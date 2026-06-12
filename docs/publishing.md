@@ -1,0 +1,50 @@
+# Publishing
+
+## Before Push
+
+1. Edit `data/beacon.json`.
+2. Replace:
+   - `YOUR_GITHUB_USERNAME`
+   - `base_url`
+   - `repo_url`
+3. Run:
+
+   ```bash
+   python scripts/build.py
+   ```
+
+4. Commit all generated files.
+
+## GitHub Pages
+
+The included workflow publishes the `site/` directory to GitHub Pages.
+
+Steps:
+
+1. Push the repository to GitHub.
+2. Open repository settings.
+3. Go to Pages.
+4. Choose GitHub Actions as the source.
+5. Run the workflow or push to `main`.
+
+## Release
+
+Create a first release after Pages is live.
+
+Suggested tag:
+
+```text
+v0.1.0
+```
+
+Suggested title:
+
+```text
+Initial machine-readable beacon experiment
+```
+
+Suggested release notes:
+
+```text
+Publishes the first version of GitHub Machine Beacon with README, GitHub Pages, llms.txt, sitemap.xml, crawler manifest, keyword index, Atom feed, and measurement docs.
+```

@@ -1,0 +1,148 @@
+{
+  "name": "GitHub Machine Beacon",
+  "slug": "github-machine-beacon",
+  "owner": "YOUR_GITHUB_USERNAME",
+  "base_url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/",
+  "repo_url": "https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon",
+  "updated": "2026-06-12",
+  "language": "en",
+  "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
+  "short_description": "Machine-readable GitHub crawler discovery experiment.",
+  "principles": [
+    "Be transparent about the experiment.",
+    "Use honest metadata and relevant keywords only.",
+    "Publish stable machine-readable entry points.",
+    "Respect robots.txt and platform rules.",
+    "Measure discovery without generating fake traffic."
+  ],
+  "pages": [
+    {
+      "path": "",
+      "title": "GitHub Machine Beacon",
+      "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
+      "priority": "1.0",
+      "changefreq": "weekly"
+    },
+    {
+      "path": "llms.txt",
+      "title": "LLM Reader Guide",
+      "summary": "Compact guide for LLM crawlers, retrieval systems, and AI coding agents.",
+      "priority": "0.9",
+      "changefreq": "weekly"
+    },
+    {
+      "path": "llms-full.txt",
+      "title": "Full LLM Context",
+      "summary": "Extended project context for retrieval augmented generation and AI readers.",
+      "priority": "0.8",
+      "changefreq": "weekly"
+    },
+    {
+      "path": "crawler-manifest.json",
+      "title": "Crawler Manifest",
+      "summary": "Canonical JSON manifest describing URLs, topics, principles, and measurement fields.",
+      "priority": "0.8",
+      "changefreq": "weekly"
+    },
+    {
+      "path": "keyword-index.json",
+      "title": "Keyword Index",
+      "summary": "Structured topic map for machine discovery and search indexing experiments.",
+      "priority": "0.7",
+      "changefreq": "weekly"
+    },
+    {
+      "path": "feed.xml",
+      "title": "Atom Feed",
+      "summary": "Recrawl-friendly Atom feed for experiment updates.",
+      "priority": "0.6",
+      "changefreq": "weekly"
+    }
+  ],
+  "keyword_groups": [
+    {
+      "name": "machine-readable web discovery",
+      "intent": "Signals for crawlers and search indexes that prefer structured, canonical resources.",
+      "terms": [
+        "machine-readable repository",
+        "crawler-friendly GitHub project",
+        "GitHub Pages metadata",
+        "sitemap.xml",
+        "robots.txt",
+        "structured data",
+        "JSON-LD",
+        "Open Graph metadata",
+        "canonical URL",
+        "Atom feed",
+        "RSS feed",
+        "web crawler observability"
+      ]
+    },
+    {
+      "name": "AI and LLM discovery",
+      "intent": "Signals for retrieval systems, AI coding tools, and agent browsers.",
+      "terms": [
+        "llms.txt",
+        "LLM crawler",
+        "AI agent browser",
+        "AI search indexing",
+        "retrieval augmented generation",
+        "RAG source",
+        "agent-readable documentation",
+        "machine context file",
+        "AI code search",
+        "LLM metadata",
+        "crawler manifest",
+        "semantic README"
+      ]
+    },
+    {
+      "name": "GitHub repository discovery",
+      "intent": "Signals that help repository search, code search, and topic-based browsing.",
+      "terms": [
+        "GitHub search optimization",
+        "GitHub repository metadata",
+        "GitHub topics",
+        "README structure",
+        "code indexing",
+        "open source discoverability",
+        "repository traffic experiment",
+        "GitHub Insights traffic",
+        "GitHub Pages deployment",
+        "open research repository",
+        "software citation",
+        "CITATION.cff"
+      ]
+    },
+    {
+      "name": "measurement and ethics",
+      "intent": "Signals that the project is an observable, non-deceptive experiment.",
+      "terms": [
+        "crawler experiment",
+        "traffic measurement",
+        "ethical SEO",
+        "transparent metadata",
+        "no fake traffic",
+        "no cloaking",
+        "privacy-preserving analytics",
+        "search experiment",
+        "bot traffic research",
+        "machine traffic benchmark",
+        "crawlability audit",
+        "public web observability"
+      ]
+    }
+  ],
+  "measurement_fields": [
+    "repository_views",
+    "unique_visitors",
+    "referrers",
+    "popular_content",
+    "clones",
+    "unique_cloners",
+    "stars",
+    "forks",
+    "issues_or_discussions",
+    "external_citations"
+  ]
+}

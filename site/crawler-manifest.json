@@ -1,0 +1,142 @@
+{
+  "schema_version": "github-machine-beacon/v1",
+  "name": "GitHub Machine Beacon",
+  "slug": "github-machine-beacon",
+  "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
+  "updated": "2026-06-12",
+  "base_url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/",
+  "repo_url": "https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon",
+  "ethical_boundaries": [
+    "Be transparent about the experiment.",
+    "Use honest metadata and relevant keywords only.",
+    "Publish stable machine-readable entry points.",
+    "Respect robots.txt and platform rules.",
+    "Measure discovery without generating fake traffic."
+  ],
+  "machine_entry_points": [
+    {
+      "title": "GitHub Machine Beacon",
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/",
+      "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
+      "type": "text/html"
+    },
+    {
+      "title": "LLM Reader Guide",
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms.txt",
+      "summary": "Compact guide for LLM crawlers, retrieval systems, and AI coding agents.",
+      "type": "text/plain"
+    },
+    {
+      "title": "Full LLM Context",
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms-full.txt",
+      "summary": "Extended project context for retrieval augmented generation and AI readers.",
+      "type": "text/plain"
+    },
+    {
+      "title": "Crawler Manifest",
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/crawler-manifest.json",
+      "summary": "Canonical JSON manifest describing URLs, topics, principles, and measurement fields.",
+      "type": "application/json"
+    },
+    {
+      "title": "Keyword Index",
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/keyword-index.json",
+      "summary": "Structured topic map for machine discovery and search indexing experiments.",
+      "type": "application/json"
+    },
+    {
+      "title": "Atom Feed",
+      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml",
+      "summary": "Recrawl-friendly Atom feed for experiment updates.",
+      "type": "application/xml"
+    }
+  ],
+  "keyword_groups": [
+    {
+      "name": "machine-readable web discovery",
+      "intent": "Signals for crawlers and search indexes that prefer structured, canonical resources.",
+      "terms": [
+        "machine-readable repository",
+        "crawler-friendly GitHub project",
+        "GitHub Pages metadata",
+        "sitemap.xml",
+        "robots.txt",
+        "structured data",
+        "JSON-LD",
+        "Open Graph metadata",
+        "canonical URL",
+        "Atom feed",
+        "RSS feed",
+        "web crawler observability"
+      ]
+    },
+    {
+      "name": "AI and LLM discovery",
+      "intent": "Signals for retrieval systems, AI coding tools, and agent browsers.",
+      "terms": [
+        "llms.txt",
+        "LLM crawler",
+        "AI agent browser",
+        "AI search indexing",
+        "retrieval augmented generation",
+        "RAG source",
+        "agent-readable documentation",
+        "machine context file",
+        "AI code search",
+        "LLM metadata",
+        "crawler manifest",
+        "semantic README"
+      ]
+    },
+    {
+      "name": "GitHub repository discovery",
+      "intent": "Signals that help repository search, code search, and topic-based browsing.",
+      "terms": [
+        "GitHub search optimization",
+        "GitHub repository metadata",
+        "GitHub topics",
+        "README structure",
+        "code indexing",
+        "open source discoverability",
+        "repository traffic experiment",
+        "GitHub Insights traffic",
+        "GitHub Pages deployment",
+        "open research repository",
+        "software citation",
+        "CITATION.cff"
+      ]
+    },
+    {
+      "name": "measurement and ethics",
+      "intent": "Signals that the project is an observable, non-deceptive experiment.",
+      "terms": [
+        "crawler experiment",
+        "traffic measurement",
+        "ethical SEO",
+        "transparent metadata",
+        "no fake traffic",
+        "no cloaking",
+        "privacy-preserving analytics",
+        "search experiment",
+        "bot traffic research",
+        "machine traffic benchmark",
+        "crawlability audit",
+        "public web observability"
+      ]
+    }
+  ],
+  "measurement_fields": [
+    "repository_views",
+    "unique_visitors",
+    "referrers",
+    "popular_content",
+    "clones",
+    "unique_cloners",
+    "stars",
+    "forks",
+    "issues_or_discussions",
+    "external_citations"
+  ],
+  "recommended_citation": "GitHub Machine Beacon: transparent machine-readable GitHub discovery experiment.",
+  "traffic_policy": "Do not generate fake visits. Observe legitimate discovery only."
+}

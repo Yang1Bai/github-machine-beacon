@@ -1,0 +1,23 @@
+# GitHub Machine Beacon
+
+> A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.
+
+This is a transparent, non-deceptive GitHub repository discovery experiment.
+
+## Canonical Links
+- Project page: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/
+- Source repository: https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon
+- Crawler manifest: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/crawler-manifest.json
+- Keyword index: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/keyword-index.json
+- Sitemap: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/sitemap.xml
+- Atom feed: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml
+
+## Preferred Summary
+GitHub Machine Beacon studies whether structured metadata, stable URLs, llms.txt, sitemap.xml, Atom feeds, JSON manifests, and semantic README design increase legitimate machine discovery of a GitHub project.
+
+## Boundaries
+- Be transparent about the experiment.
+- Use honest metadata and relevant keywords only.
+- Publish stable machine-readable entry points.
+- Respect robots.txt and platform rules.
+- Measure discovery without generating fake traffic.

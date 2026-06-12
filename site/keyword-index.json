@@ -1,0 +1,74 @@
+[
+  {
+    "name": "machine-readable web discovery",
+    "intent": "Signals for crawlers and search indexes that prefer structured, canonical resources.",
+    "terms": [
+      "machine-readable repository",
+      "crawler-friendly GitHub project",
+      "GitHub Pages metadata",
+      "sitemap.xml",
+      "robots.txt",
+      "structured data",
+      "JSON-LD",
+      "Open Graph metadata",
+      "canonical URL",
+      "Atom feed",
+      "RSS feed",
+      "web crawler observability"
+    ]
+  },
+  {
+    "name": "AI and LLM discovery",
+    "intent": "Signals for retrieval systems, AI coding tools, and agent browsers.",
+    "terms": [
+      "llms.txt",
+      "LLM crawler",
+      "AI agent browser",
+      "AI search indexing",
+      "retrieval augmented generation",
+      "RAG source",
+      "agent-readable documentation",
+      "machine context file",
+      "AI code search",
+      "LLM metadata",
+      "crawler manifest",
+      "semantic README"
+    ]
+  },
+  {
+    "name": "GitHub repository discovery",
+    "intent": "Signals that help repository search, code search, and topic-based browsing.",
+    "terms": [
+      "GitHub search optimization",
+      "GitHub repository metadata",
+      "GitHub topics",
+      "README structure",
+      "code indexing",
+      "open source discoverability",
+      "repository traffic experiment",
+      "GitHub Insights traffic",
+      "GitHub Pages deployment",
+      "open research repository",
+      "software citation",
+      "CITATION.cff"
+    ]
+  },
+  {
+    "name": "measurement and ethics",
+    "intent": "Signals that the project is an observable, non-deceptive experiment.",
+    "terms": [
+      "crawler experiment",
+      "traffic measurement",
+      "ethical SEO",
+      "transparent metadata",
+      "no fake traffic",
+      "no cloaking",
+      "privacy-preserving analytics",
+      "search experiment",
+      "bot traffic research",
+      "machine traffic benchmark",
+      "crawlability audit",
+      "public web observability"
+    ]
+  }
+]

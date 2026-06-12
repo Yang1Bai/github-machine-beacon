@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" role="img" aria-labelledby="title desc">
+  <title id="title">Machine-readable repository beacon map</title>
+  <desc id="desc">A diagram showing a GitHub repository connected to pages, manifests, feeds, crawlers, agents, and measurement.</desc>
+  <rect width="960" height="700" fill="#fbfcf8"/>
+  <g fill="none" stroke="#d9e2dc" stroke-width="2">
+    <path d="M480 170 C340 210 260 300 220 430"/>
+    <path d="M480 170 C620 210 700 300 740 430"/>
+    <path d="M480 170 C480 270 480 350 480 480"/>
+    <path d="M220 430 C310 520 390 565 480 590"/>
+    <path d="M740 430 C650 520 570 565 480 590"/>
+    <path d="M300 250 C430 310 540 310 660 250"/>
+    <path d="M290 500 C420 438 540 438 670 500"/>
+  </g>
+  <g>
+    <circle cx="480" cy="170" r="88" fill="#17211c"/>
+    <text x="480" y="156" fill="#ffffff" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">GitHub</text>
+    <text x="480" y="190" fill="#cfe7dc" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20">Repository</text>
+  </g>
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="93" y="386" width="254" height="94" rx="8" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+    <text x="220" y="426" text-anchor="middle" fill="#17211c" font-size="24" font-weight="700">Metadata</text>
+    <text x="220" y="456" text-anchor="middle" fill="#5c6b63" font-size="18">JSON-LD · Open Graph</text>
+    <rect x="613" y="386" width="254" height="94" rx="8" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+    <text x="740" y="426" text-anchor="middle" fill="#17211c" font-size="24" font-weight="700">Crawlers</text>
+    <text x="740" y="456" text-anchor="middle" fill="#5c6b63" font-size="18">Search · agents · indexes</text>
+    <rect x="353" y="455" width="254" height="94" rx="8" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+    <text x="480" y="495" text-anchor="middle" fill="#17211c" font-size="24" font-weight="700">Machine Files</text>
+    <text x="480" y="525" text-anchor="middle" fill="#5c6b63" font-size="18">llms.txt · manifest · feed</text>
+    <rect x="172" y="218" width="254" height="94" rx="8" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+    <text x="299" y="258" text-anchor="middle" fill="#17211c" font-size="24" font-weight="700">README</text>
+    <text x="299" y="288" text-anchor="middle" fill="#5c6b63" font-size="18">Semantic repo context</text>
+    <rect x="534" y="218" width="254" height="94" rx="8" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+    <text x="661" y="258" text-anchor="middle" fill="#17211c" font-size="24" font-weight="700">Pages Site</text>
+    <text x="661" y="288" text-anchor="middle" fill="#5c6b63" font-size="18">Stable web surface</text>
+    <rect x="353" y="570" width="254" height="74" rx="8" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+    <text x="480" y="612" text-anchor="middle" fill="#17211c" font-size="24" font-weight="700">Measure Legitimate Discovery</text>
+  </g>
+  <g fill="#2357d9">
+    <circle cx="299" cy="313" r="7"/>
+    <circle cx="661" cy="313" r="7"/>
+    <circle cx="220" cy="481" r="7"/>
+    <circle cx="740" cy="481" r="7"/>
+    <circle cx="480" cy="550" r="7"/>
+  </g>
+</svg>
