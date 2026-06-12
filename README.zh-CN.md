@@ -2,11 +2,11 @@
 
 这是一个 GitHub 机器浏览触发实验项目。目标是让仓库对搜索引擎、GitHub 内部索引、代码搜索、AI agent、LLM 抓取器、链接预览 bot、归档工具和引用工具都更容易发现、更容易解析、更容易复访。
 
-[![当前验证访问量](site/assets/traffic-card.svg)](https://yang1bai.github.io/github-machine-beacon/)
+[![当前验证访问量](site/assets/traffic-card.svg)](https://github-machine-beacon.yangbai0110.workers.dev/)
 
-实时主页：[https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
+实时主页：[https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)
 
-Cloudflare 实时计数入口：[https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)  
+GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)  
 机器/人拆分 JSON：[cloudflare-traffic.json](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json)
 
 核心原则：公开、透明、可复现，不刷量、不伪装、不堆无关关键词。

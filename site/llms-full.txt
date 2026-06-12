@@ -110,6 +110,10 @@ Signals that the project is an observable, non-deceptive experiment.
 - popular_content
 - clones
 - unique_cloners
+- edge_requests
+- machine_requests
+- human_requests
+- unknown_requests
 - stars
 - forks
 - issues_or_discussions

@@ -13,6 +13,7 @@ Canonical page: https://yang1bai.github.io/github-machine-beacon/results-log.htm
 | 2026-06-12 | Release created | v0.1.0 published as the initial machine-readable beacon experiment. |
 | 2026-06-12 | Resource expansion | v0.2.0 adds reusable content pages, resource JSON, a validation workflow, and a richer manifest. |
 | 2026-06-12 | Observation workflow | v0.2.1 adds structured issue templates, labels, and a Day 0 baseline issue. |
+| 2026-06-12 | Cloudflare edge split | v0.3.0 adds a Cloudflare Worker proxy and public machine/human request split at cloudflare-traffic.json. |
 
 ## Observation template
 

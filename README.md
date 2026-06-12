@@ -5,11 +5,11 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 [![Deploy GitHub Pages](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml)
 [![Validate Machine Surfaces](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml)
 
-[![Current verified traffic](site/assets/traffic-card.svg)](https://yang1bai.github.io/github-machine-beacon/)
+[![Current verified traffic](site/assets/traffic-card.svg)](https://github-machine-beacon.yangbai0110.workers.dev/)
 
-**Live homepage:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
+**Live homepage:** [https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)
 
-**Cloudflare live counter:** [https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)  
+**GitHub Pages mirror:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)  
 **Machine/human split:** [cloudflare-traffic.json](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json)
 
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
