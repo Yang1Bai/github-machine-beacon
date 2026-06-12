@@ -16,6 +16,15 @@
 - [Crawlability Audit](https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html)
 - [Results Log](https://yang1bai.github.io/github-machine-beacon/results-log.html)
 
+## 首页访问量显示
+
+首页现在有一个大号流量面板，数据来自 [`traffic.json`](traffic.json)：
+
+- `views` 和 `unique visitors` 来自 GitHub Traffic API。
+- 统计窗口采用 GitHub Traffic API 当前提供的仓库流量窗口，通常是最近 14 天。
+- `machine visits` 和 `human visits` 暂时显示为不可用，因为 GitHub 官方 traffic 数据不提供 user-agent 级别分类。
+- `.github/workflows/update-traffic.yml` 会定时刷新快照，数据变化时自动重新发布 Pages。
+
 ## 实验思路
 
 普通 GitHub 仓库大多只靠 README 被理解。这个项目把“机器读者”当成第一类读者来设计：
@@ -26,6 +35,7 @@
 - `crawler-manifest.json` 负责结构化机器索引。
 - `keyword-index.json` 负责把关键词按意图分组，避免变成无意义堆砌。
 - `resources.json` 负责把所有资源页和机器入口统一成结构化索引。
+- `traffic.json` 负责给首页大号访问量面板提供公开流量快照。
 - `sitemap.xml` 和 `feed.xml` 负责发现和复访。
 - `docs/measurement.md` 负责记录 GitHub traffic 指标。
 

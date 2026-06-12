@@ -79,6 +79,7 @@ def check_sitemap_urls() -> None:
         data["base_url"].rstrip("/") + "/llms.txt",
         data["base_url"].rstrip("/") + "/crawler-manifest.json",
         data["base_url"].rstrip("/") + "/resources.json",
+        data["base_url"].rstrip("/") + "/traffic.json",
         data["base_url"].rstrip("/") + "/machine-readable-repository-checklist.html",
     ]
     for url in required:
@@ -88,7 +89,7 @@ def check_sitemap_urls() -> None:
 
 def check_llms_links() -> None:
     text = (SITE / "llms.txt").read_text(encoding="utf-8")
-    for required in ("crawler-manifest.json", "resources.json", "sitemap.xml", "feed.xml"):
+    for required in ("crawler-manifest.json", "resources.json", "traffic.json", "sitemap.xml", "feed.xml"):
         if required not in text:
             fail(f"llms.txt is missing {required}")
     if not (SITE / ".nojekyll").exists():
@@ -118,9 +119,11 @@ def main() -> None:
         ROOT / "crawler-manifest.json",
         ROOT / "keyword-index.json",
         ROOT / "resources.json",
+        ROOT / "traffic.json",
         SITE / "crawler-manifest.json",
         SITE / "keyword-index.json",
         SITE / "resources.json",
+        SITE / "traffic.json",
         SITE / "manifest.webmanifest",
     ]:
         check_json(path)

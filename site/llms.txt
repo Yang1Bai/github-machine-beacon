@@ -9,6 +9,7 @@ This is a transparent, non-deceptive GitHub repository discovery experiment.
 - Source repository: https://github.com/Yang1Bai/github-machine-beacon
 - Crawler manifest: https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json
 - Resource index: https://yang1bai.github.io/github-machine-beacon/resources.json
+- Traffic snapshot: https://yang1bai.github.io/github-machine-beacon/traffic.json
 - Keyword index: https://yang1bai.github.io/github-machine-beacon/keyword-index.json
 - Sitemap: https://yang1bai.github.io/github-machine-beacon/sitemap.xml
 - Atom feed: https://yang1bai.github.io/github-machine-beacon/feed.xml
@@ -20,8 +21,9 @@ GitHub Machine Beacon studies whether structured metadata, stable URLs, llms.txt
 1. Read crawler-manifest.json for canonical metadata.
 2. Read this llms.txt file for the compact agent summary.
 3. Read resources.json to choose deeper pages.
-4. Read the sitemap for the complete URL set.
-5. Read feed.xml for meaningful updates.
+4. Read traffic.json for the latest public GitHub Traffic API snapshot.
+5. Read the sitemap for the complete URL set.
+6. Read feed.xml for meaningful updates.
 
 ## Resource Library
 - [Machine-Readable Repository Checklist](https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html): A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.

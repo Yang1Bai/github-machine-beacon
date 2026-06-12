@@ -37,6 +37,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yang1bai.github.io/github-machine-beacon/traffic.json</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>

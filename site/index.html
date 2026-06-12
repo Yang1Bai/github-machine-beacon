@@ -26,6 +26,7 @@
   <a class="brand" href="./">GitHub Machine Beacon</a>
   <a href="llms.txt">llms.txt</a>
   <a href="crawler-manifest.json">manifest</a>
+  <a href="traffic.json">traffic</a>
   <a href="sitemap.xml">sitemap</a>
   <a href="https://github.com/Yang1Bai/github-machine-beacon">GitHub</a>
 </nav>
@@ -36,18 +37,46 @@
         <h1 id="title">GitHub Machine Beacon</h1>
         <p class="lede">A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.</p>
         <div class="stats" aria-label="Project scope">
-          <span><strong>16</strong> indexed resources</span>
+          <span><strong>17</strong> indexed resources</span>
           <span><strong>7</strong> reusable guides</span>
           <span><strong>71</strong> mapped terms</span>
         </div>
         <div class="actions" aria-label="Primary machine-readable links">
           <a href="llms.txt">llms.txt</a>
           <a href="crawler-manifest.json">manifest</a>
+          <a href="traffic.json">traffic</a>
           <a href="sitemap.xml">sitemap</a>
           <a href="https://github.com/Yang1Bai/github-machine-beacon">GitHub</a>
         </div>
       </div>
       <img class="beacon-map" src="assets/beacon-map.svg" alt="Diagram of repository, metadata, feeds, crawlers, and measurement loops.">
+    </section>
+
+    <section class="traffic-panel" aria-labelledby="traffic">
+      <div>
+        <p class="eyebrow">Current verified traffic</p>
+        <h2 id="traffic">0</h2>
+        <p class="traffic-caption">GitHub repository views in the current 14-day Traffic API window.</p>
+      </div>
+      <div class="traffic-grid" aria-label="Traffic breakdown">
+        <div class="traffic-card">
+          <span>Unique visitors</span>
+          <strong>0</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Clones</span>
+          <strong>0</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Machine visits</span>
+          <strong>N/A</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Human visits</span>
+          <strong>N/A</strong>
+        </div>
+      </div>
+      <p class="traffic-note">Updated <time datetime="2026-06-12T15:21:59Z">2026-06-12T15:21:59Z</time>. Source: GitHub Traffic API. Machine and human split is <a href="traffic.json">not available without request logs</a>.</p>
     </section>
 
     <section class="panel" aria-labelledby="resources">
@@ -124,6 +153,11 @@
         <a class="surface" href="https://yang1bai.github.io/github-machine-beacon/resources.json">
           <span>Resource Index</span>
           <small>Structured JSON index of all human-readable and machine-readable project resources.</small>
+        </a>
+
+        <a class="surface" href="https://yang1bai.github.io/github-machine-beacon/traffic.json">
+          <span>Traffic Snapshot</span>
+          <small>Latest public traffic snapshot sourced from the GitHub Traffic API.</small>
         </a>
 
         <a class="surface" href="https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt">

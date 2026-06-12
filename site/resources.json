@@ -46,6 +46,13 @@
       "keywords": []
     },
     {
+      "title": "Traffic Snapshot",
+      "url": "https://yang1bai.github.io/github-machine-beacon/traffic.json",
+      "summary": "Latest public traffic snapshot sourced from the GitHub Traffic API.",
+      "media_type": "application/json",
+      "keywords": []
+    },
+    {
       "title": "Well-Known LLM Reader Guide",
       "url": "https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt",
       "summary": "A compatibility copy of llms.txt for readers that check well-known paths.",

@@ -20,6 +20,15 @@ Most repositories are designed for humans first. This one treats machine readers
 
 The hypothesis is simple: a repo with coherent machine-readable surfaces, stable URLs, explicit metadata, and useful content should be discovered and revisited more often than a repo with only a normal README.
 
+## Traffic Display
+
+The project homepage shows a large current traffic panel backed by [`traffic.json`](traffic.json).
+
+- `views` and `unique visitors` come from the GitHub Traffic API.
+- the window is the GitHub Traffic API's current repository traffic window, normally the recent 14-day period.
+- `machine visits` and `human visits` are shown as unavailable unless a request-log backend is added, because GitHub's public traffic data does not expose user-agent classification.
+- `.github/workflows/update-traffic.yml` refreshes the snapshot on a schedule and republishes the site when values change.
+
 ## Resource Library
 
 These pages are intended to be useful resources, not just discovery bait:
@@ -42,6 +51,7 @@ After publishing with GitHub Pages, these endpoints become the main crawler surf
 - `/crawler-manifest.json` - canonical machine-readable project manifest
 - `/keyword-index.json` - topic map for discovery experiments
 - `/resources.json` - structured index of all human-readable and machine-readable resources
+- `/traffic.json` - latest public traffic snapshot used by the homepage counter
 - `/sitemap.xml` - URL inventory for crawlers
 - `/feed.xml` - Atom feed for recrawl triggers
 - `/robots.txt` - transparent crawl permission and sitemap pointer
@@ -52,6 +62,7 @@ The repository itself also exposes:
 - [`llms-full.txt`](llms-full.txt)
 - [`crawler-manifest.json`](crawler-manifest.json)
 - [`resources.json`](resources.json)
+- [`traffic.json`](traffic.json)
 - [`keyword-index.json`](keyword-index.json)
 - [`data/beacon.json`](data/beacon.json)
 - [`data/content-pages.json`](data/content-pages.json)
@@ -132,6 +143,7 @@ Use a focused set. Do not add unrelated popular topics.
 |   +-- crawler-manifest.json
 |   +-- keyword-index.json
 |   +-- resources.json
+|   +-- traffic.json
 |   +-- manifest.webmanifest
 |   +-- sitemap.xml
 |   +-- feed.xml

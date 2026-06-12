@@ -9,6 +9,7 @@ from xml.sax.saxutils import escape as xml_escape
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "beacon.json"
 CONTENT_PATH = ROOT / "data" / "content-pages.json"
+TRAFFIC_PATH = ROOT / "data" / "traffic.json"
 SITE = ROOT / "site"
 
 
@@ -16,8 +17,8 @@ def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def read_data() -> tuple[dict, list[dict]]:
-    return read_json(DATA_PATH), read_json(CONTENT_PATH)
+def read_data() -> tuple[dict, list[dict], dict]:
+    return read_json(DATA_PATH), read_json(CONTENT_PATH), read_json(TRAFFIC_PATH)
 
 
 def write(path: Path, content: str) -> None:
@@ -77,6 +78,12 @@ def json_script(payload: dict) -> str:
     return json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
 
 
+def format_count(value: int | None) -> str:
+    if value is None:
+        return "N/A"
+    return f"{int(value):,}"
+
+
 def render_head(
     data: dict,
     title: str,
@@ -116,6 +123,7 @@ def render_nav(data: dict) -> str:
   <a class="brand" href="./">{html.escape(data['name'])}</a>
   <a href="llms.txt">llms.txt</a>
   <a href="crawler-manifest.json">manifest</a>
+  <a href="traffic.json">traffic</a>
   <a href="sitemap.xml">sitemap</a>
   <a href="{html.escape(data['repo_url'])}">GitHub</a>
 </nav>"""
@@ -148,10 +156,15 @@ def render_section(section: dict) -> str:
     return "\n".join(parts)
 
 
-def build_index(data: dict, content_pages: list[dict]) -> str:
+def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
     base_url = data["base_url"].rstrip("/") + "/"
     keywords = flatten_keywords(data, content_pages)
     pages = all_pages(data, content_pages)
+    views = traffic.get("views", {})
+    clones = traffic.get("clones", {})
+    classification = traffic.get("visitor_classification", {})
+    machine_count = classification.get("machine_visits")
+    human_count = classification.get("human_visits")
 
     json_ld = {
         "@context": "https://schema.org",
@@ -234,11 +247,39 @@ def build_index(data: dict, content_pages: list[dict]) -> str:
         <div class="actions" aria-label="Primary machine-readable links">
           <a href="llms.txt">llms.txt</a>
           <a href="crawler-manifest.json">manifest</a>
+          <a href="traffic.json">traffic</a>
           <a href="sitemap.xml">sitemap</a>
           <a href="{html.escape(data['repo_url'])}">GitHub</a>
         </div>
       </div>
       <img class="beacon-map" src="assets/beacon-map.svg" alt="Diagram of repository, metadata, feeds, crawlers, and measurement loops.">
+    </section>
+
+    <section class="traffic-panel" aria-labelledby="traffic">
+      <div>
+        <p class="eyebrow">Current verified traffic</p>
+        <h2 id="traffic">{format_count(views.get('count', 0))}</h2>
+        <p class="traffic-caption">GitHub repository views in the current 14-day Traffic API window.</p>
+      </div>
+      <div class="traffic-grid" aria-label="Traffic breakdown">
+        <div class="traffic-card">
+          <span>Unique visitors</span>
+          <strong>{format_count(views.get('uniques', 0))}</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Clones</span>
+          <strong>{format_count(clones.get('count', 0))}</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Machine visits</span>
+          <strong>{format_count(machine_count)}</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Human visits</span>
+          <strong>{format_count(human_count)}</strong>
+        </div>
+      </div>
+      <p class="traffic-note">Updated <time datetime="{html.escape(traffic.get('updated_at', data['updated']))}">{html.escape(traffic.get('updated_at', data['updated']))}</time>. Source: GitHub Traffic API. Machine and human split is <a href="traffic.json">not available without request logs</a>.</p>
     </section>
 
     <section class="panel" aria-labelledby="resources">
@@ -389,6 +430,7 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         f"- Source repository: {data['repo_url']}",
         f"- Crawler manifest: {page_url(base_url, 'crawler-manifest.json')}",
         f"- Resource index: {page_url(base_url, 'resources.json')}",
+        f"- Traffic snapshot: {page_url(base_url, 'traffic.json')}",
         f"- Keyword index: {page_url(base_url, 'keyword-index.json')}",
         f"- Sitemap: {page_url(base_url, 'sitemap.xml')}",
         f"- Atom feed: {page_url(base_url, 'feed.xml')}",
@@ -400,8 +442,9 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         "1. Read crawler-manifest.json for canonical metadata.",
         "2. Read this llms.txt file for the compact agent summary.",
         "3. Read resources.json to choose deeper pages.",
-        "4. Read the sitemap for the complete URL set.",
-        "5. Read feed.xml for meaningful updates.",
+        "4. Read traffic.json for the latest public GitHub Traffic API snapshot.",
+        "5. Read the sitemap for the complete URL set.",
+        "6. Read feed.xml for meaningful updates.",
         "",
         "## Resource Library",
     ]
@@ -434,7 +477,7 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
     return "\n".join(lines)
 
 
-def build_manifest(data: dict, content_pages: list[dict]) -> dict:
+def build_manifest(data: dict, content_pages: list[dict], traffic: dict) -> dict:
     base_url = data["base_url"].rstrip("/") + "/"
     return {
         "schema_version": "github-machine-beacon/v2",
@@ -469,6 +512,13 @@ def build_manifest(data: dict, content_pages: list[dict]) -> dict:
         ],
         "keyword_groups": data["keyword_groups"],
         "measurement_fields": data["measurement_fields"],
+        "traffic_snapshot": {
+            "url": page_url(base_url, "traffic.json"),
+            "updated_at": traffic.get("updated_at"),
+            "source": traffic.get("source"),
+            "views": traffic.get("views", {}),
+            "visitor_classification": traffic.get("visitor_classification", {}),
+        },
         "recommended_citation": f"{data['name']}: transparent machine-readable GitHub discovery experiment.",
         "traffic_policy": "Do not generate fake visits. Observe legitimate discovery only.",
         "validation": {
@@ -558,10 +608,10 @@ def build_markdown_page(data: dict, page: dict) -> str:
 
 
 def main() -> None:
-    data, content_pages = read_data()
-    manifest = build_manifest(data, content_pages)
+    data, content_pages, traffic = read_data()
+    manifest = build_manifest(data, content_pages, traffic)
 
-    write(SITE / "index.html", build_index(data, content_pages))
+    write(SITE / "index.html", build_index(data, content_pages, traffic))
     for page in content_pages:
         write(SITE / page["path"], build_content_page(data, page))
         write(ROOT / "docs" / f"{page['slug']}.md", build_markdown_page(data, page))
@@ -574,6 +624,7 @@ def main() -> None:
     write(SITE / "crawler-manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))
     write(SITE / "keyword-index.json", json.dumps(build_keyword_index(data, content_pages), ensure_ascii=False, indent=2))
     write(SITE / "resources.json", json.dumps(build_resources_json(data, content_pages), ensure_ascii=False, indent=2))
+    write(SITE / "traffic.json", json.dumps(traffic, ensure_ascii=False, indent=2))
     write(SITE / "manifest.webmanifest", json.dumps(build_webmanifest(data), ensure_ascii=False, indent=2))
     write(SITE / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {page_url(data['base_url'], 'sitemap.xml')}\n")
     write(SITE / ".nojekyll", "")
@@ -585,6 +636,7 @@ def main() -> None:
     write(ROOT / "crawler-manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))
     write(ROOT / "keyword-index.json", json.dumps(build_keyword_index(data, content_pages), ensure_ascii=False, indent=2))
     write(ROOT / "resources.json", json.dumps(build_resources_json(data, content_pages), ensure_ascii=False, indent=2))
+    write(ROOT / "traffic.json", json.dumps(traffic, ensure_ascii=False, indent=2))
 
     print(f"Generated machine-readable site in {SITE}")
 

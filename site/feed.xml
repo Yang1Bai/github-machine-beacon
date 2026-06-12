@@ -49,6 +49,13 @@
     <summary>Structured JSON index of all human-readable and machine-readable project resources.</summary>
   </entry>
   <entry>
+    <title>Traffic Snapshot</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/traffic.json"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/traffic.json</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>Latest public traffic snapshot sourced from the GitHub Traffic API.</summary>
+  </entry>
+  <entry>
     <title>Well-Known LLM Reader Guide</title>
     <link href="https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt"/>
     <id>https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt</id>

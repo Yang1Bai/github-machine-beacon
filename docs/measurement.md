@@ -10,6 +10,15 @@ Record these from GitHub Insights > Traffic:
 | --- | ---: | ---: | ---: | ---: | --- | --- | --- |
 | 2026-06-12 | | | | | | | Initial publication |
 
+## Homepage Traffic Counter
+
+The homepage traffic panel is backed by `traffic.json`.
+
+- Source: GitHub Traffic API.
+- Scope: repository traffic, not raw GitHub Pages server logs.
+- Window: the API's current traffic window, normally the recent 14-day period.
+- Machine/human split: unavailable unless a request-log backend is added, because GitHub Traffic API does not expose user-agent classification.
+
 ## Weekly Review
 
 Questions:
