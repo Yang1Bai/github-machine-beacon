@@ -4,7 +4,7 @@
   "owner": "Yang1Bai",
   "base_url": "https://yang1bai.github.io/github-machine-beacon/",
   "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "updated": "2026-06-12",
   "language": "en",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
