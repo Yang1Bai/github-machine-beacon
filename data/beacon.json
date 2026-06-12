@@ -4,6 +4,7 @@
   "owner": "Yang1Bai",
   "base_url": "https://yang1bai.github.io/github-machine-beacon/",
   "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
+  "version": "0.2.0",
   "updated": "2026-06-12",
   "language": "en",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
@@ -50,6 +51,27 @@
       "summary": "Structured topic map for machine discovery and search indexing experiments.",
       "priority": "0.7",
       "changefreq": "weekly"
+    },
+    {
+      "path": "resources.json",
+      "title": "Resource Index",
+      "summary": "Structured JSON index of all human-readable and machine-readable project resources.",
+      "priority": "0.7",
+      "changefreq": "weekly"
+    },
+    {
+      "path": ".well-known/llms.txt",
+      "title": "Well-Known LLM Reader Guide",
+      "summary": "A compatibility copy of llms.txt for readers that check well-known paths.",
+      "priority": "0.5",
+      "changefreq": "weekly"
+    },
+    {
+      "path": "manifest.webmanifest",
+      "title": "Web App Manifest",
+      "summary": "Basic web manifest that exposes the site name, description, and canonical start URL.",
+      "priority": "0.4",
+      "changefreq": "monthly"
     },
     {
       "path": "feed.xml",

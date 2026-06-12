@@ -2,6 +2,9 @@
 
 Transparent experiment: make a GitHub project unusually easy for crawlers, code search, AI agents, LLM readers, link preview bots, and search indexes to discover, parse, cite, revisit, and measure.
 
+[![Deploy GitHub Pages](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml)
+[![Validate Machine Surfaces](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml)
+
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
 
 中文摘要：这是一个“机器可读 GitHub 项目”实验。目标不是刷量，而是把公开项目做成对机器读者极其友好的形态：清晰 README、GitHub Pages、`llms.txt`、`sitemap.xml`、Atom feed、JSON manifest、结构化关键词地图、可复现实验记录。
@@ -17,6 +20,18 @@ Most repositories are designed for humans first. This one treats machine readers
 
 The hypothesis is simple: a repo with coherent machine-readable surfaces, stable URLs, explicit metadata, and useful content should be discovered and revisited more often than a repo with only a normal README.
 
+## Resource Library
+
+These pages are intended to be useful resources, not just discovery bait:
+
+- [Machine-Readable Repository Checklist](https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html)
+- [Crawler Surface Map](https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html)
+- [AI Agent Entrypoints](https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html)
+- [Experiment Protocol](https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html)
+- [Standards and Sources](https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html)
+- [Crawlability Audit](https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html)
+- [Results Log](https://yang1bai.github.io/github-machine-beacon/results-log.html)
+
 ## Machine Entry Points
 
 After publishing with GitHub Pages, these endpoints become the main crawler surfaces:
@@ -26,6 +41,7 @@ After publishing with GitHub Pages, these endpoints become the main crawler surf
 - `/llms-full.txt` - extended context bundle for retrieval systems
 - `/crawler-manifest.json` - canonical machine-readable project manifest
 - `/keyword-index.json` - topic map for discovery experiments
+- `/resources.json` - structured index of all human-readable and machine-readable resources
 - `/sitemap.xml` - URL inventory for crawlers
 - `/feed.xml` - Atom feed for recrawl triggers
 - `/robots.txt` - transparent crawl permission and sitemap pointer
@@ -33,8 +49,12 @@ After publishing with GitHub Pages, these endpoints become the main crawler surf
 The repository itself also exposes:
 
 - [`llms.txt`](llms.txt)
+- [`llms-full.txt`](llms-full.txt)
 - [`crawler-manifest.json`](crawler-manifest.json)
+- [`resources.json`](resources.json)
+- [`keyword-index.json`](keyword-index.json)
 - [`data/beacon.json`](data/beacon.json)
+- [`data/content-pages.json`](data/content-pages.json)
 - [`docs/strategy.md`](docs/strategy.md)
 - [`docs/measurement.md`](docs/measurement.md)
 - [`docs/ethics.md`](docs/ethics.md)
@@ -63,6 +83,7 @@ It does use:
 
    ```bash
    python scripts/build.py
+   python scripts/validate.py
    ```
 
 3. Commit the generated files.
@@ -81,32 +102,44 @@ Use a focused set. Do not add unrelated popular topics.
 
 ```text
 .
-├── README.md
-├── data/
-│   └── beacon.json
-├── docs/
-│   ├── ethics.md
-│   ├── github-topics.txt
-│   ├── measurement.md
-│   ├── publishing.md
-│   └── strategy.md
-├── scripts/
-│   └── build.py
-├── site/
-│   ├── assets/
-│   │   ├── beacon-map.svg
-│   │   └── styles.css
-│   ├── index.html
-│   ├── llms.txt
-│   ├── llms-full.txt
-│   ├── crawler-manifest.json
-│   ├── keyword-index.json
-│   ├── sitemap.xml
-│   ├── feed.xml
-│   └── robots.txt
-└── .github/
-    └── workflows/
-        └── pages.yml
++-- README.md
++-- data/
+|   +-- beacon.json
+|   +-- content-pages.json
++-- docs/
+|   +-- ethics.md
+|   +-- github-topics.txt
+|   +-- measurement.md
+|   +-- publishing.md
+|   +-- strategy.md
+|   +-- machine-readable-repository-checklist.md
+|   +-- crawler-surface-map.md
+|   +-- ai-agent-entrypoints.md
+|   +-- experiment-protocol.md
+|   +-- standards-and-sources.md
+|   +-- crawlability-audit.md
+|   +-- results-log.md
++-- scripts/
+|   +-- build.py
+|   +-- validate.py
++-- site/
+|   +-- assets/
+|   |   +-- beacon-map.svg
+|   |   +-- styles.css
+|   +-- index.html
+|   +-- llms.txt
+|   +-- llms-full.txt
+|   +-- crawler-manifest.json
+|   +-- keyword-index.json
+|   +-- resources.json
+|   +-- manifest.webmanifest
+|   +-- sitemap.xml
+|   +-- feed.xml
+|   +-- robots.txt
++-- .github/
+    +-- workflows/
+        +-- pages.yml
+        +-- validate.yml
 ```
 
 ## Success Metrics

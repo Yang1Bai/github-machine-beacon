@@ -1,11 +1,13 @@
 {
-  "schema_version": "github-machine-beacon/v1",
+  "schema_version": "github-machine-beacon/v2",
   "name": "GitHub Machine Beacon",
   "slug": "github-machine-beacon",
+  "version": "0.2.0",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
   "updated": "2026-06-12",
   "base_url": "https://yang1bai.github.io/github-machine-beacon/",
   "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
+  "owner": "Yang1Bai",
   "ethical_boundaries": [
     "Be transparent about the experiment.",
     "Use honest metadata and relevant keywords only.",
@@ -18,37 +20,215 @@
       "title": "GitHub Machine Beacon",
       "url": "https://yang1bai.github.io/github-machine-beacon/",
       "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
-      "type": "text/html"
+      "type": "text/html",
+      "changefreq": "weekly",
+      "priority": "1.0"
     },
     {
       "title": "LLM Reader Guide",
       "url": "https://yang1bai.github.io/github-machine-beacon/llms.txt",
       "summary": "Compact guide for LLM crawlers, retrieval systems, and AI coding agents.",
-      "type": "text/plain"
+      "type": "text/plain",
+      "changefreq": "weekly",
+      "priority": "0.9"
     },
     {
       "title": "Full LLM Context",
       "url": "https://yang1bai.github.io/github-machine-beacon/llms-full.txt",
       "summary": "Extended project context for retrieval augmented generation and AI readers.",
-      "type": "text/plain"
+      "type": "text/plain",
+      "changefreq": "weekly",
+      "priority": "0.8"
     },
     {
       "title": "Crawler Manifest",
       "url": "https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json",
       "summary": "Canonical JSON manifest describing URLs, topics, principles, and measurement fields.",
-      "type": "application/json"
+      "type": "application/json",
+      "changefreq": "weekly",
+      "priority": "0.8"
     },
     {
       "title": "Keyword Index",
       "url": "https://yang1bai.github.io/github-machine-beacon/keyword-index.json",
       "summary": "Structured topic map for machine discovery and search indexing experiments.",
-      "type": "application/json"
+      "type": "application/json",
+      "changefreq": "weekly",
+      "priority": "0.7"
+    },
+    {
+      "title": "Resource Index",
+      "url": "https://yang1bai.github.io/github-machine-beacon/resources.json",
+      "summary": "Structured JSON index of all human-readable and machine-readable project resources.",
+      "type": "application/json",
+      "changefreq": "weekly",
+      "priority": "0.7"
+    },
+    {
+      "title": "Well-Known LLM Reader Guide",
+      "url": "https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt",
+      "summary": "A compatibility copy of llms.txt for readers that check well-known paths.",
+      "type": "text/plain",
+      "changefreq": "weekly",
+      "priority": "0.5"
+    },
+    {
+      "title": "Web App Manifest",
+      "url": "https://yang1bai.github.io/github-machine-beacon/manifest.webmanifest",
+      "summary": "Basic web manifest that exposes the site name, description, and canonical start URL.",
+      "type": "application/manifest+json",
+      "changefreq": "monthly",
+      "priority": "0.4"
     },
     {
       "title": "Atom Feed",
       "url": "https://yang1bai.github.io/github-machine-beacon/feed.xml",
       "summary": "Recrawl-friendly Atom feed for experiment updates.",
-      "type": "application/xml"
+      "type": "application/xml",
+      "changefreq": "weekly",
+      "priority": "0.6"
+    },
+    {
+      "title": "Machine-Readable Repository Checklist",
+      "url": "https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html",
+      "summary": "A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.",
+      "type": "text/html",
+      "changefreq": "monthly",
+      "priority": "0.90"
+    },
+    {
+      "title": "Crawler Surface Map",
+      "url": "https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html",
+      "summary": "A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.",
+      "type": "text/html",
+      "changefreq": "monthly",
+      "priority": "0.88"
+    },
+    {
+      "title": "AI Agent Entrypoints",
+      "url": "https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html",
+      "summary": "Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.",
+      "type": "text/html",
+      "changefreq": "monthly",
+      "priority": "0.86"
+    },
+    {
+      "title": "Experiment Protocol",
+      "url": "https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html",
+      "summary": "A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.",
+      "type": "text/html",
+      "changefreq": "weekly",
+      "priority": "0.84"
+    },
+    {
+      "title": "Standards and Sources",
+      "url": "https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html",
+      "summary": "Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.",
+      "type": "text/html",
+      "changefreq": "monthly",
+      "priority": "0.80"
+    },
+    {
+      "title": "Crawlability Audit",
+      "url": "https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html",
+      "summary": "A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.",
+      "type": "text/html",
+      "changefreq": "weekly",
+      "priority": "0.82"
+    },
+    {
+      "title": "Results Log",
+      "url": "https://yang1bai.github.io/github-machine-beacon/results-log.html",
+      "summary": "A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.",
+      "type": "text/html",
+      "changefreq": "weekly",
+      "priority": "0.78"
+    }
+  ],
+  "content_resources": [
+    {
+      "title": "Machine-Readable Repository Checklist",
+      "url": "https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html",
+      "summary": "A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.",
+      "keywords": [
+        "machine-readable repository checklist",
+        "GitHub README structure",
+        "crawler-friendly documentation",
+        "AI agent documentation",
+        "repository metadata"
+      ]
+    },
+    {
+      "title": "Crawler Surface Map",
+      "url": "https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html",
+      "summary": "A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.",
+      "keywords": [
+        "crawler surface map",
+        "crawler entry points",
+        "GitHub Pages metadata",
+        "repository discovery",
+        "web crawler observability"
+      ]
+    },
+    {
+      "title": "AI Agent Entrypoints",
+      "url": "https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html",
+      "summary": "Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.",
+      "keywords": [
+        "AI agent entrypoints",
+        "LLM crawler",
+        "llms.txt",
+        "agent-readable documentation",
+        "RAG source"
+      ]
+    },
+    {
+      "title": "Experiment Protocol",
+      "url": "https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html",
+      "summary": "A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.",
+      "keywords": [
+        "repository traffic experiment",
+        "GitHub Insights traffic",
+        "crawler experiment protocol",
+        "public web observability",
+        "bot traffic research"
+      ]
+    },
+    {
+      "title": "Standards and Sources",
+      "url": "https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html",
+      "summary": "Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.",
+      "keywords": [
+        "GitHub topics documentation",
+        "GitHub Pages Actions",
+        "Schema.org JSON-LD",
+        "llms.txt proposal",
+        "sitemap robots Atom feed"
+      ]
+    },
+    {
+      "title": "Crawlability Audit",
+      "url": "https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html",
+      "summary": "A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.",
+      "keywords": [
+        "crawlability audit",
+        "machine-readable audit",
+        "GitHub Pages audit",
+        "metadata validation",
+        "crawler readiness"
+      ]
+    },
+    {
+      "title": "Results Log",
+      "url": "https://yang1bai.github.io/github-machine-beacon/results-log.html",
+      "summary": "A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.",
+      "keywords": [
+        "GitHub traffic log",
+        "crawler experiment results",
+        "repository views",
+        "unique visitors",
+        "traffic measurement"
+      ]
     }
   ],
   "keyword_groups": [
@@ -138,5 +318,11 @@
     "external_citations"
   ],
   "recommended_citation": "GitHub Machine Beacon: transparent machine-readable GitHub discovery experiment.",
-  "traffic_policy": "Do not generate fake visits. Observe legitimate discovery only."
+  "traffic_policy": "Do not generate fake visits. Observe legitimate discovery only.",
+  "validation": {
+    "json_parseable": true,
+    "xml_parseable": true,
+    "local_links_checked": true,
+    "placeholder_usernames_removed": true
+  }
 }

@@ -1,0 +1,24 @@
+name: Validate Machine Surfaces
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate site files
+        run: python scripts/build.py
+
+      - name: Validate machine-readable surfaces
+        run: python scripts/validate.py

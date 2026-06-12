@@ -1,0 +1,10 @@
+{
+  "name": "GitHub Machine Beacon",
+  "short_name": "Machine Beacon",
+  "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
+  "start_url": "https://yang1bai.github.io/github-machine-beacon/",
+  "scope": "https://yang1bai.github.io/github-machine-beacon/",
+  "display": "minimal-ui",
+  "background_color": "#fbfcf8",
+  "theme_color": "#17211c"
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crawler Surface Map | GitHub Machine Beacon</title>
+  <meta name="description" content="A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.">
+  <meta name="keywords" content="crawler surface map, crawler entry points, GitHub Pages metadata, repository discovery, web crawler observability">
+  <link rel="canonical" href="https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html">
+  <link rel="alternate" type="application/atom+xml" title="GitHub Machine Beacon feed" href="https://yang1bai.github.io/github-machine-beacon/feed.xml">
+  <link rel="sitemap" type="application/xml" href="https://yang1bai.github.io/github-machine-beacon/sitemap.xml">
+  <link rel="manifest" href="https://yang1bai.github.io/github-machine-beacon/manifest.webmanifest">
+  <meta property="og:title" content="Crawler Surface Map | GitHub Machine Beacon">
+  <meta property="og:description" content="A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html">
+  <meta property="og:image" content="https://yang1bai.github.io/github-machine-beacon/assets/beacon-map.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Crawler Surface Map | GitHub Machine Beacon">
+  <meta name="twitter:description" content="A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Crawler Surface Map","description":"A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.","url":"https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html","dateModified":"2026-06-12","inLanguage":"en","keywords":["crawler surface map","crawler entry points","GitHub Pages metadata","repository discovery","web crawler observability"],"isPartOf":{"@type":"WebSite","name":"GitHub Machine Beacon","url":"https://yang1bai.github.io/github-machine-beacon/"},"publisher":{"@type":"Organization","name":"Yang1Bai","url":"https://github.com/Yang1Bai"}}</script>
+</head>
+<body>
+  <nav class="topbar" aria-label="Primary">
+  <a class="brand" href="./">GitHub Machine Beacon</a>
+  <a href="llms.txt">llms.txt</a>
+  <a href="crawler-manifest.json">manifest</a>
+  <a href="sitemap.xml">sitemap</a>
+  <a href="https://github.com/Yang1Bai/github-machine-beacon">GitHub</a>
+</nav>
+  <main class="article-main">
+    <article class="article" aria-labelledby="title">
+      <p class="eyebrow">GitHub Machine Beacon resource</p>
+      <h1 id="title">Crawler Surface Map</h1>
+      <p class="lede">A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.</p>
+      <section class="article-section"><h2>Surface matrix</h2>
+<p>The project is intentionally multi-surface. Each surface gives a different reader a compact route into the same canonical project identity.</p>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Surface</th><th>Primary reader</th><th>Signal exposed</th><th>Why it matters</th></tr></thead>
+    <tbody><tr><td>README.md</td><td>GitHub search and code indexes</td><td>Project purpose, links, repository map</td><td>The README is often the first document seen by GitHub-native crawlers and coding assistants.</td></tr><tr><td>GitHub topics</td><td>GitHub browsing and recommendation systems</td><td>Subject classification</td><td>Topics help classify a repository by purpose and subject area.</td></tr><tr><td>GitHub Pages index</td><td>Web crawlers and link preview bots</td><td>Canonical public web page</td><td>A stable HTML page is easier for general crawlers to discover and summarize.</td></tr><tr><td>llms.txt</td><td>LLM readers and AI agents</td><td>Compact context and preferred links</td><td>Agents can quickly decide what to read next without scraping the whole site.</td></tr><tr><td>crawler-manifest.json</td><td>Programmatic crawlers</td><td>Structured project map</td><td>Machines can parse URLs, summaries, update dates, and policies without natural-language extraction.</td></tr><tr><td>sitemap.xml</td><td>Search crawlers</td><td>URL inventory</td><td>Crawlers can enumerate canonical pages and update priorities.</td></tr><tr><td>feed.xml</td><td>Feed readers and recrawl systems</td><td>Update signal</td><td>Meaningful releases and docs changes can create legitimate revisit cues.</td></tr></tbody>
+  </table>
+</div>
+</section>
+<section class="article-section"><h2>Preferred crawl order</h2>
+<ul class="checklist"><li>Start with crawler-manifest.json for canonical project metadata.</li><li>Read llms.txt for the compact agent summary.</li><li>Read the Pages index for HTML context and structured data.</li><li>Read resource pages from the sitemap for deeper content.</li><li>Use feed.xml to detect meaningful updates.</li></ul>
+</section>
+      <section class="article-section">
+        <h2>Page Keywords</h2>
+        <ul class="metrics"><li>crawler surface map</li><li>crawler entry points</li><li>GitHub Pages metadata</li><li>repository discovery</li><li>web crawler observability</li></ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

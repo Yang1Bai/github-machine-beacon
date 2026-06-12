@@ -42,10 +42,80 @@
     <summary>Structured topic map for machine discovery and search indexing experiments.</summary>
   </entry>
   <entry>
+    <title>Resource Index</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/resources.json"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/resources.json</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>Structured JSON index of all human-readable and machine-readable project resources.</summary>
+  </entry>
+  <entry>
+    <title>Well-Known LLM Reader Guide</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>A compatibility copy of llms.txt for readers that check well-known paths.</summary>
+  </entry>
+  <entry>
+    <title>Web App Manifest</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/manifest.webmanifest"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/manifest.webmanifest</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>Basic web manifest that exposes the site name, description, and canonical start URL.</summary>
+  </entry>
+  <entry>
     <title>Atom Feed</title>
     <link href="https://yang1bai.github.io/github-machine-beacon/feed.xml"/>
     <id>https://yang1bai.github.io/github-machine-beacon/feed.xml</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Recrawl-friendly Atom feed for experiment updates.</summary>
+  </entry>
+  <entry>
+    <title>Machine-Readable Repository Checklist</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.</summary>
+  </entry>
+  <entry>
+    <title>Crawler Surface Map</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.</summary>
+  </entry>
+  <entry>
+    <title>AI Agent Entrypoints</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.</summary>
+  </entry>
+  <entry>
+    <title>Experiment Protocol</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.</summary>
+  </entry>
+  <entry>
+    <title>Standards and Sources</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.</summary>
+  </entry>
+  <entry>
+    <title>Crawlability Audit</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.</summary>
+  </entry>
+  <entry>
+    <title>Results Log</title>
+    <link href="https://yang1bai.github.io/github-machine-beacon/results-log.html"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/results-log.html</id>
+    <updated>2026-06-12T00:00:00Z</updated>
+    <summary>A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.</summary>
   </entry>
 </feed>

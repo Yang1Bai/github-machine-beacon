@@ -30,6 +30,9 @@ jobs:
       - name: Generate site files
         run: python scripts/build.py
 
+      - name: Validate machine-readable surfaces
+        run: python scripts/validate.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

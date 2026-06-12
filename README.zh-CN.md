@@ -4,6 +4,18 @@
 
 核心原则：公开、透明、可复现，不刷量、不伪装、不堆无关关键词。
 
+## 第二版增强
+
+我把项目从“可发布实验”升级成“可引用资源库”。现在它不只是有机器入口，还提供了一组真实有用的页面：
+
+- [Machine-Readable Repository Checklist](https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html)
+- [Crawler Surface Map](https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html)
+- [AI Agent Entrypoints](https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html)
+- [Experiment Protocol](https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html)
+- [Standards and Sources](https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html)
+- [Crawlability Audit](https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html)
+- [Results Log](https://yang1bai.github.io/github-machine-beacon/results-log.html)
+
 ## 实验思路
 
 普通 GitHub 仓库大多只靠 README 被理解。这个项目把“机器读者”当成第一类读者来设计：
@@ -13,6 +25,7 @@
 - `llms.txt` 和 `llms-full.txt` 负责 LLM/agent 读者。
 - `crawler-manifest.json` 负责结构化机器索引。
 - `keyword-index.json` 负责把关键词按意图分组，避免变成无意义堆砌。
+- `resources.json` 负责把所有资源页和机器入口统一成结构化索引。
 - `sitemap.xml` 和 `feed.xml` 负责发现和复访。
 - `docs/measurement.md` 负责记录 GitHub traffic 指标。
 
@@ -20,10 +33,11 @@
 
 1. 修改 [`data/beacon.json`](data/beacon.json) 里的用户名、仓库地址和 Pages 地址。
 2. 运行生成脚本，让 sitemap、manifest、feed、llms 文件同步。
-3. 推送到 GitHub。
-4. 开启 GitHub Pages。
-5. 添加 [`docs/github-topics.txt`](docs/github-topics.txt) 里的主题标签。
-6. 按 [`docs/measurement.md`](docs/measurement.md) 每天记录浏览数据。
+3. 运行校验脚本，检查 JSON/XML、内部链接、占位符和关键入口。
+4. 推送到 GitHub。
+5. 开启 GitHub Pages。
+6. 添加 [`docs/github-topics.txt`](docs/github-topics.txt) 里的主题标签。
+7. 按 [`docs/measurement.md`](docs/measurement.md) 每天记录浏览数据。
 
 ## 不该做什么
 

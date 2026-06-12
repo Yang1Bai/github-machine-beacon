@@ -25,6 +25,8 @@ Goal: maximize legitimate machine discovery of a GitHub project by making the pr
    - `llms-full.txt`
    - `crawler-manifest.json`
    - `keyword-index.json`
+   - `resources.json`
+   - `.well-known/llms.txt`
 
 4. Recrawl triggers
    - real release notes
@@ -32,9 +34,18 @@ Goal: maximize legitimate machine discovery of a GitHub project by making the pr
    - Atom feed changes
    - GitHub discussions or issues with experiment logs
 
+5. Reusable resource pages
+   - machine-readable repository checklist
+   - crawler surface map
+   - AI agent entrypoints
+   - experiment protocol
+   - standards and sources
+   - crawlability audit
+   - results log
+
 ## Content Rules
 
-Every keyword should be connected to real project content. The experiment should attract machine readers because the repo is useful and easy to parse, not because it hides keywords or imitates unrelated projects.
+Every keyword should be connected to real project content. The experiment should attract machine readers because the repo is useful and easy to parse, not because it hides keywords or imitates unrelated projects. Resource pages should be useful enough for a human to bookmark and structured enough for a machine to summarize.
 
 ## Initial Experiment Design
 
