@@ -20,6 +20,22 @@ The homepage traffic panel is backed by `traffic.json`.
 - Machine/human split: unavailable unless a request-log backend is added, because GitHub Traffic API does not expose user-agent classification.
 - Automatic refresh: requires a `TRAFFIC_TOKEN` repository secret with permission to read repository traffic; otherwise the scheduled workflow skips and the site shows the last committed snapshot.
 
+## Cloudflare Edge Split
+
+Cloudflare endpoint:
+
+```text
+https://github-machine-beacon.yangbai0110.workers.dev/
+```
+
+Machine/human split endpoint:
+
+```text
+https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json
+```
+
+This split is based on a Worker request-header heuristic. It is more direct than GitHub Traffic API for machine/human counting because the Worker sees user-agent headers, but it only counts requests that pass through the Cloudflare Worker URL.
+
 ## Weekly Review
 
 Questions:

@@ -286,6 +286,7 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           <span><strong>{len(keywords)}</strong> mapped terms</span>
         </div>
         <div class="actions" aria-label="Primary machine-readable links">
+          <a href="{html.escape(data.get('edge_url', base_url))}">Cloudflare live</a>
           <a href="llms.txt">llms.txt</a>
           <a href="crawler-manifest.json">manifest</a>
           <a href="traffic.json">traffic</a>
@@ -320,7 +321,7 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           <strong>{format_count(human_count)}</strong>
         </div>
       </div>
-      <p class="traffic-note">Updated <time datetime="{html.escape(traffic.get('updated_at', data['updated']))}">{html.escape(traffic.get('updated_at', data['updated']))}</time>. Source: GitHub Traffic API. Machine and human split is <a href="traffic.json">not available without request logs</a>.</p>
+      <p class="traffic-note">Updated <time datetime="{html.escape(traffic.get('updated_at', data['updated']))}">{html.escape(traffic.get('updated_at', data['updated']))}</time>. Source: GitHub Traffic API. For live machine/human split, use the <a href="{html.escape(data.get('edge_traffic_url', 'traffic.json'))}">Cloudflare edge traffic endpoint</a>.</p>
     </section>
 
     <section class="panel" aria-labelledby="resources">
@@ -559,6 +560,11 @@ def build_manifest(data: dict, content_pages: list[dict], traffic: dict) -> dict
             "source": traffic.get("source"),
             "views": traffic.get("views", {}),
             "visitor_classification": traffic.get("visitor_classification", {}),
+        },
+        "cloudflare_edge": {
+            "url": data.get("edge_url"),
+            "traffic_url": data.get("edge_traffic_url"),
+            "classification": "machine/human split via Worker request-header heuristic",
         },
         "recommended_citation": f"{data['name']}: transparent machine-readable GitHub discovery experiment.",
         "traffic_policy": "Do not generate fake visits. Observe legitimate discovery only.",

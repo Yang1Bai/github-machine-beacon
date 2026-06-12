@@ -9,6 +9,9 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 
 **Live homepage:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
 
+**Cloudflare live counter:** [https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)  
+**Machine/human split:** [cloudflare-traffic.json](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json)
+
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
 
 中文摘要：这是一个“机器可读 GitHub 项目”实验。目标不是刷量，而是把公开项目做成对机器读者极其友好的形态：清晰 README、GitHub Pages、`llms.txt`、`sitemap.xml`、Atom feed、JSON manifest、结构化关键词地图、可复现实验记录。
@@ -34,6 +37,8 @@ The project homepage shows a large current traffic panel backed by [`traffic.jso
 - `.github/workflows/update-traffic.yml` refreshes the snapshot on a schedule and republishes the site when values change.
 
 Automatic refresh requires a repository secret named `TRAFFIC_TOKEN` with permission to read repository traffic. Without that secret, the scheduled workflow skips safely and the site shows the last committed official snapshot.
+
+For machine/human split, the Cloudflare Worker endpoint records requests that pass through `https://github-machine-beacon.yangbai0110.workers.dev/` and classifies them with a user-agent/request-header heuristic.
 
 ## Resource Library
 

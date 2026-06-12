@@ -3,6 +3,8 @@
   "slug": "github-machine-beacon",
   "owner": "Yang1Bai",
   "base_url": "https://yang1bai.github.io/github-machine-beacon/",
+  "edge_url": "https://github-machine-beacon.yangbai0110.workers.dev/",
+  "edge_traffic_url": "https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json",
   "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
   "version": "0.2.1",
   "updated": "2026-06-12",

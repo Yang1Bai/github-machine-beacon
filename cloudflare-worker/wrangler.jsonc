@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "github-machine-beacon",
+  "main": "src/index.js",
+  "compatibility_date": "2026-06-12",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "ORIGIN": "https://yang1bai.github.io/github-machine-beacon"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "TRAFFIC_KV",
+      "id": "ef34a519458240afa7eafd60d90f7370"
+    }
+  ]
+}

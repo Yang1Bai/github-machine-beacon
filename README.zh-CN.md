@@ -6,6 +6,9 @@
 
 实时主页：[https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
 
+Cloudflare 实时计数入口：[https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)  
+机器/人拆分 JSON：[cloudflare-traffic.json](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json)
+
 核心原则：公开、透明、可复现，不刷量、不伪装、不堆无关关键词。
 
 ## 第二版增强
@@ -30,6 +33,8 @@
 - `.github/workflows/update-traffic.yml` 会定时刷新快照，数据变化时自动重新发布 Pages。
 
 自动刷新需要配置一个名为 `TRAFFIC_TOKEN` 的仓库 secret，并授予读取 repository traffic 的权限。没有这个 secret 时，定时 workflow 会安全跳过，首页显示最后一次已提交的官方快照。
+
+机器/人拆分现在由 Cloudflare Worker 统计：经过 `https://github-machine-beacon.yangbai0110.workers.dev/` 的请求会按 user-agent 和请求头启发式分类。
 
 ## 实验思路
 

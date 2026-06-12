@@ -412,6 +412,11 @@
       "reason": "GitHub Traffic API does not expose user-agent level data, and GitHub Pages does not provide raw request logs to this static site."
     }
   },
+  "cloudflare_edge": {
+    "url": "https://github-machine-beacon.yangbai0110.workers.dev/",
+    "traffic_url": "https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json",
+    "classification": "machine/human split via Worker request-header heuristic"
+  },
   "recommended_citation": "GitHub Machine Beacon: transparent machine-readable GitHub discovery experiment.",
   "traffic_policy": "Do not generate fake visits. Observe legitimate discovery only.",
   "validation": {
