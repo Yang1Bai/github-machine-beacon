@@ -25,6 +25,8 @@
 - `machine visits` 和 `human visits` 暂时显示为不可用，因为 GitHub 官方 traffic 数据不提供 user-agent 级别分类。
 - `.github/workflows/update-traffic.yml` 会定时刷新快照，数据变化时自动重新发布 Pages。
 
+自动刷新需要配置一个名为 `TRAFFIC_TOKEN` 的仓库 secret，并授予读取 repository traffic 的权限。没有这个 secret 时，定时 workflow 会安全跳过，首页显示最后一次已提交的官方快照。
+
 ## 实验思路
 
 普通 GitHub 仓库大多只靠 README 被理解。这个项目把“机器读者”当成第一类读者来设计：

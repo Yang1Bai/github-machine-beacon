@@ -15,24 +15,40 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
           persist-credentials: true
 
+      - name: Check traffic token
+        id: token
+        run: |
+          if [ -z "$TRAFFIC_TOKEN" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "TRAFFIC_TOKEN is not configured. Skipping automatic traffic refresh."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Update traffic snapshot
+        if: steps.token.outputs.skip != 'true'
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ env.TRAFFIC_TOKEN }}
         run: python scripts/update_traffic.py
 
       - name: Generate site files
+        if: steps.token.outputs.skip != 'true'
         run: python scripts/build.py
 
       - name: Validate machine-readable surfaces
+        if: steps.token.outputs.skip != 'true'
         run: python scripts/validate.py
 
       - name: Commit updated traffic snapshot
+        if: steps.token.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

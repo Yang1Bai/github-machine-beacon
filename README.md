@@ -29,6 +29,8 @@ The project homepage shows a large current traffic panel backed by [`traffic.jso
 - `machine visits` and `human visits` are shown as unavailable unless a request-log backend is added, because GitHub's public traffic data does not expose user-agent classification.
 - `.github/workflows/update-traffic.yml` refreshes the snapshot on a schedule and republishes the site when values change.
 
+Automatic refresh requires a repository secret named `TRAFFIC_TOKEN` with permission to read repository traffic. Without that secret, the scheduled workflow skips safely and the site shows the last committed official snapshot.
+
 ## Resource Library
 
 These pages are intended to be useful resources, not just discovery bait:

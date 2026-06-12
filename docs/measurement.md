@@ -18,6 +18,7 @@ The homepage traffic panel is backed by `traffic.json`.
 - Scope: repository traffic, not raw GitHub Pages server logs.
 - Window: the API's current traffic window, normally the recent 14-day period.
 - Machine/human split: unavailable unless a request-log backend is added, because GitHub Traffic API does not expose user-agent classification.
+- Automatic refresh: requires a `TRAFFIC_TOKEN` repository secret with permission to read repository traffic; otherwise the scheduled workflow skips and the site shows the last committed snapshot.
 
 ## Weekly Review
 
