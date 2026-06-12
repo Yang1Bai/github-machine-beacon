@@ -1,25 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
-  <title id="title">Current verified traffic for GitHub Machine Beacon</title>
-  <desc id="desc">GitHub Traffic API snapshot showing repository views, unique visitors, clones, and unavailable machine versus human split.</desc>
+  <title id="title">Live traffic card for GitHub Machine Beacon</title>
+  <desc id="desc">Pointer to the dynamic Cloudflare traffic card for live machine and human request counts.</desc>
   <rect width="1200" height="430" rx="18" fill="#fbfcf8"/>
   <rect x="24" y="24" width="1152" height="382" rx="14" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
-  <text x="64" y="82" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d7f61">CURRENT VERIFIED TRAFFIC</text>
-  <text x="64" y="206" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="142" font-weight="850" fill="#2357d9">0</text>
-  <text x="72" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" fill="#5c6b63">GitHub repository views in the current 14-day Traffic API window</text>
+  <text x="64" y="82" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d7f61">LIVE TRAFFIC CARD MOVED TO CLOUDFLARE</text>
+  <text x="64" y="206" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="96" font-weight="850" fill="#2357d9">EDGE LIVE</text>
+  <text x="72" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" fill="#5c6b63">Use the dynamic Worker SVG for current request totals and machine/human split.</text>
   <g font-family="Inter, Segoe UI, Arial, sans-serif">
     <rect x="640" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="662" y="116" font-size="22" font-weight="700" fill="#5c6b63">Unique visitors</text>
-    <text x="662" y="166" font-size="50" font-weight="850" fill="#17211c">0</text>
+    <text x="662" y="116" font-size="22" font-weight="700" fill="#5c6b63">Machine visits</text>
+    <text x="662" y="166" font-size="42" font-weight="850" fill="#17211c">LIVE</text>
     <rect x="890" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="912" y="116" font-size="22" font-weight="700" fill="#5c6b63">Clones</text>
-    <text x="912" y="166" font-size="50" font-weight="850" fill="#17211c">0</text>
+    <text x="912" y="116" font-size="22" font-weight="700" fill="#5c6b63">Human visits</text>
+    <text x="912" y="166" font-size="42" font-weight="850" fill="#17211c">LIVE</text>
     <rect x="640" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="662" y="256" font-size="22" font-weight="700" fill="#5c6b63">Machine visits</text>
-    <text x="662" y="306" font-size="50" font-weight="850" fill="#17211c">N/A</text>
+    <text x="662" y="256" font-size="22" font-weight="700" fill="#5c6b63">Total requests</text>
+    <text x="662" y="306" font-size="42" font-weight="850" fill="#17211c">LIVE</text>
     <rect x="890" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="912" y="256" font-size="22" font-weight="700" fill="#5c6b63">Human visits</text>
-    <text x="912" y="306" font-size="50" font-weight="850" fill="#17211c">N/A</text>
+    <text x="912" y="256" font-size="22" font-weight="700" fill="#5c6b63">Source</text>
+    <text x="912" y="306" font-size="42" font-weight="850" fill="#17211c">WORKER</text>
   </g>
-  <text x="64" y="352" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" fill="#5c6b63">Updated 2026-06-12T15:21:59Z · machine/human split requires request logs</text>
-  <text x="64" y="386" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="750" fill="#17211c">Open live homepage: https://yang1bai.github.io/github-machine-beacon/</text>
+  <text x="64" y="352" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" fill="#5c6b63">Dynamic SVG: https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg</text>
+  <text x="64" y="386" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="750" fill="#17211c">Open live homepage: https://github-machine-beacon.yangbai0110.workers.dev/</text>
 </svg>

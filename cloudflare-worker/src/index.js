@@ -85,6 +85,64 @@ function jsonResponse(payload, init = {}) {
   });
 }
 
+function formatCount(value) {
+  return Number(value || 0).toLocaleString("en-US");
+}
+
+function escapeSvg(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function svgResponse(svg, init = {}) {
+  return new Response(svg, {
+    ...init,
+    headers: {
+      "content-type": "image/svg+xml; charset=utf-8",
+      "cache-control": "no-store, no-cache, max-age=0, must-revalidate",
+      "access-control-allow-origin": "*",
+      "x-content-type-options": "nosniff",
+      ...(init.headers || {})
+    }
+  });
+}
+
+function buildTrafficCardSvg(snapshot) {
+  const totals = snapshot.totals || {};
+  const paths = snapshot.paths || {};
+  const pathCount = Object.keys(paths).length;
+  const updated = snapshot.updated_at || new Date().toISOString();
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Live Cloudflare edge traffic for GitHub Machine Beacon</title>
+  <desc id="desc">Live request counter with machine and human split from the Cloudflare Worker edge endpoint.</desc>
+  <rect width="1200" height="430" rx="18" fill="#fbfcf8"/>
+  <rect x="24" y="24" width="1152" height="382" rx="14" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+  <text x="64" y="82" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d7f61">LIVE CLOUDFLARE EDGE TRAFFIC</text>
+  <text x="64" y="206" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="142" font-weight="850" fill="#2357d9">${formatCount(totals.requests)}</text>
+  <text x="72" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" fill="#5c6b63">requests through the live homepage and machine-readable endpoints</text>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <rect x="640" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="662" y="116" font-size="22" font-weight="700" fill="#5c6b63">Machine visits</text>
+    <text x="662" y="166" font-size="50" font-weight="850" fill="#17211c">${formatCount(totals.machine)}</text>
+    <rect x="890" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="912" y="116" font-size="22" font-weight="700" fill="#5c6b63">Human visits</text>
+    <text x="912" y="166" font-size="50" font-weight="850" fill="#17211c">${formatCount(totals.human)}</text>
+    <rect x="640" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="662" y="256" font-size="22" font-weight="700" fill="#5c6b63">Unknown</text>
+    <text x="662" y="306" font-size="50" font-weight="850" fill="#17211c">${formatCount(totals.unknown)}</text>
+    <rect x="890" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="912" y="256" font-size="22" font-weight="700" fill="#5c6b63">Paths tracked</text>
+    <text x="912" y="306" font-size="50" font-weight="850" fill="#17211c">${formatCount(pathCount)}</text>
+  </g>
+  <text x="64" y="352" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" fill="#5c6b63">Updated ${escapeSvg(updated)} - source: Cloudflare Worker request classifier</text>
+  <text x="64" y="386" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="750" fill="#17211c">Live homepage: https://github-machine-beacon.yangbai0110.workers.dev/</text>
+</svg>`;
+}
+
 async function proxyToOrigin(request, url, origin) {
   const originBase = new URL(origin.endsWith("/") ? origin : `${origin}/`);
   const originPath = url.pathname === "/" ? "" : url.pathname.replace(/^\/+/, "");
@@ -109,6 +167,15 @@ export default {
 
     if (url.pathname === "/cloudflare-traffic.json" || url.pathname === "/traffic-edge.json") {
       return jsonResponse(await readSnapshot(env, now));
+    }
+
+    if (url.pathname === "/traffic-card.svg") {
+      const snapshot =
+        request.method === "GET" || request.method === "HEAD"
+          ? await recordVisit(env, request, url)
+          : await readSnapshot(env, now);
+      const svg = buildTrafficCardSvg(snapshot);
+      return svgResponse(request.method === "HEAD" ? null : svg);
     }
 
     if (url.pathname === "/health") {

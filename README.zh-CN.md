@@ -2,7 +2,7 @@
 
 这是一个 GitHub 机器浏览触发实验项目。目标是让仓库对搜索引擎、GitHub 内部索引、代码搜索、AI agent、LLM 抓取器、链接预览 bot、归档工具和引用工具都更容易发现、更容易解析、更容易复访。
 
-[![当前验证访问量](site/assets/traffic-card.svg)](https://github-machine-beacon.yangbai0110.workers.dev/)
+[![Cloudflare 实时访问量](https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg?v=0.3.1)](https://github-machine-beacon.yangbai0110.workers.dev/)
 
 实时主页：[https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)
 
@@ -25,12 +25,12 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 
 ## 首页访问量显示
 
-首页现在有一个大号流量面板，数据来自 [`traffic.json`](traffic.json)：
+首页现在有一个大号实时流量面板，主数据来自 Cloudflare Worker：
 
-- `views` 和 `unique visitors` 来自 GitHub Traffic API。
-- 统计窗口采用 GitHub Traffic API 当前提供的仓库流量窗口，通常是最近 14 天。
-- `machine visits` 和 `human visits` 暂时显示为不可用，因为 GitHub 官方 traffic 数据不提供 user-agent 级别分类。
-- `.github/workflows/update-traffic.yml` 会定时刷新快照，数据变化时自动重新发布 Pages。
+- `total requests`、`machine visits`、`human visits` 和 `unknown` 来自 [`cloudflare-traffic.json`](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json)。
+- README 顶部访问量卡片由 Worker 动态生成：[`traffic-card.svg`](https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg)。
+- GitHub 官方 `views`、`unique visitors` 和 `clones` 仍然保留在 [`traffic.json`](traffic.json)，但它是较慢刷新的官方快照。
+- `.github/workflows/update-traffic.yml` 会定时刷新 GitHub API 快照，数据变化时自动重新发布 Pages。
 
 自动刷新需要配置一个名为 `TRAFFIC_TOKEN` 的仓库 secret，并授予读取 repository traffic 的权限。没有这个 secret 时，定时 workflow 会安全跳过，首页显示最后一次已提交的官方快照。
 

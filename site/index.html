@@ -55,29 +55,29 @@
 
     <section class="traffic-panel" aria-labelledby="traffic">
       <div>
-        <p class="eyebrow">Current verified traffic</p>
-        <h2 id="traffic">0</h2>
-        <p class="traffic-caption">GitHub repository views in the current 14-day Traffic API window.</p>
+        <p class="eyebrow">Live edge traffic</p>
+        <h2 id="traffic">...</h2>
+        <p class="traffic-caption">Cloudflare requests through the live homepage and machine-readable endpoints.</p>
       </div>
       <div class="traffic-grid" aria-label="Traffic breakdown">
         <div class="traffic-card">
-          <span>Unique visitors</span>
-          <strong>0</strong>
-        </div>
-        <div class="traffic-card">
-          <span>Clones</span>
-          <strong>0</strong>
-        </div>
-        <div class="traffic-card">
           <span>Machine visits</span>
-          <strong>N/A</strong>
+          <strong id="edge-machine">...</strong>
         </div>
         <div class="traffic-card">
           <span>Human visits</span>
-          <strong>N/A</strong>
+          <strong id="edge-human">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Unknown</span>
+          <strong id="edge-unknown">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>GitHub views</span>
+          <strong>0</strong>
         </div>
       </div>
-      <p class="traffic-note">Updated <time datetime="2026-06-12T15:21:59Z">2026-06-12T15:21:59Z</time>. Source: GitHub Traffic API. For live machine/human split, use the <a href="https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json">Cloudflare edge traffic endpoint</a>.</p>
+      <p class="traffic-note">Live split updated <time id="traffic-updated" datetime="">loading</time>. Source: Cloudflare Worker. GitHub official snapshot: 0 views, 0 unique visitors, 0 clones. Raw edge data: <a href="https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json">cloudflare-traffic.json</a>.</p>
     </section>
 
     <section class="panel" aria-labelledby="resources">
@@ -222,8 +222,44 @@
 
     <section class="panel" aria-labelledby="updates">
       <h2 id="updates">Update Contract</h2>
-      <p>This page is generated from <code>data/beacon.json</code> and <code>data/content-pages.json</code>. Declared project version: <code>0.3.0</code>. Last declared update: <time datetime="2026-06-12">2026-06-12</time>.</p>
+      <p>This page is generated from <code>data/beacon.json</code> and <code>data/content-pages.json</code>. Declared project version: <code>0.3.1</code>. Last declared update: <time datetime="2026-06-12">2026-06-12</time>.</p>
     </section>
   </main>
+  <script>
+    (() => {
+      const endpoint = "https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json";
+      const formatter = new Intl.NumberFormat("en-US");
+      const setText = (id, value) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = formatter.format(Number(value || 0));
+      };
+
+      fetch(endpoint, { cache: "no-store" })
+        .then((response) => {
+          if (!response.ok) throw new Error(`traffic endpoint returned ${response.status}`);
+          return response.json();
+        })
+        .then((snapshot) => {
+          const totals = snapshot.totals || {};
+          setText("traffic", totals.requests);
+          setText("edge-machine", totals.machine);
+          setText("edge-human", totals.human);
+          setText("edge-unknown", totals.unknown);
+          const updated = document.getElementById("traffic-updated");
+          if (updated && snapshot.updated_at) {
+            updated.textContent = snapshot.updated_at;
+            updated.setAttribute("datetime", snapshot.updated_at);
+          }
+        })
+        .catch(() => {
+          setText("traffic", 0);
+          setText("edge-machine", 0);
+          setText("edge-human", 0);
+          setText("edge-unknown", 0);
+          const updated = document.getElementById("traffic-updated");
+          if (updated) updated.textContent = "edge endpoint unavailable";
+        });
+    })();
+  </script>
 </body>
 </html>

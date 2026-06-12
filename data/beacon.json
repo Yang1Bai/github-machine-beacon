@@ -6,7 +6,7 @@
   "edge_url": "https://github-machine-beacon.yangbai0110.workers.dev/",
   "edge_traffic_url": "https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json",
   "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "updated": "2026-06-12",
   "language": "en",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",

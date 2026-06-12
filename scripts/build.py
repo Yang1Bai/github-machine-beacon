@@ -85,43 +85,32 @@ def format_count(value: int | None) -> str:
 
 
 def build_traffic_card_svg(data: dict, traffic: dict) -> str:
-    views = traffic.get("views", {})
-    clones = traffic.get("clones", {})
-    classification = traffic.get("visitor_classification", {})
-    updated = traffic.get("updated_at", data["updated"])
-    machine_count = classification.get("machine_visits")
-    human_count = classification.get("human_visits")
-    values = {
-        "views": format_count(views.get("count", 0)),
-        "uniques": format_count(views.get("uniques", 0)),
-        "clones": format_count(clones.get("count", 0)),
-        "machines": format_count(machine_count),
-        "humans": format_count(human_count),
-    }
+    edge_url = data.get("edge_url", data["base_url"])
+    edge_card_url = edge_url.rstrip("/") + "/traffic-card.svg"
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
-  <title id="title">Current verified traffic for {html.escape(data['name'])}</title>
-  <desc id="desc">GitHub Traffic API snapshot showing repository views, unique visitors, clones, and unavailable machine versus human split.</desc>
+  <title id="title">Live traffic card for {html.escape(data['name'])}</title>
+  <desc id="desc">Pointer to the dynamic Cloudflare traffic card for live machine and human request counts.</desc>
   <rect width="1200" height="430" rx="18" fill="#fbfcf8"/>
   <rect x="24" y="24" width="1152" height="382" rx="14" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
-  <text x="64" y="82" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d7f61">CURRENT VERIFIED TRAFFIC</text>
-  <text x="64" y="206" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="142" font-weight="850" fill="#2357d9">{values['views']}</text>
-  <text x="72" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" fill="#5c6b63">GitHub repository views in the current 14-day Traffic API window</text>
+  <text x="64" y="82" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d7f61">LIVE TRAFFIC CARD MOVED TO CLOUDFLARE</text>
+  <text x="64" y="206" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="96" font-weight="850" fill="#2357d9">EDGE LIVE</text>
+  <text x="72" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" fill="#5c6b63">Use the dynamic Worker SVG for current request totals and machine/human split.</text>
   <g font-family="Inter, Segoe UI, Arial, sans-serif">
     <rect x="640" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="662" y="116" font-size="22" font-weight="700" fill="#5c6b63">Unique visitors</text>
-    <text x="662" y="166" font-size="50" font-weight="850" fill="#17211c">{values['uniques']}</text>
+    <text x="662" y="116" font-size="22" font-weight="700" fill="#5c6b63">Machine visits</text>
+    <text x="662" y="166" font-size="42" font-weight="850" fill="#17211c">LIVE</text>
     <rect x="890" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="912" y="116" font-size="22" font-weight="700" fill="#5c6b63">Clones</text>
-    <text x="912" y="166" font-size="50" font-weight="850" fill="#17211c">{values['clones']}</text>
+    <text x="912" y="116" font-size="22" font-weight="700" fill="#5c6b63">Human visits</text>
+    <text x="912" y="166" font-size="42" font-weight="850" fill="#17211c">LIVE</text>
     <rect x="640" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="662" y="256" font-size="22" font-weight="700" fill="#5c6b63">Machine visits</text>
-    <text x="662" y="306" font-size="50" font-weight="850" fill="#17211c">{values['machines']}</text>
+    <text x="662" y="256" font-size="22" font-weight="700" fill="#5c6b63">Total requests</text>
+    <text x="662" y="306" font-size="42" font-weight="850" fill="#17211c">LIVE</text>
     <rect x="890" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
-    <text x="912" y="256" font-size="22" font-weight="700" fill="#5c6b63">Human visits</text>
-    <text x="912" y="306" font-size="50" font-weight="850" fill="#17211c">{values['humans']}</text>
+    <text x="912" y="256" font-size="22" font-weight="700" fill="#5c6b63">Source</text>
+    <text x="912" y="306" font-size="42" font-weight="850" fill="#17211c">WORKER</text>
   </g>
-  <text x="64" y="352" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" fill="#5c6b63">Updated {html.escape(updated)} · machine/human split requires request logs</text>
-  <text x="64" y="386" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="750" fill="#17211c">Open live homepage: {html.escape(data['base_url'])}</text>
+  <text x="64" y="352" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" fill="#5c6b63">Dynamic SVG: {html.escape(edge_card_url)}</text>
+  <text x="64" y="386" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="750" fill="#17211c">Open live homepage: {html.escape(edge_url)}</text>
 </svg>"""
 
 
@@ -203,9 +192,7 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
     pages = all_pages(data, content_pages)
     views = traffic.get("views", {})
     clones = traffic.get("clones", {})
-    classification = traffic.get("visitor_classification", {})
-    machine_count = classification.get("machine_visits")
-    human_count = classification.get("human_visits")
+    edge_traffic_url = data.get("edge_traffic_url", page_url(base_url, "traffic.json"))
 
     json_ld = {
         "@context": "https://schema.org",
@@ -299,29 +286,29 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
 
     <section class="traffic-panel" aria-labelledby="traffic">
       <div>
-        <p class="eyebrow">Current verified traffic</p>
-        <h2 id="traffic">{format_count(views.get('count', 0))}</h2>
-        <p class="traffic-caption">GitHub repository views in the current 14-day Traffic API window.</p>
+        <p class="eyebrow">Live edge traffic</p>
+        <h2 id="traffic">...</h2>
+        <p class="traffic-caption">Cloudflare requests through the live homepage and machine-readable endpoints.</p>
       </div>
       <div class="traffic-grid" aria-label="Traffic breakdown">
         <div class="traffic-card">
-          <span>Unique visitors</span>
-          <strong>{format_count(views.get('uniques', 0))}</strong>
-        </div>
-        <div class="traffic-card">
-          <span>Clones</span>
-          <strong>{format_count(clones.get('count', 0))}</strong>
-        </div>
-        <div class="traffic-card">
           <span>Machine visits</span>
-          <strong>{format_count(machine_count)}</strong>
+          <strong id="edge-machine">...</strong>
         </div>
         <div class="traffic-card">
           <span>Human visits</span>
-          <strong>{format_count(human_count)}</strong>
+          <strong id="edge-human">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Unknown</span>
+          <strong id="edge-unknown">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>GitHub views</span>
+          <strong>{format_count(views.get('count', 0))}</strong>
         </div>
       </div>
-      <p class="traffic-note">Updated <time datetime="{html.escape(traffic.get('updated_at', data['updated']))}">{html.escape(traffic.get('updated_at', data['updated']))}</time>. Source: GitHub Traffic API. For live machine/human split, use the <a href="{html.escape(data.get('edge_traffic_url', 'traffic.json'))}">Cloudflare edge traffic endpoint</a>.</p>
+      <p class="traffic-note">Live split updated <time id="traffic-updated" datetime="">loading</time>. Source: Cloudflare Worker. GitHub official snapshot: {format_count(views.get('count', 0))} views, {format_count(views.get('uniques', 0))} unique visitors, {format_count(clones.get('count', 0))} clones. Raw edge data: <a href="{html.escape(edge_traffic_url)}">cloudflare-traffic.json</a>.</p>
     </section>
 
     <section class="panel" aria-labelledby="resources">
@@ -363,6 +350,42 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
       <p>This page is generated from <code>data/beacon.json</code> and <code>data/content-pages.json</code>. Declared project version: <code>{html.escape(data['version'])}</code>. Last declared update: <time datetime="{html.escape(data['updated'])}">{html.escape(data['updated'])}</time>.</p>
     </section>
   </main>
+  <script>
+    (() => {{
+      const endpoint = {json.dumps(edge_traffic_url)};
+      const formatter = new Intl.NumberFormat("en-US");
+      const setText = (id, value) => {{
+        const element = document.getElementById(id);
+        if (element) element.textContent = formatter.format(Number(value || 0));
+      }};
+
+      fetch(endpoint, {{ cache: "no-store" }})
+        .then((response) => {{
+          if (!response.ok) throw new Error(`traffic endpoint returned ${{response.status}}`);
+          return response.json();
+        }})
+        .then((snapshot) => {{
+          const totals = snapshot.totals || {{}};
+          setText("traffic", totals.requests);
+          setText("edge-machine", totals.machine);
+          setText("edge-human", totals.human);
+          setText("edge-unknown", totals.unknown);
+          const updated = document.getElementById("traffic-updated");
+          if (updated && snapshot.updated_at) {{
+            updated.textContent = snapshot.updated_at;
+            updated.setAttribute("datetime", snapshot.updated_at);
+          }}
+        }})
+        .catch(() => {{
+          setText("traffic", 0);
+          setText("edge-machine", 0);
+          setText("edge-human", 0);
+          setText("edge-unknown", 0);
+          const updated = document.getElementById("traffic-updated");
+          if (updated) updated.textContent = "edge endpoint unavailable";
+        }});
+    }})();
+  </script>
 </body>
 </html>"""
 

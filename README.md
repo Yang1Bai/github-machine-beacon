@@ -5,7 +5,7 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 [![Deploy GitHub Pages](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml)
 [![Validate Machine Surfaces](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml)
 
-[![Current verified traffic](site/assets/traffic-card.svg)](https://github-machine-beacon.yangbai0110.workers.dev/)
+[![Live Cloudflare edge traffic](https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg?v=0.3.1)](https://github-machine-beacon.yangbai0110.workers.dev/)
 
 **Live homepage:** [https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)
 
@@ -29,16 +29,16 @@ The hypothesis is simple: a repo with coherent machine-readable surfaces, stable
 
 ## Traffic Display
 
-The project homepage shows a large current traffic panel backed by [`traffic.json`](traffic.json).
+The project homepage shows a large live traffic panel backed by the Cloudflare Worker endpoint.
 
-- `views` and `unique visitors` come from the GitHub Traffic API.
-- the window is the GitHub Traffic API's current repository traffic window, normally the recent 14-day period.
-- `machine visits` and `human visits` are shown as unavailable unless a request-log backend is added, because GitHub's public traffic data does not expose user-agent classification.
-- `.github/workflows/update-traffic.yml` refreshes the snapshot on a schedule and republishes the site when values change.
+- `total requests`, `machine visits`, `human visits`, and `unknown` come from [`cloudflare-traffic.json`](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json).
+- the README traffic card is generated dynamically by the Worker at [`traffic-card.svg`](https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg).
+- GitHub official `views`, `unique visitors`, and `clones` remain available as a slower snapshot in [`traffic.json`](traffic.json).
+- `.github/workflows/update-traffic.yml` refreshes the GitHub API snapshot on a schedule and republishes the site when values change.
 
 Automatic refresh requires a repository secret named `TRAFFIC_TOKEN` with permission to read repository traffic. Without that secret, the scheduled workflow skips safely and the site shows the last committed official snapshot.
 
-For machine/human split, the Cloudflare Worker endpoint records requests that pass through `https://github-machine-beacon.yangbai0110.workers.dev/` and classifies them with a user-agent/request-header heuristic.
+The Cloudflare Worker endpoint records requests that pass through `https://github-machine-beacon.yangbai0110.workers.dev/` and classifies them with a user-agent/request-header heuristic.
 
 ## Resource Library
 
