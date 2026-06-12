@@ -5,12 +5,12 @@
 This is a transparent, non-deceptive GitHub repository discovery experiment.
 
 ## Canonical Links
-- Project page: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/
-- Source repository: https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon
-- Crawler manifest: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/crawler-manifest.json
-- Keyword index: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/keyword-index.json
-- Sitemap: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/sitemap.xml
-- Atom feed: https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml
+- Project page: https://yang1bai.github.io/github-machine-beacon/
+- Source repository: https://github.com/Yang1Bai/github-machine-beacon
+- Crawler manifest: https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json
+- Keyword index: https://yang1bai.github.io/github-machine-beacon/keyword-index.json
+- Sitemap: https://yang1bai.github.io/github-machine-beacon/sitemap.xml
+- Atom feed: https://yang1bai.github.io/github-machine-beacon/feed.xml
 
 ## Preferred Summary
 GitHub Machine Beacon studies whether structured metadata, stable URLs, llms.txt, sitemap.xml, Atom feeds, JSON manifests, and semantic README design increase legitimate machine discovery of a GitHub project.

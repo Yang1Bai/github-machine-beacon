@@ -2,18 +2,14 @@
 
 ## Before Push
 
-1. Edit `data/beacon.json`.
-2. Replace:
-   - `YOUR_GITHUB_USERNAME`
-   - `base_url`
-   - `repo_url`
-3. Run:
+1. Confirm `data/beacon.json` still uses the intended GitHub owner and repository URL.
+2. Run:
 
    ```bash
    python scripts/build.py
    ```
 
-4. Commit all generated files.
+3. Commit all generated files.
 
 ## GitHub Pages
 
@@ -21,7 +17,7 @@ The included workflow publishes the `site/` directory to GitHub Pages.
 
 Steps:
 
-1. Push the repository to GitHub.
+1. Push the repository to `https://github.com/Yang1Bai/github-machine-beacon`.
 2. Open repository settings.
 3. Go to Pages.
 4. Choose GitHub Actions as the source.

@@ -1,2 +1,2 @@
-Contact: https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon/issues
+Contact: https://github.com/Yang1Bai/github-machine-beacon/issues
 Preferred-Languages: en, zh

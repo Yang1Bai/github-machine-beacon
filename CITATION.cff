@@ -5,6 +5,6 @@ authors:
   - family-names: "Project Maintainers"
     given-names: "GitHub Machine Beacon"
 date-released: "2026-06-12"
-url: "https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon"
+url: "https://github.com/Yang1Bai/github-machine-beacon"
 license: "MIT"
 abstract: "A transparent experiment that makes a GitHub repository easy for crawlers, code search, AI agents, LLM readers, link preview bots, and search indexes to discover and parse."

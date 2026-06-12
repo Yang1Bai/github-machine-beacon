@@ -58,10 +58,7 @@ It does use:
 
 ## Quick Start
 
-1. Replace placeholders in [`data/beacon.json`](data/beacon.json):
-   - `base_url`
-   - `repo_url`
-   - `owner`
+1. Confirm [`data/beacon.json`](data/beacon.json) points to the intended owner, repository URL, and Pages URL.
 2. Run:
 
    ```bash

@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>GitHub Machine Beacon</title>
-  <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/"/>
-  <link rel="self" href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml"/>
-  <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/</id>
+  <link href="https://yang1bai.github.io/github-machine-beacon/"/>
+  <link rel="self" href="https://yang1bai.github.io/github-machine-beacon/feed.xml"/>
+  <id>https://yang1bai.github.io/github-machine-beacon/</id>
   <updated>2026-06-12T00:00:00Z</updated>
   <subtitle>Machine-readable GitHub crawler discovery experiment.</subtitle>
   <entry>
     <title>GitHub Machine Beacon</title>
-    <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/"/>
-    <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/</id>
+    <link href="https://yang1bai.github.io/github-machine-beacon/"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Landing page for the machine-readable GitHub crawler discovery experiment.</summary>
   </entry>
   <entry>
     <title>LLM Reader Guide</title>
-    <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms.txt"/>
-    <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms.txt</id>
+    <link href="https://yang1bai.github.io/github-machine-beacon/llms.txt"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/llms.txt</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Compact guide for LLM crawlers, retrieval systems, and AI coding agents.</summary>
   </entry>
   <entry>
     <title>Full LLM Context</title>
-    <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms-full.txt"/>
-    <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms-full.txt</id>
+    <link href="https://yang1bai.github.io/github-machine-beacon/llms-full.txt"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/llms-full.txt</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Extended project context for retrieval augmented generation and AI readers.</summary>
   </entry>
   <entry>
     <title>Crawler Manifest</title>
-    <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/crawler-manifest.json"/>
-    <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/crawler-manifest.json</id>
+    <link href="https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Canonical JSON manifest describing URLs, topics, principles, and measurement fields.</summary>
   </entry>
   <entry>
     <title>Keyword Index</title>
-    <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/keyword-index.json"/>
-    <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/keyword-index.json</id>
+    <link href="https://yang1bai.github.io/github-machine-beacon/keyword-index.json"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/keyword-index.json</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Structured topic map for machine discovery and search indexing experiments.</summary>
   </entry>
   <entry>
     <title>Atom Feed</title>
-    <link href="https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml"/>
-    <id>https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml</id>
+    <link href="https://yang1bai.github.io/github-machine-beacon/feed.xml"/>
+    <id>https://yang1bai.github.io/github-machine-beacon/feed.xml</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Recrawl-friendly Atom feed for experiment updates.</summary>
   </entry>

@@ -1,9 +1,9 @@
 {
   "name": "GitHub Machine Beacon",
   "slug": "github-machine-beacon",
-  "owner": "YOUR_GITHUB_USERNAME",
-  "base_url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/",
-  "repo_url": "https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon",
+  "owner": "Yang1Bai",
+  "base_url": "https://yang1bai.github.io/github-machine-beacon/",
+  "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
   "updated": "2026-06-12",
   "language": "en",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",

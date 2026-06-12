@@ -4,8 +4,8 @@
   "slug": "github-machine-beacon",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
   "updated": "2026-06-12",
-  "base_url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/",
-  "repo_url": "https://github.com/YOUR_GITHUB_USERNAME/github-machine-beacon",
+  "base_url": "https://yang1bai.github.io/github-machine-beacon/",
+  "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
   "ethical_boundaries": [
     "Be transparent about the experiment.",
     "Use honest metadata and relevant keywords only.",
@@ -16,37 +16,37 @@
   "machine_entry_points": [
     {
       "title": "GitHub Machine Beacon",
-      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/",
+      "url": "https://yang1bai.github.io/github-machine-beacon/",
       "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
       "type": "text/html"
     },
     {
       "title": "LLM Reader Guide",
-      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms.txt",
+      "url": "https://yang1bai.github.io/github-machine-beacon/llms.txt",
       "summary": "Compact guide for LLM crawlers, retrieval systems, and AI coding agents.",
       "type": "text/plain"
     },
     {
       "title": "Full LLM Context",
-      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/llms-full.txt",
+      "url": "https://yang1bai.github.io/github-machine-beacon/llms-full.txt",
       "summary": "Extended project context for retrieval augmented generation and AI readers.",
       "type": "text/plain"
     },
     {
       "title": "Crawler Manifest",
-      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/crawler-manifest.json",
+      "url": "https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json",
       "summary": "Canonical JSON manifest describing URLs, topics, principles, and measurement fields.",
       "type": "application/json"
     },
     {
       "title": "Keyword Index",
-      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/keyword-index.json",
+      "url": "https://yang1bai.github.io/github-machine-beacon/keyword-index.json",
       "summary": "Structured topic map for machine discovery and search indexing experiments.",
       "type": "application/json"
     },
     {
       "title": "Atom Feed",
-      "url": "https://YOUR_GITHUB_USERNAME.github.io/github-machine-beacon/feed.xml",
+      "url": "https://yang1bai.github.io/github-machine-beacon/feed.xml",
       "summary": "Recrawl-friendly Atom feed for experiment updates.",
       "type": "application/xml"
     }
