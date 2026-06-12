@@ -1,0 +1,43 @@
+name: Crawler or agent observation
+description: Report a crawler, search, link preview, or AI agent behavior observed against this repository.
+title: "Crawler observation: "
+labels:
+  - crawler-observation
+body:
+  - type: input
+    id: observed_system
+    attributes:
+      label: Observed system
+      description: Name the crawler, search engine, link preview bot, archive system, or AI agent if known.
+      placeholder: "Example: GitHub code search, search engine result, link preview bot"
+    validations:
+      required: true
+  - type: input
+    id: observed_url
+    attributes:
+      label: Observed URL
+      description: Which project URL or repository page was involved?
+      placeholder: "https://yang1bai.github.io/github-machine-beacon/llms.txt"
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Describe what happened and how it was observed.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Add public links, screenshots, timestamps, or reproducible search queries when safe.
+    validations:
+      required: false
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Ethical boundary
+      options:
+        - label: This observation was not produced by fake traffic, cloaking, hidden text, proxy traffic, or automated refresh loops.
+          required: true

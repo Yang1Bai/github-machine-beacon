@@ -1,0 +1,46 @@
+name: Experiment log entry
+description: Record a real measurement or update from the machine-readable discovery experiment.
+title: "Experiment log: "
+labels:
+  - experiment-log
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for observed data only. Do not report generated traffic, fake visits, or unverifiable metrics.
+  - type: input
+    id: observation_date
+    attributes:
+      label: Observation date
+      description: Use YYYY-MM-DD.
+      placeholder: "2026-06-12"
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Observed metrics
+      description: Record GitHub Insights values or other disclosed, privacy-preserving measurements.
+      placeholder: |
+        Repository views:
+        Unique visitors:
+        Clones:
+        Unique cloners:
+        Top referrers:
+        Popular content:
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Note what changed before the observation, such as release, docs update, link share, or indexing event.
+    validations:
+      required: false
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Ethical boundary
+      options:
+        - label: This entry does not rely on fake traffic, cloaking, hidden text, proxy traffic, or unrelated keyword stuffing.
+          required: true
