@@ -5,6 +5,10 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 [![Deploy GitHub Pages](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml)
 [![Validate Machine Surfaces](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml)
 
+[![Current verified traffic](site/assets/traffic-card.svg)](https://yang1bai.github.io/github-machine-beacon/)
+
+**Live homepage:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
+
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
 
 中文摘要：这是一个“机器可读 GitHub 项目”实验。目标不是刷量，而是把公开项目做成对机器读者极其友好的形态：清晰 README、GitHub Pages、`llms.txt`、`sitemap.xml`、Atom feed、JSON manifest、结构化关键词地图、可复现实验记录。

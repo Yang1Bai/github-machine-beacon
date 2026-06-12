@@ -84,6 +84,47 @@ def format_count(value: int | None) -> str:
     return f"{int(value):,}"
 
 
+def build_traffic_card_svg(data: dict, traffic: dict) -> str:
+    views = traffic.get("views", {})
+    clones = traffic.get("clones", {})
+    classification = traffic.get("visitor_classification", {})
+    updated = traffic.get("updated_at", data["updated"])
+    machine_count = classification.get("machine_visits")
+    human_count = classification.get("human_visits")
+    values = {
+        "views": format_count(views.get("count", 0)),
+        "uniques": format_count(views.get("uniques", 0)),
+        "clones": format_count(clones.get("count", 0)),
+        "machines": format_count(machine_count),
+        "humans": format_count(human_count),
+    }
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Current verified traffic for {html.escape(data['name'])}</title>
+  <desc id="desc">GitHub Traffic API snapshot showing repository views, unique visitors, clones, and unavailable machine versus human split.</desc>
+  <rect width="1200" height="430" rx="18" fill="#fbfcf8"/>
+  <rect x="24" y="24" width="1152" height="382" rx="14" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+  <text x="64" y="82" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#0d7f61">CURRENT VERIFIED TRAFFIC</text>
+  <text x="64" y="206" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="142" font-weight="850" fill="#2357d9">{values['views']}</text>
+  <text x="72" y="250" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" fill="#5c6b63">GitHub repository views in the current 14-day Traffic API window</text>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <rect x="640" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="662" y="116" font-size="22" font-weight="700" fill="#5c6b63">Unique visitors</text>
+    <text x="662" y="166" font-size="50" font-weight="850" fill="#17211c">{values['uniques']}</text>
+    <rect x="890" y="74" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="912" y="116" font-size="22" font-weight="700" fill="#5c6b63">Clones</text>
+    <text x="912" y="166" font-size="50" font-weight="850" fill="#17211c">{values['clones']}</text>
+    <rect x="640" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="662" y="256" font-size="22" font-weight="700" fill="#5c6b63">Machine visits</text>
+    <text x="662" y="306" font-size="50" font-weight="850" fill="#17211c">{values['machines']}</text>
+    <rect x="890" y="214" width="220" height="112" rx="10" fill="#f8faf7" stroke="#d9e2dc"/>
+    <text x="912" y="256" font-size="22" font-weight="700" fill="#5c6b63">Human visits</text>
+    <text x="912" y="306" font-size="50" font-weight="850" fill="#17211c">{values['humans']}</text>
+  </g>
+  <text x="64" y="352" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" fill="#5c6b63">Updated {html.escape(updated)} · machine/human split requires request logs</text>
+  <text x="64" y="386" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="750" fill="#17211c">Open live homepage: {html.escape(data['base_url'])}</text>
+</svg>"""
+
+
 def render_head(
     data: dict,
     title: str,
@@ -626,6 +667,7 @@ def main() -> None:
     write(SITE / "resources.json", json.dumps(build_resources_json(data, content_pages), ensure_ascii=False, indent=2))
     write(SITE / "traffic.json", json.dumps(traffic, ensure_ascii=False, indent=2))
     write(SITE / "manifest.webmanifest", json.dumps(build_webmanifest(data), ensure_ascii=False, indent=2))
+    write(SITE / "assets" / "traffic-card.svg", build_traffic_card_svg(data, traffic))
     write(SITE / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {page_url(data['base_url'], 'sitemap.xml')}\n")
     write(SITE / ".nojekyll", "")
     write(SITE / ".well-known" / "security.txt", f"Contact: {data['repo_url']}/issues\nPreferred-Languages: en, zh\n")

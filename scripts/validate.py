@@ -94,6 +94,8 @@ def check_llms_links() -> None:
             fail(f"llms.txt is missing {required}")
     if not (SITE / ".nojekyll").exists():
         fail("site/.nojekyll is missing; GitHub Pages may omit .well-known files")
+    if not (SITE / "assets" / "traffic-card.svg").exists():
+        fail("site/assets/traffic-card.svg is missing")
 
 
 def check_schema_json_ld() -> None:
