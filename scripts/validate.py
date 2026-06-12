@@ -91,6 +91,8 @@ def check_llms_links() -> None:
     for required in ("crawler-manifest.json", "resources.json", "sitemap.xml", "feed.xml"):
         if required not in text:
             fail(f"llms.txt is missing {required}")
+    if not (SITE / ".nojekyll").exists():
+        fail("site/.nojekyll is missing; GitHub Pages may omit .well-known files")
 
 
 def check_schema_json_ld() -> None:

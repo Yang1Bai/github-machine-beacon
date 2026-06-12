@@ -576,6 +576,7 @@ def main() -> None:
     write(SITE / "resources.json", json.dumps(build_resources_json(data, content_pages), ensure_ascii=False, indent=2))
     write(SITE / "manifest.webmanifest", json.dumps(build_webmanifest(data), ensure_ascii=False, indent=2))
     write(SITE / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {page_url(data['base_url'], 'sitemap.xml')}\n")
+    write(SITE / ".nojekyll", "")
     write(SITE / ".well-known" / "security.txt", f"Contact: {data['repo_url']}/issues\nPreferred-Languages: en, zh\n")
     write(SITE / "404.html", '<!doctype html><meta charset="utf-8"><title>Not found</title><p>Not found. Try <a href="./">GitHub Machine Beacon</a>.</p>')
 
