@@ -149,12 +149,13 @@ def render_head(
 
 
 def render_nav(data: dict) -> str:
+    base_url = data["base_url"].rstrip("/") + "/"
     return f"""<nav class="topbar" aria-label="Primary">
-  <a class="brand" href="./">{html.escape(data['name'])}</a>
-  <a href="llms.txt">llms.txt</a>
-  <a href="crawler-manifest.json">manifest</a>
-  <a href="traffic.json">traffic</a>
-  <a href="sitemap.xml">sitemap</a>
+  <a class="brand" href="{html.escape(base_url)}">{html.escape(data['name'])}</a>
+  <a href="{html.escape(page_url(base_url, 'llms.txt'))}">llms.txt</a>
+  <a href="{html.escape(page_url(base_url, 'crawler-manifest.json'))}">manifest</a>
+  <a href="{html.escape(page_url(base_url, 'traffic.json'))}">traffic</a>
+  <a href="{html.escape(page_url(base_url, 'sitemap.xml'))}">sitemap</a>
   <a href="{html.escape(data['repo_url'])}">GitHub</a>
 </nav>"""
 
@@ -274,10 +275,10 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
         </div>
         <div class="actions" aria-label="Primary machine-readable links">
           <a href="{html.escape(data.get('edge_url', base_url))}">Cloudflare live</a>
-          <a href="llms.txt">llms.txt</a>
-          <a href="crawler-manifest.json">manifest</a>
-          <a href="traffic.json">traffic</a>
-          <a href="sitemap.xml">sitemap</a>
+          <a href="{html.escape(page_url(base_url, 'llms.txt'))}">llms.txt</a>
+          <a href="{html.escape(page_url(base_url, 'crawler-manifest.json'))}">manifest</a>
+          <a href="{html.escape(page_url(base_url, 'traffic.json'))}">traffic</a>
+          <a href="{html.escape(page_url(base_url, 'sitemap.xml'))}">sitemap</a>
           <a href="{html.escape(data['repo_url'])}">GitHub</a>
         </div>
       </div>

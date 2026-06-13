@@ -38,23 +38,23 @@ The project homepage shows a large live traffic panel backed by the Cloudflare W
 
 Automatic refresh requires a repository secret named `TRAFFIC_TOKEN` with permission to read repository traffic. Without that secret, the scheduled workflow skips safely and the site shows the last committed official snapshot.
 
-The Cloudflare Worker endpoint records requests that pass through `https://github-machine-beacon.yangbai0110.workers.dev/` and classifies them with a user-agent/request-header heuristic.
+The Cloudflare Worker endpoint records content and machine-readable endpoint requests that pass through `https://github-machine-beacon.yangbai0110.workers.dev/` and classifies them with a user-agent/request-header heuristic. Static assets, favicon requests, and the README traffic-card SVG are excluded from future visit increments so the live split better reflects real page and machine-surface reads.
 
 ## Resource Library
 
 These pages are intended to be useful resources, not just discovery bait:
 
-- [Machine-Readable Repository Checklist](https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html)
-- [Crawler Surface Map](https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html)
-- [AI Agent Entrypoints](https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html)
-- [Experiment Protocol](https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html)
-- [Standards and Sources](https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html)
-- [Crawlability Audit](https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html)
-- [Results Log](https://yang1bai.github.io/github-machine-beacon/results-log.html)
+- [Machine-Readable Repository Checklist](https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html)
+- [Crawler Surface Map](https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html)
+- [AI Agent Entrypoints](https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html)
+- [Experiment Protocol](https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html)
+- [Standards and Sources](https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html)
+- [Crawlability Audit](https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html)
+- [Results Log](https://github-machine-beacon.yangbai0110.workers.dev/results-log.html)
 
 ## Machine Entry Points
 
-After publishing with GitHub Pages, these endpoints become the main crawler surfaces:
+The canonical Worker endpoint exposes these main crawler surfaces; GitHub Pages remains a mirror origin:
 
 - `/` - semantic landing page with JSON-LD, Open Graph, and canonical metadata
 - `/llms.txt` - compact guide for LLM and agent readers

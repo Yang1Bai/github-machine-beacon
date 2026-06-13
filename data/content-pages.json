@@ -33,7 +33,7 @@
           "Use multiple entry points because different machines begin in different places. GitHub code search, web crawlers, LLM readers, link preview bots, feed readers, and archive systems do not all share one discovery path."
         ],
         "items": [
-          "Expose a canonical GitHub Pages URL.",
+          "Expose a canonical live Worker URL and keep GitHub Pages as a mirror.",
           "Publish /llms.txt and a richer /llms-full.txt.",
           "Publish /sitemap.xml and /robots.txt.",
           "Publish a JSON crawler manifest with canonical URLs and summaries.",
@@ -123,7 +123,7 @@
         ],
         "items": [
           "Use the repository URL as the canonical source code link.",
-          "Use the GitHub Pages URL as the canonical web link.",
+          "Use the live Worker URL as the canonical web link.",
           "Prefer manifest and llms files before broad page scraping.",
           "Preserve the ethical boundary: no fake traffic, no cloaking, no hidden text.",
           "Treat traffic metrics as directional because GitHub traffic reporting is limited."
@@ -249,7 +249,7 @@
           "headers": ["Check", "Status", "Evidence"],
           "rows": [
             ["Public repository", "Pass", "Repository is public at https://github.com/Yang1Bai/github-machine-beacon."],
-            ["Canonical Pages URL", "Pass", "GitHub Pages is published at https://yang1bai.github.io/github-machine-beacon/."],
+            ["Canonical live URL", "Pass", "The canonical site is published at https://github-machine-beacon.yangbai0110.workers.dev/ and mirrored by GitHub Pages."],
             ["llms.txt", "Pass", "Root site and repository both expose llms.txt."],
             ["Sitemap", "Pass", "sitemap.xml lists canonical HTML and machine-readable resources."],
             ["Crawler manifest", "Pass", "crawler-manifest.json lists entry points, policies, resources, and measurement fields."],

@@ -1,6 +1,6 @@
 # Cloudflare Worker Traffic Classifier
 
-This Worker proxies the GitHub Pages site and records edge requests into Cloudflare KV.
+This Worker proxies the GitHub Pages mirror origin and records canonical content requests into Cloudflare KV.
 
 It exposes:
 
@@ -10,4 +10,4 @@ It exposes:
 - `/traffic-card.svg` - dynamic SVG card for the GitHub README traffic display
 - `/health` - health check
 
-The machine/human split is heuristic. It uses user-agent and request headers, which is more informative than GitHub Traffic API for this purpose but still not identity-level analytics.
+The machine/human split is heuristic. It uses user-agent and request headers, which is more informative than GitHub Traffic API for this purpose but still not identity-level analytics. Static assets, favicon requests, and the README traffic-card SVG are excluded from future visit increments so the counter focuses on page and machine-readable endpoint reads.

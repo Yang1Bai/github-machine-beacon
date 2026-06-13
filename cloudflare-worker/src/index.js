@@ -1,6 +1,8 @@
 const DEFAULT_ORIGIN = "https://yang1bai.github.io/github-machine-beacon";
 const COUNTER_KEY = "traffic:v1";
-const BOT_PATTERN = /(bot|crawler|spider|slurp|archive|indexer|preview|facebookexternalhit|twitterbot|linkedinbot|discordbot|slackbot|telegrambot|whatsapp|embedly|quora link preview|pinterest|google-inspectiontool|googleother|bingpreview|duckduckbot|baiduspider|yandex|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|gptbot|chatgpt-user|openai|anthropic|claude|perplexity|ccbot|cohere|amazonbot|applebot|meta-externalagent)/i;
+const MACHINE_UA_PATTERN = /(bot|crawler|spider|slurp|archive|indexer|preview|facebookexternalhit|twitterbot|linkedinbot|discordbot|slackbot|telegrambot|whatsapp|embedly|quora link preview|pinterest|google-inspectiontool|googleother|bingpreview|duckduckbot|baiduspider|yandex|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|gptbot|chatgpt-user|openai|anthropic|claude|perplexity|ccbot|cohere|amazonbot|applebot|meta-externalagent|github-camo|curl|wget|python-requests|go-http-client|node-fetch|undici|axios|okhttp|java\/|libwww-perl|ruby|php|headlesschrome|playwright|puppeteer)/i;
+const STATIC_ASSET_PATTERN = /^\/(?:assets\/|favicon\.ico$)|\.(?:css|js|mjs|svg|png|jpe?g|gif|webp|ico|avif|woff2?|ttf|map)$/i;
+const COUNTER_ASSET_PATHS = new Set(["/traffic-card.svg"]);
 
 function classifyVisitor(request) {
   const userAgent = request.headers.get("user-agent") || "";
@@ -11,7 +13,7 @@ function classifyVisitor(request) {
     request.headers.has("sec-ch-ua-platform") ||
     request.headers.has("sec-fetch-site");
 
-  if (BOT_PATTERN.test(userAgent)) {
+  if (MACHINE_UA_PATTERN.test(userAgent)) {
     return "machine";
   }
 
@@ -30,6 +32,10 @@ function classifyVisitor(request) {
   return "human";
 }
 
+function shouldRecordVisit(url) {
+  return !COUNTER_ASSET_PATHS.has(url.pathname) && !STATIC_ASSET_PATTERN.test(url.pathname);
+}
+
 function emptySnapshot(now) {
   return {
     schema_version: "github-machine-beacon/cloudflare-traffic/v1",
@@ -45,7 +51,7 @@ function emptySnapshot(now) {
     paths: {},
     classifier: {
       method: "user-agent and request-header heuristic",
-      caveat: "Classification is approximate. It is more useful for directional machine/human split than identity-level analytics."
+      caveat: "Classification is approximate. Static assets and the README traffic-card SVG are excluded from future visit increments so the counter better reflects content and machine-readable endpoint reads."
     }
   };
 }
@@ -62,6 +68,10 @@ async function recordVisit(env, request, url) {
   const snapshot = await readSnapshot(env, now);
 
   snapshot.updated_at = now;
+  snapshot.classifier = {
+    method: "user-agent and request-header heuristic",
+    caveat: "Classification is approximate. Static assets and the README traffic-card SVG are excluded from future visit increments so the counter better reflects content and machine-readable endpoint reads."
+  };
   snapshot.totals.requests += 1;
   snapshot.totals[visitorType] = (snapshot.totals[visitorType] || 0) + 1;
 
@@ -170,10 +180,7 @@ export default {
     }
 
     if (url.pathname === "/traffic-card.svg") {
-      const snapshot =
-        request.method === "GET" || request.method === "HEAD"
-          ? await recordVisit(env, request, url)
-          : await readSnapshot(env, now);
+      const snapshot = await readSnapshot(env, now);
       const svg = buildTrafficCardSvg(snapshot);
       return svgResponse(request.method === "HEAD" ? null : svg);
     }
@@ -182,7 +189,7 @@ export default {
       return jsonResponse({ ok: true, service: "github-machine-beacon-worker", origin: env.ORIGIN || DEFAULT_ORIGIN });
     }
 
-    if (request.method === "GET" || request.method === "HEAD") {
+    if ((request.method === "GET" || request.method === "HEAD") && shouldRecordVisit(url)) {
       await recordVisit(env, request, url);
     }
 

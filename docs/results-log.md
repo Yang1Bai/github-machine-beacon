@@ -2,7 +2,7 @@
 
 A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.
 
-Canonical page: https://yang1bai.github.io/github-machine-beacon/results-log.html
+Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/results-log.html
 
 ## Launch record
 

@@ -78,7 +78,7 @@
   "page_keywords": [
     {
       "title": "Machine-Readable Repository Checklist",
-      "url": "https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html",
       "keywords": [
         "machine-readable repository checklist",
         "GitHub README structure",
@@ -89,7 +89,7 @@
     },
     {
       "title": "Crawler Surface Map",
-      "url": "https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html",
       "keywords": [
         "crawler surface map",
         "crawler entry points",
@@ -100,7 +100,7 @@
     },
     {
       "title": "AI Agent Entrypoints",
-      "url": "https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html",
       "keywords": [
         "AI agent entrypoints",
         "LLM crawler",
@@ -111,7 +111,7 @@
     },
     {
       "title": "Experiment Protocol",
-      "url": "https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html",
       "keywords": [
         "repository traffic experiment",
         "GitHub Insights traffic",
@@ -122,7 +122,7 @@
     },
     {
       "title": "Standards and Sources",
-      "url": "https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html",
       "keywords": [
         "GitHub topics documentation",
         "GitHub Pages Actions",
@@ -133,7 +133,7 @@
     },
     {
       "title": "Crawlability Audit",
-      "url": "https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html",
       "keywords": [
         "crawlability audit",
         "machine-readable audit",
@@ -144,7 +144,7 @@
     },
     {
       "title": "Results Log",
-      "url": "https://yang1bai.github.io/github-machine-beacon/results-log.html",
+      "url": "https://github-machine-beacon.yangbai0110.workers.dev/results-log.html",
       "keywords": [
         "GitHub traffic log",
         "crawler experiment results",

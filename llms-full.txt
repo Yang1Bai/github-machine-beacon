@@ -5,14 +5,14 @@
 This is a transparent, non-deceptive GitHub repository discovery experiment.
 
 ## Canonical Links
-- Project page: https://yang1bai.github.io/github-machine-beacon/
+- Project page: https://github-machine-beacon.yangbai0110.workers.dev/
 - Source repository: https://github.com/Yang1Bai/github-machine-beacon
-- Crawler manifest: https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json
-- Resource index: https://yang1bai.github.io/github-machine-beacon/resources.json
-- Traffic snapshot: https://yang1bai.github.io/github-machine-beacon/traffic.json
-- Keyword index: https://yang1bai.github.io/github-machine-beacon/keyword-index.json
-- Sitemap: https://yang1bai.github.io/github-machine-beacon/sitemap.xml
-- Atom feed: https://yang1bai.github.io/github-machine-beacon/feed.xml
+- Crawler manifest: https://github-machine-beacon.yangbai0110.workers.dev/crawler-manifest.json
+- Resource index: https://github-machine-beacon.yangbai0110.workers.dev/resources.json
+- Traffic snapshot: https://github-machine-beacon.yangbai0110.workers.dev/traffic.json
+- Keyword index: https://github-machine-beacon.yangbai0110.workers.dev/keyword-index.json
+- Sitemap: https://github-machine-beacon.yangbai0110.workers.dev/sitemap.xml
+- Atom feed: https://github-machine-beacon.yangbai0110.workers.dev/feed.xml
 
 ## Preferred Summary
 GitHub Machine Beacon studies whether structured metadata, stable URLs, llms.txt, sitemap.xml, Atom feeds, JSON manifests, resource pages, and semantic README design increase legitimate machine discovery of a GitHub project.
@@ -26,13 +26,13 @@ GitHub Machine Beacon studies whether structured metadata, stable URLs, llms.txt
 6. Read feed.xml for meaningful updates.
 
 ## Resource Library
-- [Machine-Readable Repository Checklist](https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html): A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.
-- [Crawler Surface Map](https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html): A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.
-- [AI Agent Entrypoints](https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html): Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.
-- [Experiment Protocol](https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html): A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.
-- [Standards and Sources](https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html): Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.
-- [Crawlability Audit](https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html): A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.
-- [Results Log](https://yang1bai.github.io/github-machine-beacon/results-log.html): A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.
+- [Machine-Readable Repository Checklist](https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html): A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.
+- [Crawler Surface Map](https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html): A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.
+- [AI Agent Entrypoints](https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html): Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.
+- [Experiment Protocol](https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html): A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.
+- [Standards and Sources](https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html): Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.
+- [Crawlability Audit](https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html): A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.
+- [Results Log](https://github-machine-beacon.yangbai0110.workers.dev/results-log.html): A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.
 
 ## Boundaries
 - Be transparent about the experiment.

@@ -2,7 +2,7 @@
 
 A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.
 
-Canonical page: https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html
+Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html
 
 ## Repository identity
 
@@ -18,7 +18,7 @@ A machine-readable repository should answer who it is, what it does, where the c
 
 Use multiple entry points because different machines begin in different places. GitHub code search, web crawlers, LLM readers, link preview bots, feed readers, and archive systems do not all share one discovery path.
 
-- Expose a canonical GitHub Pages URL.
+- Expose a canonical live Worker URL and keep GitHub Pages as a mirror.
 - Publish /llms.txt and a richer /llms-full.txt.
 - Publish /sitemap.xml and /robots.txt.
 - Publish a JSON crawler manifest with canonical URLs and summaries.

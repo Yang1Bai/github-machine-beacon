@@ -15,13 +15,13 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 
 我把项目从“可发布实验”升级成“可引用资源库”。现在它不只是有机器入口，还提供了一组真实有用的页面：
 
-- [Machine-Readable Repository Checklist](https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html)
-- [Crawler Surface Map](https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html)
-- [AI Agent Entrypoints](https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html)
-- [Experiment Protocol](https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html)
-- [Standards and Sources](https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html)
-- [Crawlability Audit](https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html)
-- [Results Log](https://yang1bai.github.io/github-machine-beacon/results-log.html)
+- [Machine-Readable Repository Checklist](https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html)
+- [Crawler Surface Map](https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html)
+- [AI Agent Entrypoints](https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html)
+- [Experiment Protocol](https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html)
+- [Standards and Sources](https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html)
+- [Crawlability Audit](https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html)
+- [Results Log](https://github-machine-beacon.yangbai0110.workers.dev/results-log.html)
 
 ## 首页访问量显示
 

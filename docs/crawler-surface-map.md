@@ -2,7 +2,7 @@
 
 A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.
 
-Canonical page: https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html
+Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html
 
 ## Surface matrix
 

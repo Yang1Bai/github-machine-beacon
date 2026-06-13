@@ -2,14 +2,14 @@
 
 A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.
 
-Canonical page: https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html
+Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html
 
 ## Current status
 
 | Check | Status | Evidence |
 | --- | --- | --- |
 | Public repository | Pass | Repository is public at https://github.com/Yang1Bai/github-machine-beacon. |
-| Canonical Pages URL | Pass | GitHub Pages is published at https://yang1bai.github.io/github-machine-beacon/. |
+| Canonical live URL | Pass | The canonical site is published at https://github-machine-beacon.yangbai0110.workers.dev/ and mirrored by GitHub Pages. |
 | llms.txt | Pass | Root site and repository both expose llms.txt. |
 | Sitemap | Pass | sitemap.xml lists canonical HTML and machine-readable resources. |
 | Crawler manifest | Pass | crawler-manifest.json lists entry points, policies, resources, and measurement fields. |

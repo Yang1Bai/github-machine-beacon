@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>GitHub Machine Beacon</title>
-  <link href="https://yang1bai.github.io/github-machine-beacon/"/>
-  <link rel="self" href="https://yang1bai.github.io/github-machine-beacon/feed.xml"/>
-  <id>https://yang1bai.github.io/github-machine-beacon/</id>
+  <link href="https://github-machine-beacon.yangbai0110.workers.dev/"/>
+  <link rel="self" href="https://github-machine-beacon.yangbai0110.workers.dev/feed.xml"/>
+  <id>https://github-machine-beacon.yangbai0110.workers.dev/</id>
   <updated>2026-06-12T00:00:00Z</updated>
   <subtitle>Machine-readable GitHub crawler discovery experiment.</subtitle>
   <entry>
     <title>GitHub Machine Beacon</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Landing page for the machine-readable GitHub crawler discovery experiment.</summary>
   </entry>
   <entry>
     <title>LLM Reader Guide</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/llms.txt"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/llms.txt</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/llms.txt"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/llms.txt</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Compact guide for LLM crawlers, retrieval systems, and AI coding agents.</summary>
   </entry>
   <entry>
     <title>Full LLM Context</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/llms-full.txt"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/llms-full.txt</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/llms-full.txt"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/llms-full.txt</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Extended project context for retrieval augmented generation and AI readers.</summary>
   </entry>
   <entry>
     <title>Crawler Manifest</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/crawler-manifest.json</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/crawler-manifest.json"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/crawler-manifest.json</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Canonical JSON manifest describing URLs, topics, principles, and measurement fields.</summary>
   </entry>
   <entry>
     <title>Keyword Index</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/keyword-index.json"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/keyword-index.json</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/keyword-index.json"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/keyword-index.json</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Structured topic map for machine discovery and search indexing experiments.</summary>
   </entry>
   <entry>
     <title>Resource Index</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/resources.json"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/resources.json</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/resources.json"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/resources.json</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Structured JSON index of all human-readable and machine-readable project resources.</summary>
   </entry>
   <entry>
     <title>Traffic Snapshot</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/traffic.json"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/traffic.json</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/traffic.json"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/traffic.json</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Latest public traffic snapshot sourced from the GitHub Traffic API.</summary>
   </entry>
   <entry>
     <title>Well-Known LLM Reader Guide</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/.well-known/llms.txt</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/.well-known/llms.txt"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/.well-known/llms.txt</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>A compatibility copy of llms.txt for readers that check well-known paths.</summary>
   </entry>
   <entry>
     <title>Web App Manifest</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/manifest.webmanifest"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/manifest.webmanifest</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/manifest.webmanifest"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/manifest.webmanifest</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Basic web manifest that exposes the site name, description, and canonical start URL.</summary>
   </entry>
   <entry>
     <title>Atom Feed</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/feed.xml"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/feed.xml</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/feed.xml"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/feed.xml</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Recrawl-friendly Atom feed for experiment updates.</summary>
   </entry>
   <entry>
     <title>Machine-Readable Repository Checklist</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/machine-readable-repository-checklist.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.</summary>
   </entry>
   <entry>
     <title>Crawler Surface Map</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/crawler-surface-map.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.</summary>
   </entry>
   <entry>
     <title>AI Agent Entrypoints</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/ai-agent-entrypoints.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.</summary>
   </entry>
   <entry>
     <title>Experiment Protocol</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/experiment-protocol.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.</summary>
   </entry>
   <entry>
     <title>Standards and Sources</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/standards-and-sources.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.</summary>
   </entry>
   <entry>
     <title>Crawlability Audit</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/crawlability-audit.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.</summary>
   </entry>
   <entry>
     <title>Results Log</title>
-    <link href="https://yang1bai.github.io/github-machine-beacon/results-log.html"/>
-    <id>https://yang1bai.github.io/github-machine-beacon/results-log.html</id>
+    <link href="https://github-machine-beacon.yangbai0110.workers.dev/results-log.html"/>
+    <id>https://github-machine-beacon.yangbai0110.workers.dev/results-log.html</id>
     <updated>2026-06-12T00:00:00Z</updated>
     <summary>A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.</summary>
   </entry>
