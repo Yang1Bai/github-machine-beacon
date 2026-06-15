@@ -1,0 +1,90 @@
+name: IndexNow ping
+
+# Tells Bing, Yandex, Seznam, Naver, and other IndexNow participants to
+# (re)crawl the beacon URLs whenever machine-readable content changes.
+# This is the automated recrawl signal that a fresh, unlinked site otherwise
+# never gets.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "crawler-manifest.json"
+      - "resources.json"
+      - "keyword-index.json"
+      - "llms.txt"
+      - "llms-full.txt"
+      - "traffic.json"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    env:
+      # Public IndexNow key (also hosted at https://$HOST/$INDEXNOW_KEY.txt).
+      # You can keep it here or override with a repo secret of the same name.
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY || '5360fa20e7cd10adbc1ef3a11b70acbd' }}
+      HOST: beacon.ybliterature.com
+    steps:
+      - name: Submit URLs to IndexNow
+        run: |
+          set -euo pipefail
+          if [ -z "${INDEXNOW_KEY}" ]; then
+            echo "No INDEXNOW_KEY configured; skipping."
+            exit 0
+          fi
+
+          # Verify the key file is reachable before submitting (IndexNow rejects
+          # batches whose key file 404s).
+          KEY_URL="https://${HOST}/${INDEXNOW_KEY}.txt"
+          if ! curl -fsS "${KEY_URL}" | grep -q "${INDEXNOW_KEY}"; then
+            echo "Key file ${KEY_URL} not reachable yet; skipping this run."
+            exit 0
+          fi
+
+          cat > payload.json <<EOF
+          {
+            "host": "${HOST}",
+            "key": "${INDEXNOW_KEY}",
+            "keyLocation": "${KEY_URL}",
+            "urlList": [
+              "https://${HOST}/",
+              "https://${HOST}/llms.txt",
+              "https://${HOST}/llms-full.txt",
+              "https://${HOST}/crawler-manifest.json",
+              "https://${HOST}/keyword-index.json",
+              "https://${HOST}/resources.json",
+              "https://${HOST}/traffic.json",
+              "https://${HOST}/sitemap.xml",
+              "https://${HOST}/feed.xml",
+              "https://${HOST}/machine-readable-repository-checklist.html",
+              "https://${HOST}/crawler-surface-map.html",
+              "https://${HOST}/ai-agent-entrypoints.html",
+              "https://${HOST}/experiment-protocol.html",
+              "https://${HOST}/standards-and-sources.html",
+              "https://${HOST}/crawlability-audit.html",
+              "https://${HOST}/results-log.html"
+            ]
+          }
+          EOF
+
+          echo "Submitting payload:"
+          cat payload.json
+
+          CODE=$(curl -sS -o resp.txt -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data @payload.json)
+
+          echo "IndexNow HTTP ${CODE}"
+          cat resp.txt || true
+
+          # 200 = accepted, 202 = accepted/queued. Anything else is a failure.
+          if [ "${CODE}" != "200" ] && [ "${CODE}" != "202" ]; then
+            echo "IndexNow submission failed."
+            exit 1
+          fi
