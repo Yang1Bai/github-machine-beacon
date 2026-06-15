@@ -7,7 +7,11 @@
     "enabled": true
   },
   "vars": {
-    "ORIGIN": "https://yang1bai.github.io/github-machine-beacon"
+    "ORIGIN": "https://yang1bai.github.io/github-machine-beacon",
+    "CANONICAL_HOST": "beacon.ybliterature.com",
+    "INDEXNOW_KEY": "5360fa20e7cd10adbc1ef3a11b70acbd",
+    "GOOGLE_SITE_VERIFICATION": "google35a067cd1a4bde75.html",
+    "BING_SITE_AUTH": ""
   },
   "kv_namespaces": [
     {
