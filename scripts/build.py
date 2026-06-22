@@ -194,6 +194,7 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
     views = traffic.get("views", {})
     clones = traffic.get("clones", {})
     edge_traffic_url = data.get("edge_traffic_url", page_url(base_url, "traffic.json"))
+    edge_geo_url = data.get("edge_geo_url", edge_traffic_url)
 
     json_ld = {
         "@context": "https://schema.org",
@@ -312,6 +313,30 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
       <p class="traffic-note">Live split updated <time id="traffic-updated" datetime="">loading</time>. Source: Cloudflare Worker. GitHub official snapshot: {format_count(views.get('count', 0))} views, {format_count(views.get('uniques', 0))} unique visitors, {format_count(clones.get('count', 0))} clones. Raw edge data: <a href="{html.escape(edge_traffic_url)}">cloudflare-traffic.json</a>.</p>
     </section>
 
+    <section class="panel" aria-labelledby="geo">
+      <h2 id="geo">AI / Machine Geography</h2>
+      <p class="section-note">Aggregated from Cloudflare request metadata. The Worker stores country, region, city, Cloudflare colo, and ASN organization counters; it does not store raw IP addresses or latitude/longitude.</p>
+      <div class="geo-grid">
+        <section class="geo-card">
+          <h3>Machine Countries</h3>
+          <ol id="geo-machine-countries" class="geo-list"><li>loading</li></ol>
+        </section>
+        <section class="geo-card">
+          <h3>Machine Cities</h3>
+          <ol id="geo-machine-cities" class="geo-list"><li>loading</li></ol>
+        </section>
+        <section class="geo-card">
+          <h3>Machine ASN Organizations</h3>
+          <ol id="geo-machine-asn" class="geo-list"><li>loading</li></ol>
+        </section>
+        <section class="geo-card">
+          <h3>Cloudflare Colos</h3>
+          <ol id="geo-colos" class="geo-list"><li>loading</li></ol>
+        </section>
+      </div>
+      <p class="traffic-note">Raw geo aggregate: <a href="{html.escape(edge_geo_url)}">geo-traffic.json</a>.</p>
+    </section>
+
     <section class="panel" aria-labelledby="resources">
       <h2 id="resources">Resource Library</h2>
       <p class="section-note">These pages are designed to be useful enough for humans to cite and structured enough for machines to parse.</p>
@@ -359,6 +384,39 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
         const element = document.getElementById(id);
         if (element) element.textContent = formatter.format(Number(value || 0));
       }};
+      const escapeHtml = (value) =>
+        String(value || "unknown").replace(/[&<>"']/g, (char) => {{
+          const entities = {{ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }};
+          return entities[char] || char;
+        }});
+      const isKnown = (value) => value && String(value).toLowerCase() !== "unknown";
+      const joinKnown = (...parts) => {{
+        const label = parts.filter(isKnown).map(escapeHtml).join(", ");
+        return label || "unknown";
+      }};
+      const topEntries = (bucket, field = "machine") =>
+        Object.values(bucket || {{}})
+          .filter((item) => Number(item?.[field] || 0) > 0)
+          .sort((left, right) => {{
+            const primary = Number(right?.[field] || 0) - Number(left?.[field] || 0);
+            return primary || Number(right?.requests || 0) - Number(left?.requests || 0);
+          }})
+          .slice(0, 6);
+      const renderList = (id, rows, labeler, field = "machine") => {{
+        const target = document.getElementById(id);
+        if (!target) return;
+        if (!rows.length) {{
+          target.innerHTML = "<li>no data yet</li>";
+          return;
+        }}
+        target.innerHTML = rows
+          .map((row) => {{
+            const value = formatter.format(Number(row?.[field] || 0));
+            const total = formatter.format(Number(row?.requests || 0));
+            return `<li><strong>${{value}}</strong> ${{labeler(row)}} <small>(${{total}} total)</small></li>`;
+          }})
+          .join("");
+      }};
 
       fetch(endpoint, {{ cache: "no-store" }})
         .then((response) => {{
@@ -371,6 +429,11 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           setText("edge-machine", totals.machine);
           setText("edge-human", totals.human);
           setText("edge-unknown", totals.unknown);
+          const geo = snapshot.geo || {{}};
+          renderList("geo-machine-countries", topEntries(geo.countries), (row) => joinKnown(row.country, row.continent));
+          renderList("geo-machine-cities", topEntries(geo.cities), (row) => joinKnown(row.city, row.regionCode, row.country));
+          renderList("geo-machine-asn", topEntries(geo.asOrganizations), (row) => joinKnown(row.organization, row.asn));
+          renderList("geo-colos", topEntries(geo.colos, "requests"), (row) => joinKnown(row.colo), "requests");
           const updated = document.getElementById("traffic-updated");
           if (updated && snapshot.updated_at) {{
             updated.textContent = snapshot.updated_at;
@@ -382,6 +445,10 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           setText("edge-machine", 0);
           setText("edge-human", 0);
           setText("edge-unknown", 0);
+          renderList("geo-machine-countries", [], () => "");
+          renderList("geo-machine-cities", [], () => "");
+          renderList("geo-machine-asn", [], () => "");
+          renderList("geo-colos", [], () => "");
           const updated = document.getElementById("traffic-updated");
           if (updated) updated.textContent = "edge endpoint unavailable";
         }});
@@ -497,6 +564,8 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         f"- Crawler manifest: {page_url(base_url, 'crawler-manifest.json')}",
         f"- Resource index: {page_url(base_url, 'resources.json')}",
         f"- Traffic snapshot: {page_url(base_url, 'traffic.json')}",
+        f"- Cloudflare edge traffic: {data.get('edge_traffic_url', page_url(base_url, 'traffic.json'))}",
+        f"- Cloudflare geo traffic: {data.get('edge_geo_url', data.get('edge_traffic_url', page_url(base_url, 'traffic.json')))}",
         f"- Keyword index: {page_url(base_url, 'keyword-index.json')}",
         f"- Sitemap: {page_url(base_url, 'sitemap.xml')}",
         f"- Atom feed: {page_url(base_url, 'feed.xml')}",
@@ -588,6 +657,7 @@ def build_manifest(data: dict, content_pages: list[dict], traffic: dict) -> dict
         "cloudflare_edge": {
             "url": data.get("edge_url"),
             "traffic_url": data.get("edge_traffic_url"),
+            "geo_url": data.get("edge_geo_url"),
             "classification": "machine/human split via Worker request-header heuristic",
         },
         "recommended_citation": f"{data['name']}: transparent machine-readable GitHub discovery experiment.",

@@ -5,12 +5,13 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 [![Deploy GitHub Pages](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml)
 [![Validate Machine Surfaces](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml)
 
-[![Live Cloudflare edge traffic](https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg?v=0.3.1)](https://github-machine-beacon.yangbai0110.workers.dev/)
+[![Live Cloudflare edge traffic](https://beacon.ybliterature.com/traffic-card.svg?v=0.5.0)](https://beacon.ybliterature.com/)
 
-**Live homepage:** [https://github-machine-beacon.yangbai0110.workers.dev/](https://github-machine-beacon.yangbai0110.workers.dev/)
+**Live homepage:** [https://beacon.ybliterature.com/](https://beacon.ybliterature.com/)
 
 **GitHub Pages mirror:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)  
-**Machine/human split:** [cloudflare-traffic.json](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json)
+**Machine/human split:** [cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)  
+**Machine geo aggregate:** [geo-traffic.json](https://beacon.ybliterature.com/geo-traffic.json)
 
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
 
@@ -31,26 +32,27 @@ The hypothesis is simple: a repo with coherent machine-readable surfaces, stable
 
 The project homepage shows a large live traffic panel backed by the Cloudflare Worker endpoint.
 
-- `total requests`, `machine visits`, `human visits`, and `unknown` come from [`cloudflare-traffic.json`](https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json).
-- the README traffic card is generated dynamically by the Worker at [`traffic-card.svg`](https://github-machine-beacon.yangbai0110.workers.dev/traffic-card.svg).
+- `total requests`, `machine visits`, `human visits`, and `unknown` come from [`cloudflare-traffic.json`](https://beacon.ybliterature.com/cloudflare-traffic.json).
+- machine geography comes from [`geo-traffic.json`](https://beacon.ybliterature.com/geo-traffic.json), aggregated by country, region, city, Cloudflare colo, and ASN organization.
+- the README traffic card is generated dynamically by the Worker at [`traffic-card.svg`](https://beacon.ybliterature.com/traffic-card.svg).
 - GitHub official `views`, `unique visitors`, and `clones` remain available as a slower snapshot in [`traffic.json`](traffic.json).
 - `.github/workflows/update-traffic.yml` refreshes the GitHub API snapshot on a schedule and republishes the site when values change.
 
 Automatic refresh requires a repository secret named `TRAFFIC_TOKEN` with permission to read repository traffic. Without that secret, the scheduled workflow skips safely and the site shows the last committed official snapshot.
 
-The Cloudflare Worker endpoint records content and machine-readable endpoint requests that pass through `https://github-machine-beacon.yangbai0110.workers.dev/` and classifies them with a user-agent/request-header heuristic. Static assets, favicon requests, and the README traffic-card SVG are excluded from future visit increments so the live split better reflects real page and machine-surface reads.
+The Cloudflare Worker endpoint records content and machine-readable endpoint requests that pass through `https://beacon.ybliterature.com/` and classifies them with a user-agent/request-header heuristic. Static assets, favicon requests, and the README traffic-card SVG are excluded from future visit increments so the live split better reflects real page and machine-surface reads. Geo data is approximate and reflects the request exit location or cloud edge location. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
 
 ## Resource Library
 
 These pages are intended to be useful resources, not just discovery bait:
 
-- [Machine-Readable Repository Checklist](https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html)
-- [Crawler Surface Map](https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html)
-- [AI Agent Entrypoints](https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html)
-- [Experiment Protocol](https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html)
-- [Standards and Sources](https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html)
-- [Crawlability Audit](https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html)
-- [Results Log](https://github-machine-beacon.yangbai0110.workers.dev/results-log.html)
+- [Machine-Readable Repository Checklist](https://beacon.ybliterature.com/machine-readable-repository-checklist.html)
+- [Crawler Surface Map](https://beacon.ybliterature.com/crawler-surface-map.html)
+- [AI Agent Entrypoints](https://beacon.ybliterature.com/ai-agent-entrypoints.html)
+- [Experiment Protocol](https://beacon.ybliterature.com/experiment-protocol.html)
+- [Standards and Sources](https://beacon.ybliterature.com/standards-and-sources.html)
+- [Crawlability Audit](https://beacon.ybliterature.com/crawlability-audit.html)
+- [Results Log](https://beacon.ybliterature.com/results-log.html)
 
 ## Machine Entry Points
 

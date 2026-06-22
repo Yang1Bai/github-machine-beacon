@@ -1,81 +1,81 @@
 {
   "name": "GitHub Machine Beacon",
-  "updated": "2026-06-12",
-  "version": "0.3.1",
+  "updated": "2026-06-22",
+  "version": "0.5.0",
   "resources": [
     {
       "title": "GitHub Machine Beacon",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/",
+      "url": "https://beacon.ybliterature.com/",
       "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
       "media_type": "text/html",
       "keywords": []
     },
     {
       "title": "LLM Reader Guide",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/llms.txt",
+      "url": "https://beacon.ybliterature.com/llms.txt",
       "summary": "Compact guide for LLM crawlers, retrieval systems, and AI coding agents.",
       "media_type": "text/plain",
       "keywords": []
     },
     {
       "title": "Full LLM Context",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/llms-full.txt",
+      "url": "https://beacon.ybliterature.com/llms-full.txt",
       "summary": "Extended project context for retrieval augmented generation and AI readers.",
       "media_type": "text/plain",
       "keywords": []
     },
     {
       "title": "Crawler Manifest",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/crawler-manifest.json",
+      "url": "https://beacon.ybliterature.com/crawler-manifest.json",
       "summary": "Canonical JSON manifest describing URLs, topics, principles, and measurement fields.",
       "media_type": "application/json",
       "keywords": []
     },
     {
       "title": "Keyword Index",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/keyword-index.json",
+      "url": "https://beacon.ybliterature.com/keyword-index.json",
       "summary": "Structured topic map for machine discovery and search indexing experiments.",
       "media_type": "application/json",
       "keywords": []
     },
     {
       "title": "Resource Index",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/resources.json",
+      "url": "https://beacon.ybliterature.com/resources.json",
       "summary": "Structured JSON index of all human-readable and machine-readable project resources.",
       "media_type": "application/json",
       "keywords": []
     },
     {
       "title": "Traffic Snapshot",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/traffic.json",
+      "url": "https://beacon.ybliterature.com/traffic.json",
       "summary": "Latest public traffic snapshot sourced from the GitHub Traffic API.",
       "media_type": "application/json",
       "keywords": []
     },
     {
       "title": "Well-Known LLM Reader Guide",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/.well-known/llms.txt",
+      "url": "https://beacon.ybliterature.com/.well-known/llms.txt",
       "summary": "A compatibility copy of llms.txt for readers that check well-known paths.",
       "media_type": "text/plain",
       "keywords": []
     },
     {
       "title": "Web App Manifest",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/manifest.webmanifest",
+      "url": "https://beacon.ybliterature.com/manifest.webmanifest",
       "summary": "Basic web manifest that exposes the site name, description, and canonical start URL.",
       "media_type": "application/manifest+json",
       "keywords": []
     },
     {
       "title": "Atom Feed",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/feed.xml",
+      "url": "https://beacon.ybliterature.com/feed.xml",
       "summary": "Recrawl-friendly Atom feed for experiment updates.",
       "media_type": "application/xml",
       "keywords": []
     },
     {
       "title": "Machine-Readable Repository Checklist",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html",
+      "url": "https://beacon.ybliterature.com/machine-readable-repository-checklist.html",
       "summary": "A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.",
       "media_type": "text/html",
       "keywords": [
@@ -88,7 +88,7 @@
     },
     {
       "title": "Crawler Surface Map",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/crawler-surface-map.html",
+      "url": "https://beacon.ybliterature.com/crawler-surface-map.html",
       "summary": "A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems.",
       "media_type": "text/html",
       "keywords": [
@@ -101,7 +101,7 @@
     },
     {
       "title": "AI Agent Entrypoints",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html",
+      "url": "https://beacon.ybliterature.com/ai-agent-entrypoints.html",
       "summary": "Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.",
       "media_type": "text/html",
       "keywords": [
@@ -114,7 +114,7 @@
     },
     {
       "title": "Experiment Protocol",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html",
+      "url": "https://beacon.ybliterature.com/experiment-protocol.html",
       "summary": "A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.",
       "media_type": "text/html",
       "keywords": [
@@ -127,7 +127,7 @@
     },
     {
       "title": "Standards and Sources",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html",
+      "url": "https://beacon.ybliterature.com/standards-and-sources.html",
       "summary": "Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.",
       "media_type": "text/html",
       "keywords": [
@@ -140,7 +140,7 @@
     },
     {
       "title": "Crawlability Audit",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html",
+      "url": "https://beacon.ybliterature.com/crawlability-audit.html",
       "summary": "A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.",
       "media_type": "text/html",
       "keywords": [
@@ -153,7 +153,7 @@
     },
     {
       "title": "Results Log",
-      "url": "https://github-machine-beacon.yangbai0110.workers.dev/results-log.html",
+      "url": "https://beacon.ybliterature.com/results-log.html",
       "summary": "A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.",
       "media_type": "text/html",
       "keywords": [

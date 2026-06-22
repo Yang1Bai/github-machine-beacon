@@ -12,10 +12,11 @@ Record these from GitHub Insights > Traffic:
 
 ## Homepage Traffic Counter
 
-The homepage traffic panel is backed by `traffic.json`.
+The homepage primary traffic panel is backed by the Cloudflare Worker endpoint. `traffic.json` remains the slower GitHub Traffic API snapshot.
 
-- Source: GitHub Traffic API.
-- Scope: repository traffic, not raw GitHub Pages server logs.
+- Live source: Cloudflare Worker request counters.
+- GitHub source: GitHub Traffic API.
+- Scope: Cloudflare counters cover requests through the Worker URL; GitHub counters cover repository traffic, not raw GitHub Pages server logs.
 - Window: the API's current traffic window, normally the recent 14-day period.
 - Machine/human split: available for requests that pass through the Cloudflare Worker URL; unavailable for direct GitHub repository views because the GitHub Traffic API does not expose user-agent classification.
 - Automatic refresh: requires a `TRAFFIC_TOKEN` repository secret with permission to read repository traffic; otherwise the scheduled workflow skips and the site shows the last committed snapshot.
@@ -25,16 +26,22 @@ The homepage traffic panel is backed by `traffic.json`.
 Cloudflare endpoint:
 
 ```text
-https://github-machine-beacon.yangbai0110.workers.dev/
+https://beacon.ybliterature.com/
 ```
 
 Machine/human split endpoint:
 
 ```text
-https://github-machine-beacon.yangbai0110.workers.dev/cloudflare-traffic.json
+https://beacon.ybliterature.com/cloudflare-traffic.json
 ```
 
-This split is based on a Worker request-header heuristic. It is more direct than GitHub Traffic API for machine/human counting because the Worker sees user-agent headers, but it only counts requests that pass through the Cloudflare Worker URL.
+Geo aggregate endpoint:
+
+```text
+https://beacon.ybliterature.com/geo-traffic.json
+```
+
+This split is based on a Worker request-header heuristic. It is more direct than GitHub Traffic API for machine/human counting because the Worker sees user-agent headers, but it only counts requests that pass through the Cloudflare Worker URL. Geo data is approximate and represents request exit or cloud edge location, not the physical location of a person or AI company. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
 
 ## Weekly Review
 

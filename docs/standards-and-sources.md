@@ -2,7 +2,7 @@
 
 Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds.
 
-Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/standards-and-sources.html
+Canonical page: https://beacon.ybliterature.com/standards-and-sources.html
 
 ## Sources used by this project
 

@@ -2,7 +2,7 @@
 
 A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment.
 
-Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/results-log.html
+Canonical page: https://beacon.ybliterature.com/results-log.html
 
 ## Launch record
 
@@ -15,6 +15,7 @@ Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/results-lo
 | 2026-06-12 | Observation workflow | v0.2.1 adds structured issue templates, labels, and a Day 0 baseline issue. |
 | 2026-06-12 | Cloudflare edge split | v0.3.0 adds a Cloudflare Worker proxy and public machine/human request split at cloudflare-traffic.json. |
 | 2026-06-12 | Live README traffic card | v0.3.1 replaces the static GitHub Traffic API card with a dynamic Cloudflare Worker SVG at traffic-card.svg. |
+| 2026-06-22 | Geo traffic aggregate | v0.5.0 adds country, region, city, Cloudflare colo, and ASN organization aggregates for machine and human requests. |
 
 ## Observation template
 

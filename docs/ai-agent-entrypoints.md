@@ -2,7 +2,7 @@
 
 Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository.
 
-Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/ai-agent-entrypoints.html
+Canonical page: https://beacon.ybliterature.com/ai-agent-entrypoints.html
 
 ## Agent summary contract
 

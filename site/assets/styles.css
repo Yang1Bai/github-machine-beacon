@@ -325,6 +325,35 @@ h3 {
   gap: 16px;
 }
 
+.geo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.geo-card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 16px;
+}
+
+.geo-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+
+.geo-list li {
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.geo-list strong {
+  color: var(--ink);
+}
+
 .keyword-group {
   min-width: 0;
   border: 1px solid var(--line);
@@ -383,6 +412,7 @@ code {
   .intro,
   .split,
   .keyword-grid,
+  .geo-grid,
   .traffic-panel,
   .surface-grid {
     grid-template-columns: 1fr;

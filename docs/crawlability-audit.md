@@ -2,7 +2,7 @@
 
 A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon.
 
-Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/crawlability-audit.html
+Canonical page: https://beacon.ybliterature.com/crawlability-audit.html
 
 ## Current status
 

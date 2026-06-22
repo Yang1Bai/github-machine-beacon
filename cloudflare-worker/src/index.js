@@ -17,6 +17,7 @@
 const DEFAULT_ORIGIN = "https://yang1bai.github.io/github-machine-beacon";
 const DEFAULT_HOST = "beacon.ybliterature.com";
 const COUNTER_KEY = "traffic:v1";
+const GEO_BUCKET_LIMIT = 250;
 
 const MACHINE_UA_PATTERN = /(bot|crawler|spider|slurp|archive|indexer|preview|facebookexternalhit|twitterbot|linkedinbot|discordbot|slackbot|telegrambot|whatsapp|embedly|quora link preview|pinterest|google-inspectiontool|googleother|bingpreview|duckduckbot|baiduspider|yandex|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|gptbot|oai-searchbot|chatgpt-user|openai|anthropic|claude|perplexity|ccbot|cohere|amazonbot|applebot|meta-externalagent|github-camo|curl|wget|python-requests|go-http-client|node-fetch|undici|axios|okhttp|java\/|libwww-perl|ruby|php|headlesschrome|playwright|puppeteer)/i;
 
@@ -157,13 +158,13 @@ function isOwnerRequest(request, url, env) {
 function classifierMeta() {
   return {
     method: "cloudflare verified-bot signals + user-agent/header heuristic",
-    caveat: "Classification is approximate. Cloudflare verified bots are authoritative; the rest is heuristic. Static assets and the README traffic-card SVG are excluded, and owner/self traffic is excluded from totals."
+    caveat: "Classification is approximate. Cloudflare verified bots are authoritative when available; the rest is heuristic. Static assets and the README traffic-card SVG are excluded, and owner/self traffic is excluded from totals."
   };
 }
 
 function emptySnapshot(now) {
   return {
-    schema_version: "github-machine-beacon/cloudflare-traffic/v1",
+    schema_version: "github-machine-beacon/cloudflare-traffic/v2",
     source: "Cloudflare Worker edge request classification",
     source_scope: "requests that pass through this Worker URL",
     updated_at: now,
@@ -172,24 +173,147 @@ function emptySnapshot(now) {
     excluded_self: 0,
     machine_categories: {},
     paths: {},
-    classifier: classifierMeta()
+    geo: emptyGeo(),
+    classifier: classifierMeta(),
+    privacy: privacyInfo()
   };
+}
+
+function emptyGeo() {
+  return {
+    countries: {},
+    regions: {},
+    cities: {},
+    continents: {},
+    colos: {},
+    asOrganizations: {}
+  };
+}
+
+function privacyInfo() {
+  return {
+    raw_ip_storage: false,
+    latitude_longitude_storage: false,
+    geo_precision: "aggregated country, region, city, Cloudflare colo, and ASN organization counters only"
+  };
+}
+
+function normalizeSnapshot(snapshot, now) {
+  const normalized = snapshot || emptySnapshot(now);
+  normalized.schema_version = "github-machine-beacon/cloudflare-traffic/v2";
+  normalized.totals ||= { requests: 0, machine: 0, human: 0, unknown: 0 };
+  normalized.verified_machine ||= 0;
+  normalized.excluded_self ||= 0;
+  normalized.machine_categories ||= {};
+  normalized.paths ||= {};
+  normalized.geo ||= emptyGeo();
+  for (const key of Object.keys(emptyGeo())) {
+    normalized.geo[key] ||= {};
+  }
+  normalized.classifier = classifierMeta();
+  normalized.privacy = privacyInfo();
+  return normalized;
 }
 
 async function readSnapshot(env, now) {
   const stored = await env.TRAFFIC_KV.get(COUNTER_KEY, "json");
-  if (!stored) return emptySnapshot(now);
-  // Backfill new fields on older snapshots.
-  stored.totals ||= { requests: 0, machine: 0, human: 0, unknown: 0 };
-  stored.verified_machine ||= 0;
-  stored.excluded_self ||= 0;
-  stored.machine_categories ||= {};
-  stored.paths ||= {};
-  return stored;
+  return normalizeSnapshot(stored, now);
 }
 
 function shouldRecordVisit(url) {
   return !COUNTER_ASSET_PATHS.has(url.pathname) && !STATIC_ASSET_PATTERN.test(url.pathname);
+}
+
+function cleanGeoValue(value, fallback = "unknown") {
+  const text = String(value || "").trim();
+  return text || fallback;
+}
+
+function geoKey(parts) {
+  return parts.map((part) => cleanGeoValue(part)).join("|");
+}
+
+function extractGeo(request) {
+  const cf = request.cf || {};
+  const country = cleanGeoValue(cf.country || request.headers.get("cf-ipcountry"), "XX").toUpperCase();
+  const region = cleanGeoValue(cf.region);
+  const regionCode = cleanGeoValue(cf.regionCode).toUpperCase();
+  const city = cleanGeoValue(cf.city);
+  const continent = cleanGeoValue(cf.continent).toUpperCase();
+  const timezone = cleanGeoValue(cf.timezone);
+  const colo = cleanGeoValue(cf.colo).toUpperCase();
+  const asn = cleanGeoValue(cf.asn);
+  const asOrganization = cleanGeoValue(cf.asOrganization);
+
+  return { country, region, regionCode, city, continent, timezone, colo, asn, asOrganization };
+}
+
+function incrementBucket(bucket, key, visitorType, metadata = {}) {
+  bucket[key] ||= { ...metadata, requests: 0, machine: 0, human: 0, unknown: 0 };
+  bucket[key].requests += 1;
+  bucket[key][visitorType] = (bucket[key][visitorType] || 0) + 1;
+}
+
+function pruneBucket(bucket) {
+  const entries = Object.entries(bucket);
+  if (entries.length <= GEO_BUCKET_LIMIT) {
+    return bucket;
+  }
+  return Object.fromEntries(
+    entries
+      .sort(([, left], [, right]) => (right.requests || 0) - (left.requests || 0))
+      .slice(0, GEO_BUCKET_LIMIT)
+  );
+}
+
+function recordGeo(snapshot, request, visitorType) {
+  const geo = extractGeo(request);
+
+  incrementBucket(snapshot.geo.countries, geo.country, visitorType, {
+    country: geo.country,
+    continent: geo.continent
+  });
+  incrementBucket(snapshot.geo.regions, geoKey([geo.country, geo.regionCode]), visitorType, {
+    country: geo.country,
+    region: geo.region,
+    regionCode: geo.regionCode,
+    continent: geo.continent
+  });
+  incrementBucket(snapshot.geo.cities, geoKey([geo.country, geo.regionCode, geo.city]), visitorType, {
+    country: geo.country,
+    region: geo.region,
+    regionCode: geo.regionCode,
+    city: geo.city,
+    timezone: geo.timezone,
+    continent: geo.continent
+  });
+  incrementBucket(snapshot.geo.continents, geo.continent, visitorType, {
+    continent: geo.continent
+  });
+  incrementBucket(snapshot.geo.colos, geo.colo, visitorType, {
+    colo: geo.colo
+  });
+  incrementBucket(snapshot.geo.asOrganizations, geoKey([geo.asn, geo.asOrganization]), visitorType, {
+    asn: geo.asn,
+    organization: geo.asOrganization
+  });
+
+  for (const key of Object.keys(snapshot.geo)) {
+    snapshot.geo[key] = pruneBucket(snapshot.geo[key]);
+  }
+}
+
+function geoSnapshot(snapshot) {
+  return {
+    schema_version: "github-machine-beacon/geo-traffic/v1",
+    source: snapshot.source,
+    source_scope: snapshot.source_scope,
+    updated_at: snapshot.updated_at,
+    totals: snapshot.totals,
+    geo: snapshot.geo || emptyGeo(),
+    classifier: snapshot.classifier,
+    privacy: snapshot.privacy
+  };
 }
 
 async function recordVisit(env, request, url) {
@@ -221,6 +345,7 @@ async function recordVisit(env, request, url) {
   snapshot.paths[path] ||= { requests: 0, machine: 0, human: 0, unknown: 0 };
   snapshot.paths[path].requests += 1;
   snapshot.paths[path][visitorType] = (snapshot.paths[path][visitorType] || 0) + 1;
+  recordGeo(snapshot, request, visitorType);
 
   await env.TRAFFIC_KV.put(COUNTER_KEY, JSON.stringify(snapshot));
   return snapshot;
@@ -387,6 +512,10 @@ export default {
     }
 
     // --- Live traffic card ---
+    if (url.pathname === "/geo-traffic.json" || url.pathname === "/traffic-geo.json") {
+      return jsonResponse(geoSnapshot(await readSnapshot(env, now)));
+    }
+
     if (url.pathname === "/traffic-card.svg") {
       const snapshot = await readSnapshot(env, now);
       const svg = buildTrafficCardSvg(snapshot);

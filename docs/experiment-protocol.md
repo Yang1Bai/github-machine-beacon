@@ -2,7 +2,7 @@
 
 A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery.
 
-Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/experiment-protocol.html
+Canonical page: https://beacon.ybliterature.com/experiment-protocol.html
 
 ## Hypothesis
 

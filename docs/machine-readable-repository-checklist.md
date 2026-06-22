@@ -2,7 +2,7 @@
 
 A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.
 
-Canonical page: https://github-machine-beacon.yangbai0110.workers.dev/machine-readable-repository-checklist.html
+Canonical page: https://beacon.ybliterature.com/machine-readable-repository-checklist.html
 
 ## Repository identity
 
