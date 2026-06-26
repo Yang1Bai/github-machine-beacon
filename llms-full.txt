@@ -12,6 +12,7 @@ This is a transparent, non-deceptive GitHub repository discovery experiment.
 - Traffic snapshot: https://beacon.ybliterature.com/traffic.json
 - Cloudflare edge traffic: https://beacon.ybliterature.com/cloudflare-traffic.json
 - Cloudflare geo traffic: https://beacon.ybliterature.com/geo-traffic.json
+- Cloudflare traffic classes: https://beacon.ybliterature.com/traffic-classes.json
 - Keyword index: https://beacon.ybliterature.com/keyword-index.json
 - Sitemap: https://beacon.ybliterature.com/sitemap.xml
 - Atom feed: https://beacon.ybliterature.com/feed.xml
@@ -120,6 +121,10 @@ Signals that the project is an observable, non-deceptive experiment.
 - machine_requests_by_city
 - machine_requests_by_asn_organization
 - edge_requests_by_cloudflare_colo
+- ai_reader_requests
+- security_scanner_requests
+- generic_machine_requests
+- security_scanner_paths
 - stars
 - forks
 - issues_or_discussions

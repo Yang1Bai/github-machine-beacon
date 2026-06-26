@@ -12,6 +12,7 @@ This is a transparent, non-deceptive GitHub repository discovery experiment.
 - Traffic snapshot: https://beacon.ybliterature.com/traffic.json
 - Cloudflare edge traffic: https://beacon.ybliterature.com/cloudflare-traffic.json
 - Cloudflare geo traffic: https://beacon.ybliterature.com/geo-traffic.json
+- Cloudflare traffic classes: https://beacon.ybliterature.com/traffic-classes.json
 - Keyword index: https://beacon.ybliterature.com/keyword-index.json
 - Sitemap: https://beacon.ybliterature.com/sitemap.xml
 - Atom feed: https://beacon.ybliterature.com/feed.xml

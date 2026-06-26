@@ -41,7 +41,13 @@ Geo aggregate endpoint:
 https://beacon.ybliterature.com/geo-traffic.json
 ```
 
-This split is based on a Worker request-header heuristic. It is more direct than GitHub Traffic API for machine/human counting because the Worker sees user-agent headers, but it only counts requests that pass through the Cloudflare Worker URL. Geo data is approximate and represents request exit or cloud edge location, not the physical location of a person or AI company. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
+Traffic class endpoint:
+
+```text
+https://beacon.ybliterature.com/traffic-classes.json
+```
+
+This split is based on a Worker request-header heuristic. It is more direct than GitHub Traffic API for machine/human counting because the Worker sees user-agent headers, but it only counts requests that pass through the Cloudflare Worker URL. Machine traffic is further split into `ai_reader`, `security_scanner`, and `generic_machine`. Sensitive-file and exploit-probe paths such as `/.env`, `/.git/config`, `wp-login.php`, `xmlrpc.php`, and `phpinfo.php` are classified as `security_scanner` before AI/generic machine classes. Geo data is approximate and represents request exit or cloud edge location, not the physical location of a person or AI company. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
 
 ## Weekly Review
 

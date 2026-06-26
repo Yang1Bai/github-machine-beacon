@@ -2,13 +2,14 @@
 
 这是一个 GitHub 机器浏览触发实验项目。目标是让仓库对搜索引擎、GitHub 内部索引、代码搜索、AI agent、LLM 抓取器、链接预览 bot、归档工具和引用工具都更容易发现、更容易解析、更容易复访。
 
-[![Cloudflare 实时访问量](https://beacon.ybliterature.com/traffic-card.svg?v=0.5.0)](https://beacon.ybliterature.com/)
+[![Cloudflare 实时访问量](https://beacon.ybliterature.com/traffic-card.svg?v=0.6.0)](https://beacon.ybliterature.com/)
 
 实时主页：[https://beacon.ybliterature.com/](https://beacon.ybliterature.com/)
 
-GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)  
-机器/人拆分 JSON：[cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)  
+GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
+机器/人拆分 JSON：[cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)
 机器地理位置聚合 JSON：[geo-traffic.json](https://beacon.ybliterature.com/geo-traffic.json)
+流量类型拆分 JSON：[traffic-classes.json](https://beacon.ybliterature.com/traffic-classes.json)
 
 核心原则：公开、透明、可复现，不刷量、不伪装、不堆无关关键词。
 
@@ -29,6 +30,7 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 首页现在有一个大号实时流量面板，主数据来自 Cloudflare Worker：
 
 - `total requests`、`machine visits`、`human visits` 和 `unknown` 来自 [`cloudflare-traffic.json`](https://beacon.ybliterature.com/cloudflare-traffic.json)。
+- 机器访问会在 [`traffic-classes.json`](https://beacon.ybliterature.com/traffic-classes.json) 中拆成 `ai_reader`、`security_scanner` 和 `generic_machine`。
 - 机器访问地理位置来自 [`geo-traffic.json`](https://beacon.ybliterature.com/geo-traffic.json)，按国家、地区、城市、Cloudflare colo 和 ASN 组织聚合。
 - README 顶部访问量卡片由 Worker 动态生成：[`traffic-card.svg`](https://beacon.ybliterature.com/traffic-card.svg)。
 - GitHub 官方 `views`、`unique visitors` 和 `clones` 仍然保留在 [`traffic.json`](traffic.json)，但它是较慢刷新的官方快照。
@@ -36,7 +38,8 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 
 自动刷新需要配置一个名为 `TRAFFIC_TOKEN` 的仓库 secret，并授予读取 repository traffic 的权限。没有这个 secret 时，定时 workflow 会安全跳过，首页显示最后一次已提交的官方快照。
 
-机器/人拆分现在由 Cloudflare Worker 统计：经过 `https://beacon.ybliterature.com/` 的请求会按 user-agent 和请求头启发式分类。
+机器/人拆分现在由 Cloudflare Worker 统计：经过 `https://beacon.ybliterature.com/` 的请求会按 user-agent 和请求头启发式分类。`/.env`、`/.git/config`、`wp-login.php`、`xmlrpc.php`、`phpinfo.php` 这类敏感文件或漏洞探测路径会优先归为 `security_scanner`，不再算作 AI reader。
+
 地理位置是近似值，代表请求出口或云节点位置，不等于 AI 公司真实位置。Worker 只保存聚合计数，不保存原始 IP 或经纬度。
 
 ## 实验思路

@@ -18,8 +18,11 @@ const DEFAULT_ORIGIN = "https://yang1bai.github.io/github-machine-beacon";
 const DEFAULT_HOST = "beacon.ybliterature.com";
 const COUNTER_KEY = "traffic:v1";
 const GEO_BUCKET_LIMIT = 250;
+const TRAFFIC_CLASS_KEYS = ["ai_reader", "security_scanner", "generic_machine", "human", "unknown"];
 
 const MACHINE_UA_PATTERN = /(bot|crawler|spider|slurp|archive|indexer|preview|facebookexternalhit|twitterbot|linkedinbot|discordbot|slackbot|telegrambot|whatsapp|embedly|quora link preview|pinterest|google-inspectiontool|googleother|bingpreview|duckduckbot|baiduspider|yandex|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|gptbot|oai-searchbot|chatgpt-user|openai|anthropic|claude|perplexity|ccbot|cohere|amazonbot|applebot|meta-externalagent|github-camo|curl|wget|python-requests|go-http-client|node-fetch|undici|axios|okhttp|java\/|libwww-perl|ruby|php|headlesschrome|playwright|puppeteer)/i;
+
+const AI_READER_CATEGORY_PATTERN = /(gptbot|oai-searchbot|chatgpt-user|openai|claude|anthropic|perplexity|ccbot|cohere|googlebot|google inspection|googleother|bingbot|duckduckbot|applebot|amazonbot|bytespider|meta|diffbot|youbot)/i;
 
 const STATIC_ASSET_PATTERN = /^\/(?:assets\/|favicon\.ico$)|\.(?:css|js|mjs|svg|png|jpe?g|gif|webp|ico|avif|woff2?|ttf|map)$/i;
 const COUNTER_ASSET_PATHS = new Set(["/traffic-card.svg"]);
@@ -92,9 +95,13 @@ function classifyVisitor(request) {
   const verifiedCategory = cf.verifiedBotCategory || "";
   const bm = cf.botManagement || {};
   if (bm.verifiedBot === true || (verifiedCategory && verifiedCategory.toLowerCase() !== "" && verifiedCategory.toLowerCase() !== "unknown")) {
-    const label = verifiedCategory && verifiedCategory.toLowerCase() !== "unknown"
+    const uaLabel = machineLabelFromUA(ua);
+    const verifiedLabel = verifiedCategory && verifiedCategory.toLowerCase() !== "unknown"
       ? verifiedCategory
-      : machineLabelFromUA(ua);
+      : "";
+    const label = verifiedLabel && uaLabel && uaLabel !== "Other Machine" && uaLabel.toLowerCase() !== verifiedLabel.toLowerCase()
+      ? `${verifiedLabel}: ${uaLabel}`
+      : verifiedLabel || uaLabel;
     return { type: "machine", category: label || "Verified Bot", verified: true };
   }
 
@@ -157,8 +164,8 @@ function isOwnerRequest(request, url, env) {
 
 function classifierMeta() {
   return {
-    method: "cloudflare verified-bot signals + user-agent/header heuristic",
-    caveat: "Classification is approximate. Cloudflare verified bots are authoritative when available; the rest is heuristic. Static assets and the README traffic-card SVG are excluded, and owner/self traffic is excluded from totals."
+    method: "cloudflare verified-bot signals + user-agent/header heuristic + security-probe path classifier",
+    caveat: "Classification is approximate. Cloudflare verified bots are authoritative when available; the rest is heuristic. Sensitive-file and exploit-probe paths are classified as security_scanner before AI/generic machine classes. Static assets and the README traffic-card SVG are excluded, and owner/self traffic is excluded from totals."
   };
 }
 
@@ -171,6 +178,7 @@ function emptySnapshot(now) {
     totals: { requests: 0, machine: 0, human: 0, unknown: 0 },
     verified_machine: 0,
     excluded_self: 0,
+    traffic_classes: emptyTrafficClasses(),
     machine_categories: {},
     paths: {},
     geo: emptyGeo(),
@@ -204,6 +212,9 @@ function normalizeSnapshot(snapshot, now) {
   normalized.totals ||= { requests: 0, machine: 0, human: 0, unknown: 0 };
   normalized.verified_machine ||= 0;
   normalized.excluded_self ||= 0;
+  normalized.traffic_classes = normalized.traffic_classes
+    ? normalizeTrafficClasses(normalized.traffic_classes)
+    : legacyTrafficClasses(normalized);
   normalized.machine_categories ||= {};
   normalized.paths ||= {};
   normalized.geo ||= emptyGeo();
@@ -222,6 +233,68 @@ async function readSnapshot(env, now) {
 
 function shouldRecordVisit(url) {
   return !COUNTER_ASSET_PATHS.has(url.pathname) && !STATIC_ASSET_PATTERN.test(url.pathname);
+}
+
+function emptyTrafficClasses() {
+  return Object.fromEntries(TRAFFIC_CLASS_KEYS.map((key) => [key, 0]));
+}
+
+function normalizeTrafficClasses(classes = {}) {
+  const normalized = emptyTrafficClasses();
+  for (const key of TRAFFIC_CLASS_KEYS) {
+    normalized[key] = Number(classes?.[key] || 0);
+  }
+  return normalized;
+}
+
+function isSecurityProbePath(pathname) {
+  const path = String(pathname || "/").toLowerCase();
+  return (
+    path.includes("/.env") ||
+    path.startsWith("/.git") ||
+    path.includes("wp-login.php") ||
+    path.includes("wp-admin") ||
+    path.includes("wp-json") ||
+    path.includes("xmlrpc.php") ||
+    /\/(?:phpinfo|test|shell|adminer)\.php(?:$|[/?#])/.test(path) ||
+    /\/(?:config|settings|credentials|secrets|database|dump|backup|db)(?:[.\-/]|$)/.test(path) ||
+    /\/(?:docker-compose\.ya?ml|dockerfile|jenkinsfile|\.gitlab-ci\.yml|\.npmrc|\.pypirc|\.git-credentials|web\.config|appsettings(?:\.[a-z]+)?\.json|application\.(?:ya?ml|properties))(?:$|[?#])/.test(path) ||
+    /\/(?:logs?|storage\/logs|var\/log)\//.test(path)
+  );
+}
+
+function trafficClassFor(pathname, verdict) {
+  if (verdict.type === "human") return "human";
+  if (verdict.type === "unknown") return "unknown";
+  if (isSecurityProbePath(pathname)) return "security_scanner";
+  if (AI_READER_CATEGORY_PATTERN.test(verdict.category || "")) return "ai_reader";
+  return "generic_machine";
+}
+
+function legacyTrafficClasses(snapshot) {
+  const classes = emptyTrafficClasses();
+  classes.human = Number(snapshot?.totals?.human || 0);
+  classes.unknown = Number(snapshot?.totals?.unknown || 0);
+
+  let securityScanner = 0;
+  for (const [path, counts] of Object.entries(snapshot?.paths || {})) {
+    if (isSecurityProbePath(path)) {
+      securityScanner += Number(counts?.machine || 0);
+    }
+  }
+
+  let aiReader = 0;
+  for (const [category, count] of Object.entries(snapshot?.machine_categories || {})) {
+    if (AI_READER_CATEGORY_PATTERN.test(category)) {
+      aiReader += Number(count || 0);
+    }
+  }
+
+  const totalMachine = Number(snapshot?.totals?.machine || 0);
+  classes.security_scanner = securityScanner;
+  classes.ai_reader = Math.min(aiReader, Math.max(totalMachine - securityScanner, 0));
+  classes.generic_machine = Math.max(totalMachine - classes.security_scanner - classes.ai_reader, 0);
+  return classes;
 }
 
 function cleanGeoValue(value, fallback = "unknown") {
@@ -248,10 +321,12 @@ function extractGeo(request) {
   return { country, region, regionCode, city, continent, timezone, colo, asn, asOrganization };
 }
 
-function incrementBucket(bucket, key, visitorType, metadata = {}) {
-  bucket[key] ||= { ...metadata, requests: 0, machine: 0, human: 0, unknown: 0 };
+function incrementBucket(bucket, key, visitorType, trafficClass, metadata = {}) {
+  bucket[key] ||= { ...metadata, requests: 0, machine: 0, human: 0, unknown: 0, traffic_classes: emptyTrafficClasses() };
+  bucket[key].traffic_classes = normalizeTrafficClasses(bucket[key].traffic_classes);
   bucket[key].requests += 1;
   bucket[key][visitorType] = (bucket[key][visitorType] || 0) + 1;
+  bucket[key].traffic_classes[trafficClass] = (bucket[key].traffic_classes[trafficClass] || 0) + 1;
 }
 
 function pruneBucket(bucket) {
@@ -266,20 +341,20 @@ function pruneBucket(bucket) {
   );
 }
 
-function recordGeo(snapshot, request, visitorType) {
+function recordGeo(snapshot, request, visitorType, trafficClass) {
   const geo = extractGeo(request);
 
-  incrementBucket(snapshot.geo.countries, geo.country, visitorType, {
+  incrementBucket(snapshot.geo.countries, geo.country, visitorType, trafficClass, {
     country: geo.country,
     continent: geo.continent
   });
-  incrementBucket(snapshot.geo.regions, geoKey([geo.country, geo.regionCode]), visitorType, {
+  incrementBucket(snapshot.geo.regions, geoKey([geo.country, geo.regionCode]), visitorType, trafficClass, {
     country: geo.country,
     region: geo.region,
     regionCode: geo.regionCode,
     continent: geo.continent
   });
-  incrementBucket(snapshot.geo.cities, geoKey([geo.country, geo.regionCode, geo.city]), visitorType, {
+  incrementBucket(snapshot.geo.cities, geoKey([geo.country, geo.regionCode, geo.city]), visitorType, trafficClass, {
     country: geo.country,
     region: geo.region,
     regionCode: geo.regionCode,
@@ -287,13 +362,13 @@ function recordGeo(snapshot, request, visitorType) {
     timezone: geo.timezone,
     continent: geo.continent
   });
-  incrementBucket(snapshot.geo.continents, geo.continent, visitorType, {
+  incrementBucket(snapshot.geo.continents, geo.continent, visitorType, trafficClass, {
     continent: geo.continent
   });
-  incrementBucket(snapshot.geo.colos, geo.colo, visitorType, {
+  incrementBucket(snapshot.geo.colos, geo.colo, visitorType, trafficClass, {
     colo: geo.colo
   });
-  incrementBucket(snapshot.geo.asOrganizations, geoKey([geo.asn, geo.asOrganization]), visitorType, {
+  incrementBucket(snapshot.geo.asOrganizations, geoKey([geo.asn, geo.asOrganization]), visitorType, trafficClass, {
     asn: geo.asn,
     organization: geo.asOrganization
   });
@@ -316,6 +391,34 @@ function geoSnapshot(snapshot) {
   };
 }
 
+function classSnapshot(snapshot) {
+  const securityPaths = Object.entries(snapshot.paths || {})
+    .filter(([path, counts]) => isSecurityProbePath(path) && Number(counts?.machine || 0) > 0)
+    .map(([path, counts]) => ({
+      path,
+      requests: Number(counts.requests || 0),
+      machine: Number(counts.machine || 0),
+      security_scanner: Number(counts.traffic_classes?.security_scanner || counts.machine || 0)
+    }))
+    .sort((left, right) => right.security_scanner - left.security_scanner || right.requests - left.requests)
+    .slice(0, 40);
+
+  return {
+    schema_version: "github-machine-beacon/traffic-classes/v1",
+    source: snapshot.source,
+    source_scope: snapshot.source_scope,
+    updated_at: snapshot.updated_at,
+    totals: snapshot.totals,
+    traffic_classes: normalizeTrafficClasses(snapshot.traffic_classes),
+    verified_machine: snapshot.verified_machine || 0,
+    excluded_self: snapshot.excluded_self || 0,
+    machine_categories: snapshot.machine_categories || {},
+    top_security_paths: securityPaths,
+    classifier: snapshot.classifier,
+    privacy: snapshot.privacy
+  };
+}
+
 async function recordVisit(env, request, url) {
   const now = new Date().toISOString();
   const snapshot = await readSnapshot(env, now);
@@ -332,9 +435,12 @@ async function recordVisit(env, request, url) {
   const verdict = classifyVisitor(request);
   const visitorType = verdict.type;
   const path = url.pathname;
+  const trafficClass = trafficClassFor(path, verdict);
 
   snapshot.totals.requests += 1;
   snapshot.totals[visitorType] = (snapshot.totals[visitorType] || 0) + 1;
+  snapshot.traffic_classes = normalizeTrafficClasses(snapshot.traffic_classes);
+  snapshot.traffic_classes[trafficClass] = (snapshot.traffic_classes[trafficClass] || 0) + 1;
   if (verdict.verified) snapshot.verified_machine += 1;
 
   if (visitorType === "machine") {
@@ -343,9 +449,11 @@ async function recordVisit(env, request, url) {
   }
 
   snapshot.paths[path] ||= { requests: 0, machine: 0, human: 0, unknown: 0 };
+  snapshot.paths[path].traffic_classes = normalizeTrafficClasses(snapshot.paths[path].traffic_classes);
   snapshot.paths[path].requests += 1;
   snapshot.paths[path][visitorType] = (snapshot.paths[path][visitorType] || 0) + 1;
-  recordGeo(snapshot, request, visitorType);
+  snapshot.paths[path].traffic_classes[trafficClass] = (snapshot.paths[path].traffic_classes[trafficClass] || 0) + 1;
+  recordGeo(snapshot, request, visitorType, trafficClass);
 
   await env.TRAFFIC_KV.put(COUNTER_KEY, JSON.stringify(snapshot));
   return snapshot;
@@ -514,6 +622,10 @@ export default {
     // --- Live traffic card ---
     if (url.pathname === "/geo-traffic.json" || url.pathname === "/traffic-geo.json") {
       return jsonResponse(geoSnapshot(await readSnapshot(env, now)));
+    }
+
+    if (url.pathname === "/traffic-classes.json" || url.pathname === "/traffic-classification.json") {
+      return jsonResponse(classSnapshot(await readSnapshot(env, now)));
     }
 
     if (url.pathname === "/traffic-card.svg") {

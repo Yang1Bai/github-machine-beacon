@@ -5,13 +5,14 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 [![Deploy GitHub Pages](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/pages.yml)
 [![Validate Machine Surfaces](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml/badge.svg)](https://github.com/Yang1Bai/github-machine-beacon/actions/workflows/validate.yml)
 
-[![Live Cloudflare edge traffic](https://beacon.ybliterature.com/traffic-card.svg?v=0.5.0)](https://beacon.ybliterature.com/)
+[![Live Cloudflare edge traffic](https://beacon.ybliterature.com/traffic-card.svg?v=0.6.0)](https://beacon.ybliterature.com/)
 
 **Live homepage:** [https://beacon.ybliterature.com/](https://beacon.ybliterature.com/)
 
-**GitHub Pages mirror:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)  
-**Machine/human split:** [cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)  
+**GitHub Pages mirror:** [https://yang1bai.github.io/github-machine-beacon/](https://yang1bai.github.io/github-machine-beacon/)
+**Machine/human split:** [cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)
 **Machine geo aggregate:** [geo-traffic.json](https://beacon.ybliterature.com/geo-traffic.json)
+**Traffic classes:** [traffic-classes.json](https://beacon.ybliterature.com/traffic-classes.json)
 
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
 
@@ -33,6 +34,7 @@ The hypothesis is simple: a repo with coherent machine-readable surfaces, stable
 The project homepage shows a large live traffic panel backed by the Cloudflare Worker endpoint.
 
 - `total requests`, `machine visits`, `human visits`, and `unknown` come from [`cloudflare-traffic.json`](https://beacon.ybliterature.com/cloudflare-traffic.json).
+- machine traffic is split into `ai_reader`, `security_scanner`, and `generic_machine` in [`traffic-classes.json`](https://beacon.ybliterature.com/traffic-classes.json).
 - machine geography comes from [`geo-traffic.json`](https://beacon.ybliterature.com/geo-traffic.json), aggregated by country, region, city, Cloudflare colo, and ASN organization.
 - the README traffic card is generated dynamically by the Worker at [`traffic-card.svg`](https://beacon.ybliterature.com/traffic-card.svg).
 - GitHub official `views`, `unique visitors`, and `clones` remain available as a slower snapshot in [`traffic.json`](traffic.json).
@@ -40,7 +42,7 @@ The project homepage shows a large live traffic panel backed by the Cloudflare W
 
 Automatic refresh requires a repository secret named `TRAFFIC_TOKEN` with permission to read repository traffic. Without that secret, the scheduled workflow skips safely and the site shows the last committed official snapshot.
 
-The Cloudflare Worker endpoint records content and machine-readable endpoint requests that pass through `https://beacon.ybliterature.com/` and classifies them with a user-agent/request-header heuristic. Static assets, favicon requests, and the README traffic-card SVG are excluded from future visit increments so the live split better reflects real page and machine-surface reads. Geo data is approximate and reflects the request exit location or cloud edge location. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
+The Cloudflare Worker endpoint records content and machine-readable endpoint requests that pass through `https://beacon.ybliterature.com/` and classifies them with a user-agent/request-header heuristic. Static assets, favicon requests, and the README traffic-card SVG are excluded from future visit increments so the live split better reflects real page and machine-surface reads. Sensitive-file and exploit-probe paths such as `/.env`, `/.git/config`, `wp-login.php`, `xmlrpc.php`, and `phpinfo.php` are classified as `security_scanner` before AI/generic machine classes. Geo data is approximate and reflects the request exit location or cloud edge location. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
 
 ## Resource Library
 

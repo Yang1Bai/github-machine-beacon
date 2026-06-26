@@ -195,6 +195,7 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
     clones = traffic.get("clones", {})
     edge_traffic_url = data.get("edge_traffic_url", page_url(base_url, "traffic.json"))
     edge_geo_url = data.get("edge_geo_url", edge_traffic_url)
+    edge_classes_url = data.get("edge_classes_url", edge_traffic_url)
 
     json_ld = {
         "@context": "https://schema.org",
@@ -313,6 +314,40 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
       <p class="traffic-note">Live split updated <time id="traffic-updated" datetime="">loading</time>. Source: Cloudflare Worker. GitHub official snapshot: {format_count(views.get('count', 0))} views, {format_count(views.get('uniques', 0))} unique visitors, {format_count(clones.get('count', 0))} clones. Raw edge data: <a href="{html.escape(edge_traffic_url)}">cloudflare-traffic.json</a>.</p>
     </section>
 
+    <section class="panel" aria-labelledby="classes">
+      <h2 id="classes">Traffic Classes</h2>
+      <p class="section-note">Machine traffic is split by intent. Sensitive-file and exploit-probe paths are counted as security scanners before normal AI or generic machine classes.</p>
+      <div class="traffic-grid" aria-label="Traffic class breakdown">
+        <div class="traffic-card">
+          <span>AI readers</span>
+          <strong id="class-ai-reader">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Security scanners</span>
+          <strong id="class-security-scanner">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Generic machine</span>
+          <strong id="class-generic-machine">...</strong>
+        </div>
+        <div class="traffic-card">
+          <span>Humans</span>
+          <strong id="class-human">...</strong>
+        </div>
+      </div>
+      <div class="geo-grid">
+        <section class="geo-card">
+          <h3>Top Security Paths</h3>
+          <ol id="class-security-paths" class="geo-list"><li>loading</li></ol>
+        </section>
+        <section class="geo-card">
+          <h3>Machine Categories</h3>
+          <ol id="class-machine-categories" class="geo-list"><li>loading</li></ol>
+        </section>
+      </div>
+      <p class="traffic-note">Raw class aggregate: <a href="{html.escape(edge_classes_url)}">traffic-classes.json</a>.</p>
+    </section>
+
     <section class="panel" aria-labelledby="geo">
       <h2 id="geo">AI / Machine Geography</h2>
       <p class="section-note">Aggregated from Cloudflare request metadata. The Worker stores country, region, city, Cloudflare colo, and ASN organization counters; it does not store raw IP addresses or latitude/longitude.</p>
@@ -402,6 +437,12 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
             return primary || Number(right?.requests || 0) - Number(left?.requests || 0);
           }})
           .slice(0, 6);
+      const topObjectEntries = (bucket) =>
+        Object.entries(bucket || {{}})
+          .map(([name, value]) => ({{ name, value: Number(value || 0) }}))
+          .filter((item) => item.value > 0)
+          .sort((left, right) => right.value - left.value)
+          .slice(0, 8);
       const renderList = (id, rows, labeler, field = "machine") => {{
         const target = document.getElementById(id);
         if (!target) return;
@@ -417,6 +458,15 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           }})
           .join("");
       }};
+      const renderSimpleList = (id, rows, labeler) => {{
+        const target = document.getElementById(id);
+        if (!target) return;
+        if (!rows.length) {{
+          target.innerHTML = "<li>no data yet</li>";
+          return;
+        }}
+        target.innerHTML = rows.map(labeler).join("");
+      }};
 
       fetch(endpoint, {{ cache: "no-store" }})
         .then((response) => {{
@@ -429,6 +479,18 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           setText("edge-machine", totals.machine);
           setText("edge-human", totals.human);
           setText("edge-unknown", totals.unknown);
+          const classes = snapshot.traffic_classes || {{}};
+          setText("class-ai-reader", classes.ai_reader);
+          setText("class-security-scanner", classes.security_scanner);
+          setText("class-generic-machine", classes.generic_machine);
+          setText("class-human", classes.human);
+          const securityPaths = Object.entries(snapshot.paths || {{}})
+            .filter(([path, counts]) => /(?:\\/\\.env|^\\/\\.git|wp-login\\.php|xmlrpc\\.php|wp-json|phpinfo\\.php|docker-compose|database\\.sql|backup\\.sql|dump\\.sql|config\\.|\\.npmrc|\\.pypirc|\\.git-credentials)/i.test(path) && Number(counts?.machine || 0) > 0)
+            .map(([path, counts]) => ({{ path, count: Number(counts?.traffic_classes?.security_scanner || counts?.machine || 0) }}))
+            .sort((left, right) => right.count - left.count)
+            .slice(0, 8);
+          renderSimpleList("class-security-paths", securityPaths, (row) => `<li><strong>${{formatter.format(row.count)}}</strong> ${{escapeHtml(row.path)}}</li>`);
+          renderSimpleList("class-machine-categories", topObjectEntries(snapshot.machine_categories), (row) => `<li><strong>${{formatter.format(row.value)}}</strong> ${{escapeHtml(row.name)}}</li>`);
           const geo = snapshot.geo || {{}};
           renderList("geo-machine-countries", topEntries(geo.countries), (row) => joinKnown(row.country, row.continent));
           renderList("geo-machine-cities", topEntries(geo.cities), (row) => joinKnown(row.city, row.regionCode, row.country));
@@ -445,6 +507,12 @@ def build_index(data: dict, content_pages: list[dict], traffic: dict) -> str:
           setText("edge-machine", 0);
           setText("edge-human", 0);
           setText("edge-unknown", 0);
+          setText("class-ai-reader", 0);
+          setText("class-security-scanner", 0);
+          setText("class-generic-machine", 0);
+          setText("class-human", 0);
+          renderSimpleList("class-security-paths", [], () => "");
+          renderSimpleList("class-machine-categories", [], () => "");
           renderList("geo-machine-countries", [], () => "");
           renderList("geo-machine-cities", [], () => "");
           renderList("geo-machine-asn", [], () => "");
@@ -566,6 +634,7 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         f"- Traffic snapshot: {page_url(base_url, 'traffic.json')}",
         f"- Cloudflare edge traffic: {data.get('edge_traffic_url', page_url(base_url, 'traffic.json'))}",
         f"- Cloudflare geo traffic: {data.get('edge_geo_url', data.get('edge_traffic_url', page_url(base_url, 'traffic.json')))}",
+        f"- Cloudflare traffic classes: {data.get('edge_classes_url', data.get('edge_traffic_url', page_url(base_url, 'traffic.json')))}",
         f"- Keyword index: {page_url(base_url, 'keyword-index.json')}",
         f"- Sitemap: {page_url(base_url, 'sitemap.xml')}",
         f"- Atom feed: {page_url(base_url, 'feed.xml')}",
@@ -658,6 +727,7 @@ def build_manifest(data: dict, content_pages: list[dict], traffic: dict) -> dict
             "url": data.get("edge_url"),
             "traffic_url": data.get("edge_traffic_url"),
             "geo_url": data.get("edge_geo_url"),
+            "classes_url": data.get("edge_classes_url"),
             "classification": "machine/human split via Worker request-header heuristic",
         },
         "recommended_citation": f"{data['name']}: transparent machine-readable GitHub discovery experiment.",
