@@ -49,6 +49,17 @@ https://beacon.ybliterature.com/traffic-classes.json
 
 This split is based on a Worker request-header heuristic. It is more direct than GitHub Traffic API for machine/human counting because the Worker sees user-agent headers, but it only counts requests that pass through the Cloudflare Worker URL. Machine traffic is further split into `ai_reader`, `security_scanner`, and `generic_machine`. Sensitive-file and exploit-probe paths such as `/.env`, `/.git/config`, `wp-login.php`, `xmlrpc.php`, and `phpinfo.php` are classified as `security_scanner` before AI/generic machine classes. Geo data is approximate and represents request exit or cloud edge location, not the physical location of a person or AI company. The Worker stores aggregate counters only; it does not store raw IP addresses or latitude/longitude.
 
+AI reader category note:
+
+Cloudflare verified categories such as `AI Crawler`, `AI Search`, and `AI Assistant` are counted as `ai_reader`. This prevents undercounting known AI traffic when Cloudflare reports a broad verified category instead of a product-specific user agent label.
+
+AI reader entry points:
+
+```text
+https://beacon.ybliterature.com/ai-readers.json
+https://beacon.ybliterature.com/ai-reader-context.txt
+```
+
 ## Weekly Review
 
 Questions:

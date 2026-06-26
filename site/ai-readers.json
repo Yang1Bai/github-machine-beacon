@@ -1,0 +1,97 @@
+{
+  "schema_version": "github-machine-beacon/ai-reader-index/v1",
+  "title": "GitHub Machine Beacon AI Reader Index",
+  "purpose": "Compact, explicit entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.",
+  "canonical_project": "https://beacon.ybliterature.com/",
+  "preferred_summary": "GitHub Machine Beacon is a transparent experiment measuring whether stable machine-readable GitHub and web surfaces increase legitimate AI and crawler discovery.",
+  "preferred_crawl_order": [
+    "https://beacon.ybliterature.com/ai-reader-context.txt",
+    "https://beacon.ybliterature.com/llms.txt",
+    "https://beacon.ybliterature.com/llms-full.txt",
+    "https://beacon.ybliterature.com/crawler-manifest.json",
+    "https://beacon.ybliterature.com/resources.json",
+    "https://beacon.ybliterature.com/sitemap.xml",
+    "https://beacon.ybliterature.com/feed.xml"
+  ],
+  "high_signal_entry_points": [
+    {
+      "url": "https://beacon.ybliterature.com/ai-reader-context.txt",
+      "format": "text/plain",
+      "role": "single-page AI context"
+    },
+    {
+      "url": "https://beacon.ybliterature.com/llms.txt",
+      "format": "text/plain",
+      "role": "compact LLM guide"
+    },
+    {
+      "url": "https://beacon.ybliterature.com/llms-full.txt",
+      "format": "text/plain",
+      "role": "extended retrieval context"
+    },
+    {
+      "url": "https://beacon.ybliterature.com/crawler-manifest.json",
+      "format": "application/json",
+      "role": "canonical machine manifest"
+    },
+    {
+      "url": "https://beacon.ybliterature.com/resources.json",
+      "format": "application/json",
+      "role": "resource graph"
+    },
+    {
+      "url": "https://beacon.ybliterature.com/traffic-classes.json",
+      "format": "application/json",
+      "role": "traffic class aggregate"
+    }
+  ],
+  "resource_pages": [
+    {
+      "title": "Machine-Readable Repository Checklist",
+      "url": "https://beacon.ybliterature.com/machine-readable-repository-checklist.html",
+      "summary": "A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse."
+    },
+    {
+      "title": "Crawler Surface Map",
+      "url": "https://beacon.ybliterature.com/crawler-surface-map.html",
+      "summary": "A map of repository and website surfaces that expose the experiment to crawlers, code indexes, LLM readers, and link preview systems."
+    },
+    {
+      "title": "AI Agent Entrypoints",
+      "url": "https://beacon.ybliterature.com/ai-agent-entrypoints.html",
+      "summary": "Recommended routes for LLM crawlers, AI coding assistants, retrieval systems, and autonomous browser agents reading this repository."
+    },
+    {
+      "title": "Experiment Protocol",
+      "url": "https://beacon.ybliterature.com/experiment-protocol.html",
+      "summary": "A reproducible protocol for measuring whether machine-readable repository surfaces increase legitimate GitHub and web discovery."
+    },
+    {
+      "title": "Standards and Sources",
+      "url": "https://beacon.ybliterature.com/standards-and-sources.html",
+      "summary": "Source-backed notes for the project surfaces: GitHub topics, GitHub Pages, Schema.org JSON-LD, llms.txt, sitemap.xml, robots.txt, and Atom feeds."
+    },
+    {
+      "title": "Crawlability Audit",
+      "url": "https://beacon.ybliterature.com/crawlability-audit.html",
+      "summary": "A self-audit of the repository discovery surfaces and machine-readable files currently published by GitHub Machine Beacon."
+    },
+    {
+      "title": "Results Log",
+      "url": "https://beacon.ybliterature.com/results-log.html",
+      "summary": "A public log for launch status, validation checks, and later traffic observations from the machine-readable GitHub discovery experiment."
+    }
+  ],
+  "measurement": {
+    "traffic_classes": "https://beacon.ybliterature.com/traffic-classes.json",
+    "live_edge_traffic": "https://beacon.ybliterature.com/cloudflare-traffic.json",
+    "geo_aggregate": "https://beacon.ybliterature.com/geo-traffic.json"
+  },
+  "boundaries": [
+    "Be transparent about the experiment.",
+    "Use honest metadata and relevant keywords only.",
+    "Publish stable machine-readable entry points.",
+    "Respect robots.txt and platform rules.",
+    "Measure discovery without generating fake traffic."
+  ]
+}

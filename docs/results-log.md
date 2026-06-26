@@ -17,6 +17,7 @@ Canonical page: https://beacon.ybliterature.com/results-log.html
 | 2026-06-12 | Live README traffic card | v0.3.1 replaces the static GitHub Traffic API card with a dynamic Cloudflare Worker SVG at traffic-card.svg. |
 | 2026-06-22 | Geo traffic aggregate | v0.5.0 adds country, region, city, Cloudflare colo, and ASN organization aggregates for machine and human requests. |
 | 2026-06-26 | Traffic class split | v0.6.0 separates machine traffic into AI readers, security scanners, and generic machine requests so vulnerability scans do not inflate AI reader counts. |
+| 2026-06-26 | AI reader entry pack | v0.6.1 fixes AI category undercounting and adds ai-readers.json plus ai-reader-context.txt as high-signal AI entry points. |
 
 ## Observation template
 

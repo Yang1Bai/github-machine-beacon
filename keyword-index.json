@@ -25,6 +25,8 @@
       "intent": "Signals for retrieval systems, AI coding tools, and agent browsers.",
       "terms": [
         "llms.txt",
+        "AI reader index",
+        "AI reader context",
         "LLM crawler",
         "AI agent browser",
         "AI search indexing",

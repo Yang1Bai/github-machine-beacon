@@ -1,13 +1,27 @@
 {
   "name": "GitHub Machine Beacon",
   "updated": "2026-06-26",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "resources": [
     {
       "title": "GitHub Machine Beacon",
       "url": "https://beacon.ybliterature.com/",
       "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
       "media_type": "text/html",
+      "keywords": []
+    },
+    {
+      "title": "AI Reader Index",
+      "url": "https://beacon.ybliterature.com/ai-readers.json",
+      "summary": "Compact JSON entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.",
+      "media_type": "application/json",
+      "keywords": []
+    },
+    {
+      "title": "AI Reader Context",
+      "url": "https://beacon.ybliterature.com/ai-reader-context.txt",
+      "summary": "Plain-text single-page context bundle designed for AI readers and agent browsers.",
+      "media_type": "text/plain",
       "keywords": []
     },
     {

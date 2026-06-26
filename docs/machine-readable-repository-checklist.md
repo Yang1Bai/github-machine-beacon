@@ -19,6 +19,7 @@ A machine-readable repository should answer who it is, what it does, where the c
 Use multiple entry points because different machines begin in different places. GitHub code search, web crawlers, LLM readers, link preview bots, feed readers, and archive systems do not all share one discovery path.
 
 - Expose a canonical live Worker URL and keep GitHub Pages as a mirror.
+- Publish /ai-readers.json and /ai-reader-context.txt as direct AI reader entry points.
 - Publish /llms.txt and a richer /llms-full.txt.
 - Publish /sitemap.xml and /robots.txt.
 - Publish a JSON crawler manifest with canonical URLs and summaries.

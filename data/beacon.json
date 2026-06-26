@@ -8,7 +8,7 @@
   "edge_geo_url": "https://beacon.ybliterature.com/geo-traffic.json",
   "edge_classes_url": "https://beacon.ybliterature.com/traffic-classes.json",
   "repo_url": "https://github.com/Yang1Bai/github-machine-beacon",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "updated": "2026-06-26",
   "language": "en",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
@@ -27,6 +27,20 @@
       "summary": "Landing page for the machine-readable GitHub crawler discovery experiment.",
       "priority": "1.0",
       "changefreq": "weekly"
+    },
+    {
+      "path": "ai-readers.json",
+      "title": "AI Reader Index",
+      "summary": "Compact JSON entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.",
+      "priority": "0.95",
+      "changefreq": "daily"
+    },
+    {
+      "path": "ai-reader-context.txt",
+      "title": "AI Reader Context",
+      "summary": "Plain-text single-page context bundle designed for AI readers and agent browsers.",
+      "priority": "0.95",
+      "changefreq": "daily"
     },
     {
       "path": "llms.txt",
@@ -116,6 +130,8 @@
       "intent": "Signals for retrieval systems, AI coding tools, and agent browsers.",
       "terms": [
         "llms.txt",
+        "AI reader index",
+        "AI reader context",
         "LLM crawler",
         "AI agent browser",
         "AI search indexing",

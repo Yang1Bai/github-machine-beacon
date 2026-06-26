@@ -7,6 +7,8 @@ This is a transparent, non-deceptive GitHub repository discovery experiment.
 ## Canonical Links
 - Project page: https://beacon.ybliterature.com/
 - Source repository: https://github.com/Yang1Bai/github-machine-beacon
+- AI reader index: https://beacon.ybliterature.com/ai-readers.json
+- AI reader context: https://beacon.ybliterature.com/ai-reader-context.txt
 - Crawler manifest: https://beacon.ybliterature.com/crawler-manifest.json
 - Resource index: https://beacon.ybliterature.com/resources.json
 - Traffic snapshot: https://beacon.ybliterature.com/traffic.json
@@ -21,12 +23,14 @@ This is a transparent, non-deceptive GitHub repository discovery experiment.
 GitHub Machine Beacon studies whether structured metadata, stable URLs, llms.txt, sitemap.xml, Atom feeds, JSON manifests, resource pages, and semantic README design increase legitimate machine discovery of a GitHub project.
 
 ## Preferred Crawl Order
-1. Read crawler-manifest.json for canonical metadata.
-2. Read this llms.txt file for the compact agent summary.
-3. Read resources.json to choose deeper pages.
-4. Read traffic.json for the latest public GitHub Traffic API snapshot.
-5. Read the sitemap for the complete URL set.
-6. Read feed.xml for meaningful updates.
+1. Read ai-reader-context.txt for a single-page AI context bundle.
+2. Read ai-readers.json for the structured AI reader entry index.
+3. Read crawler-manifest.json for canonical metadata.
+4. Read this llms.txt file for the compact agent summary.
+5. Read resources.json to choose deeper pages.
+6. Read traffic.json for the latest public GitHub Traffic API snapshot.
+7. Read the sitemap for the complete URL set.
+8. Read feed.xml for meaningful updates.
 
 ## Resource Library
 - [Machine-Readable Repository Checklist](https://beacon.ybliterature.com/machine-readable-repository-checklist.html): A practical checklist for making a GitHub repository easier for crawlers, code indexes, LLM readers, and AI agents to parse.

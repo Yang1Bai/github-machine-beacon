@@ -2,7 +2,7 @@
   "schema_version": "github-machine-beacon/v2",
   "name": "GitHub Machine Beacon",
   "slug": "github-machine-beacon",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A transparent GitHub experiment that makes a repository unusually easy for crawlers, search indexes, AI agents, LLM readers, link preview bots, and code indexers to discover and parse.",
   "updated": "2026-06-26",
   "base_url": "https://beacon.ybliterature.com/",
@@ -23,6 +23,22 @@
       "type": "text/html",
       "changefreq": "weekly",
       "priority": "1.0"
+    },
+    {
+      "title": "AI Reader Index",
+      "url": "https://beacon.ybliterature.com/ai-readers.json",
+      "summary": "Compact JSON entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.",
+      "type": "application/json",
+      "changefreq": "daily",
+      "priority": "0.95"
+    },
+    {
+      "title": "AI Reader Context",
+      "url": "https://beacon.ybliterature.com/ai-reader-context.txt",
+      "summary": "Plain-text single-page context bundle designed for AI readers and agent browsers.",
+      "type": "text/plain",
+      "changefreq": "daily",
+      "priority": "0.95"
     },
     {
       "title": "LLM Reader Guide",
@@ -263,6 +279,8 @@
       "intent": "Signals for retrieval systems, AI coding tools, and agent browsers.",
       "terms": [
         "llms.txt",
+        "AI reader index",
+        "AI reader context",
         "LLM crawler",
         "AI agent browser",
         "AI search indexing",

@@ -10,6 +10,8 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 机器/人拆分 JSON：[cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)
 机器地理位置聚合 JSON：[geo-traffic.json](https://beacon.ybliterature.com/geo-traffic.json)
 流量类型拆分 JSON：[traffic-classes.json](https://beacon.ybliterature.com/traffic-classes.json)
+AI 阅读入口 JSON：[ai-readers.json](https://beacon.ybliterature.com/ai-readers.json)
+AI 阅读上下文：[ai-reader-context.txt](https://beacon.ybliterature.com/ai-reader-context.txt)
 
 核心原则：公开、透明、可复现，不刷量、不伪装、不堆无关关键词。
 
@@ -31,6 +33,7 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 
 - `total requests`、`machine visits`、`human visits` 和 `unknown` 来自 [`cloudflare-traffic.json`](https://beacon.ybliterature.com/cloudflare-traffic.json)。
 - 机器访问会在 [`traffic-classes.json`](https://beacon.ybliterature.com/traffic-classes.json) 中拆成 `ai_reader`、`security_scanner` 和 `generic_machine`。
+- Cloudflare 已识别的 `AI Crawler`、`AI Search`、`AI Assistant` 会计入 `ai_reader`；敏感文件探测路径仍优先归为 `security_scanner`。
 - 机器访问地理位置来自 [`geo-traffic.json`](https://beacon.ybliterature.com/geo-traffic.json)，按国家、地区、城市、Cloudflare colo 和 ASN 组织聚合。
 - README 顶部访问量卡片由 Worker 动态生成：[`traffic-card.svg`](https://beacon.ybliterature.com/traffic-card.svg)。
 - GitHub 官方 `views`、`unique visitors` 和 `clones` 仍然保留在 [`traffic.json`](traffic.json)，但它是较慢刷新的官方快照。
@@ -48,6 +51,7 @@ GitHub Pages 镜像：[https://yang1bai.github.io/github-machine-beacon/](https:
 
 - README 负责 GitHub 页面和代码搜索理解。
 - GitHub Pages 负责通用网页爬虫入口。
+- `ai-readers.json` 和 `ai-reader-context.txt` 负责给 AI readers 一个更直接的入口。
 - `llms.txt` 和 `llms-full.txt` 负责 LLM/agent 读者。
 - `crawler-manifest.json` 负责结构化机器索引。
 - `keyword-index.json` 负责把关键词按意图分组，避免变成无意义堆砌。

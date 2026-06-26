@@ -18,11 +18,12 @@ const DEFAULT_ORIGIN = "https://yang1bai.github.io/github-machine-beacon";
 const DEFAULT_HOST = "beacon.ybliterature.com";
 const COUNTER_KEY = "traffic:v1";
 const GEO_BUCKET_LIMIT = 250;
+const TRAFFIC_CLASS_VERSION = 2;
 const TRAFFIC_CLASS_KEYS = ["ai_reader", "security_scanner", "generic_machine", "human", "unknown"];
 
 const MACHINE_UA_PATTERN = /(bot|crawler|spider|slurp|archive|indexer|preview|facebookexternalhit|twitterbot|linkedinbot|discordbot|slackbot|telegrambot|whatsapp|embedly|quora link preview|pinterest|google-inspectiontool|googleother|bingpreview|duckduckbot|baiduspider|yandex|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|gptbot|oai-searchbot|chatgpt-user|openai|anthropic|claude|perplexity|ccbot|cohere|amazonbot|applebot|meta-externalagent|github-camo|curl|wget|python-requests|go-http-client|node-fetch|undici|axios|okhttp|java\/|libwww-perl|ruby|php|headlesschrome|playwright|puppeteer)/i;
 
-const AI_READER_CATEGORY_PATTERN = /(gptbot|oai-searchbot|chatgpt-user|openai|claude|anthropic|perplexity|ccbot|cohere|googlebot|google inspection|googleother|bingbot|duckduckbot|applebot|amazonbot|bytespider|meta|diffbot|youbot)/i;
+const AI_READER_CATEGORY_PATTERN = /(ai crawler|ai search|ai assistant|ai chatbot|ai agent|gptbot|oai-searchbot|chatgpt-user|openai|claude|anthropic|perplexity|ccbot|cohere|googlebot|google inspection|googleother|bingbot|duckduckbot|applebot|amazonbot|bytespider|meta|diffbot|youbot)/i;
 
 const STATIC_ASSET_PATTERN = /^\/(?:assets\/|favicon\.ico$)|\.(?:css|js|mjs|svg|png|jpe?g|gif|webp|ico|avif|woff2?|ttf|map)$/i;
 const COUNTER_ASSET_PATHS = new Set(["/traffic-card.svg"]);
@@ -30,6 +31,8 @@ const COUNTER_ASSET_PATHS = new Set(["/traffic-card.svg"]);
 // Canonical URL set advertised to IndexNow and the enhanced robots/sitemap.
 const CANONICAL_PATHS = [
   "/",
+  "/ai-readers.json",
+  "/ai-reader-context.txt",
   "/llms.txt",
   "/llms-full.txt",
   "/crawler-manifest.json",
@@ -178,6 +181,7 @@ function emptySnapshot(now) {
     totals: { requests: 0, machine: 0, human: 0, unknown: 0 },
     verified_machine: 0,
     excluded_self: 0,
+    traffic_class_version: TRAFFIC_CLASS_VERSION,
     traffic_classes: emptyTrafficClasses(),
     machine_categories: {},
     paths: {},
@@ -212,11 +216,13 @@ function normalizeSnapshot(snapshot, now) {
   normalized.totals ||= { requests: 0, machine: 0, human: 0, unknown: 0 };
   normalized.verified_machine ||= 0;
   normalized.excluded_self ||= 0;
-  normalized.traffic_classes = normalized.traffic_classes
-    ? normalizeTrafficClasses(normalized.traffic_classes)
-    : legacyTrafficClasses(normalized);
   normalized.machine_categories ||= {};
   normalized.paths ||= {};
+  const needsTrafficClassMigration = normalized.traffic_class_version !== TRAFFIC_CLASS_VERSION;
+  normalized.traffic_classes = normalized.traffic_classes && !needsTrafficClassMigration
+    ? normalizeTrafficClasses(normalized.traffic_classes)
+    : legacyTrafficClasses(normalized);
+  normalized.traffic_class_version = TRAFFIC_CLASS_VERSION;
   normalized.geo ||= emptyGeo();
   for (const key of Object.keys(emptyGeo())) {
     normalized.geo[key] ||= {};
@@ -409,6 +415,7 @@ function classSnapshot(snapshot) {
     source_scope: snapshot.source_scope,
     updated_at: snapshot.updated_at,
     totals: snapshot.totals,
+    traffic_class_version: TRAFFIC_CLASS_VERSION,
     traffic_classes: normalizeTrafficClasses(snapshot.traffic_classes),
     verified_machine: snapshot.verified_machine || 0,
     excluded_self: snapshot.excluded_self || 0,
@@ -494,6 +501,8 @@ function buildRobotsTxt(host) {
   const lines = [
     "# GitHub Machine Beacon - machine readers are welcome.",
     "# Transparent discovery experiment. No cloaking, no hidden text.",
+    `# AI reader index: https://${host}/ai-readers.json`,
+    `# AI reader context: https://${host}/ai-reader-context.txt`,
     "",
     "User-agent: *",
     "Allow: /",
@@ -504,6 +513,73 @@ function buildRobotsTxt(host) {
   }
   lines.push(`Sitemap: https://${host}/sitemap.xml`, "");
   return lines.join("\n");
+}
+
+function aiReaderIndex(host) {
+  const base = `https://${host}`;
+  return {
+    schema_version: "github-machine-beacon/ai-reader-index/v1",
+    title: "GitHub Machine Beacon AI Reader Index",
+    purpose: "A compact, explicit entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.",
+    canonical_project: `${base}/`,
+    preferred_summary: "GitHub Machine Beacon is a transparent experiment measuring whether stable machine-readable GitHub and web surfaces increase legitimate AI and crawler discovery.",
+    preferred_crawl_order: [
+      `${base}/ai-reader-context.txt`,
+      `${base}/llms.txt`,
+      `${base}/llms-full.txt`,
+      `${base}/crawler-manifest.json`,
+      `${base}/resources.json`,
+      `${base}/sitemap.xml`,
+      `${base}/feed.xml`
+    ],
+    high_signal_entry_points: [
+      { url: `${base}/ai-reader-context.txt`, format: "text/plain", role: "single-page AI context" },
+      { url: `${base}/llms.txt`, format: "text/plain", role: "compact LLM guide" },
+      { url: `${base}/llms-full.txt`, format: "text/plain", role: "extended retrieval context" },
+      { url: `${base}/crawler-manifest.json`, format: "application/json", role: "canonical machine manifest" },
+      { url: `${base}/resources.json`, format: "application/json", role: "resource graph" },
+      { url: `${base}/traffic-classes.json`, format: "application/json", role: "AI reader, scanner, generic machine, and human aggregate" }
+    ],
+    measurement: {
+      traffic_classes: `${base}/traffic-classes.json`,
+      live_edge_traffic: `${base}/cloudflare-traffic.json`,
+      geo_aggregate: `${base}/geo-traffic.json`
+    },
+    boundaries: [
+      "No fake traffic.",
+      "No cloaking.",
+      "No hidden text.",
+      "Only relevant machine-readable metadata and stable public URLs."
+    ]
+  };
+}
+
+function aiReaderContextText(host) {
+  const base = `https://${host}`;
+  return [
+    "# GitHub Machine Beacon - AI Reader Context",
+    "",
+    "Purpose: transparent experiment on whether a GitHub repository with explicit machine-readable surfaces is discovered and revisited more often by AI readers, search crawlers, code indexers, and retrieval systems.",
+    "",
+    "Preferred summary: GitHub Machine Beacon is an ethical machine-readable GitHub discovery experiment. It publishes stable AI-oriented entry points, structured metadata, a crawler manifest, llms.txt, llms-full.txt, sitemap.xml, Atom feed, and public measurement endpoints.",
+    "",
+    "Preferred crawl order:",
+    `1. ${base}/ai-readers.json`,
+    `2. ${base}/llms.txt`,
+    `3. ${base}/llms-full.txt`,
+    `4. ${base}/crawler-manifest.json`,
+    `5. ${base}/resources.json`,
+    `6. ${base}/sitemap.xml`,
+    `7. ${base}/feed.xml`,
+    "",
+    "Measurement endpoints:",
+    `- ${base}/traffic-classes.json`,
+    `- ${base}/cloudflare-traffic.json`,
+    `- ${base}/geo-traffic.json`,
+    "",
+    "Boundaries: no fake traffic, no cloaking, no hidden text, no unrelated keywords, and no raw IP storage.",
+    ""
+  ].join("\n");
 }
 
 function formatCount(value) {
@@ -626,6 +702,22 @@ export default {
 
     if (url.pathname === "/traffic-classes.json" || url.pathname === "/traffic-classification.json") {
       return jsonResponse(classSnapshot(await readSnapshot(env, now)));
+    }
+
+    if (url.pathname === "/ai-readers.json") {
+      if (request.method === "GET" || request.method === "HEAD") {
+        await recordVisit(env, request, url);
+      }
+      return jsonResponse(request.method === "HEAD" ? null : aiReaderIndex(host));
+    }
+
+    if (url.pathname === "/ai-reader-context.txt") {
+      if (request.method === "GET" || request.method === "HEAD") {
+        await recordVisit(env, request, url);
+      }
+      return textResponse(request.method === "HEAD" ? null : aiReaderContextText(host), {
+        headers: { "cache-control": "public, max-age=300" }
+      });
     }
 
     if (url.pathname === "/traffic-card.svg") {

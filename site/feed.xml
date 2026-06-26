@@ -14,6 +14,20 @@
     <summary>Landing page for the machine-readable GitHub crawler discovery experiment.</summary>
   </entry>
   <entry>
+    <title>AI Reader Index</title>
+    <link href="https://beacon.ybliterature.com/ai-readers.json"/>
+    <id>https://beacon.ybliterature.com/ai-readers.json</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <summary>Compact JSON entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.</summary>
+  </entry>
+  <entry>
+    <title>AI Reader Context</title>
+    <link href="https://beacon.ybliterature.com/ai-reader-context.txt"/>
+    <id>https://beacon.ybliterature.com/ai-reader-context.txt</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <summary>Plain-text single-page context bundle designed for AI readers and agent browsers.</summary>
+  </entry>
+  <entry>
     <title>LLM Reader Guide</title>
     <link href="https://beacon.ybliterature.com/llms.txt"/>
     <id>https://beacon.ybliterature.com/llms.txt</id>

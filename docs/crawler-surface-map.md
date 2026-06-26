@@ -13,6 +13,8 @@ The project is intentionally multi-surface. Each surface gives a different reade
 | README.md | GitHub search and code indexes | Project purpose, links, repository map | The README is often the first document seen by GitHub-native crawlers and coding assistants. |
 | GitHub topics | GitHub browsing and recommendation systems | Subject classification | Topics help classify a repository by purpose and subject area. |
 | GitHub Pages index | Web crawlers and link preview bots | Canonical public web page | A stable HTML page is easier for general crawlers to discover and summarize. |
+| ai-readers.json | AI crawlers and retrieval systems | Structured AI reader index | A compact JSON entry point tells machines exactly which canonical resources to read first. |
+| ai-reader-context.txt | LLM readers and agent browsers | Plain-text context bundle | A single plain-text file gives AI systems a low-friction summary and crawl order. |
 | llms.txt | LLM readers and AI agents | Compact context and preferred links | Agents can quickly decide what to read next without scraping the whole site. |
 | crawler-manifest.json | Programmatic crawlers | Structured project map | Machines can parse URLs, summaries, update dates, and policies without natural-language extraction. |
 | sitemap.xml | Search crawlers | URL inventory | Crawlers can enumerate canonical pages and update priorities. |
@@ -20,7 +22,9 @@ The project is intentionally multi-surface. Each surface gives a different reade
 
 ## Preferred crawl order
 
-- Start with crawler-manifest.json for canonical project metadata.
+- Start with ai-reader-context.txt for the compact AI context bundle.
+- Read ai-readers.json for the structured AI reader entry index.
+- Read crawler-manifest.json for canonical project metadata.
 - Read llms.txt for the compact agent summary.
 - Read the Pages index for HTML context and structured data.
 - Read resource pages from the sitemap for deeper content.

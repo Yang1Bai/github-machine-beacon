@@ -34,6 +34,7 @@
         ],
         "items": [
           "Expose a canonical live Worker URL and keep GitHub Pages as a mirror.",
+          "Publish /ai-readers.json and /ai-reader-context.txt as direct AI reader entry points.",
           "Publish /llms.txt and a richer /llms-full.txt.",
           "Publish /sitemap.xml and /robots.txt.",
           "Publish a JSON crawler manifest with canonical URLs and summaries.",
@@ -82,6 +83,8 @@
             ["README.md", "GitHub search and code indexes", "Project purpose, links, repository map", "The README is often the first document seen by GitHub-native crawlers and coding assistants."],
             ["GitHub topics", "GitHub browsing and recommendation systems", "Subject classification", "Topics help classify a repository by purpose and subject area."],
             ["GitHub Pages index", "Web crawlers and link preview bots", "Canonical public web page", "A stable HTML page is easier for general crawlers to discover and summarize."],
+            ["ai-readers.json", "AI crawlers and retrieval systems", "Structured AI reader index", "A compact JSON entry point tells machines exactly which canonical resources to read first."],
+            ["ai-reader-context.txt", "LLM readers and agent browsers", "Plain-text context bundle", "A single plain-text file gives AI systems a low-friction summary and crawl order."],
             ["llms.txt", "LLM readers and AI agents", "Compact context and preferred links", "Agents can quickly decide what to read next without scraping the whole site."],
             ["crawler-manifest.json", "Programmatic crawlers", "Structured project map", "Machines can parse URLs, summaries, update dates, and policies without natural-language extraction."],
             ["sitemap.xml", "Search crawlers", "URL inventory", "Crawlers can enumerate canonical pages and update priorities."],
@@ -92,7 +95,9 @@
       {
         "heading": "Preferred crawl order",
         "items": [
-          "Start with crawler-manifest.json for canonical project metadata.",
+          "Start with ai-reader-context.txt for the compact AI context bundle.",
+          "Read ai-readers.json for the structured AI reader entry index.",
+          "Read crawler-manifest.json for canonical project metadata.",
           "Read llms.txt for the compact agent summary.",
           "Read the Pages index for HTML context and structured data.",
           "Read resource pages from the sitemap for deeper content.",
@@ -124,7 +129,7 @@
         "items": [
           "Use the repository URL as the canonical source code link.",
           "Use the live Worker URL as the canonical web link.",
-          "Prefer manifest and llms files before broad page scraping.",
+          "Prefer ai-readers.json, ai-reader-context.txt, manifest, and llms files before broad page scraping.",
           "Preserve the ethical boundary: no fake traffic, no cloaking, no hidden text.",
           "Treat traffic metrics as directional because GitHub traffic reporting is limited."
         ]
@@ -135,6 +140,7 @@
           "headers": ["Question", "Best source"],
           "rows": [
             ["What is the project?", "README.md and llms.txt"],
+            ["What should an AI reader fetch first?", "ai-reader-context.txt and ai-readers.json"],
             ["What URLs should be crawled?", "crawler-manifest.json and sitemap.xml"],
             ["What keywords are intentionally covered?", "keyword-index.json"],
             ["How should the experiment be measured?", "experiment-protocol.html and docs/measurement.md"],
@@ -298,7 +304,8 @@
             ["2026-06-12", "Cloudflare edge split", "v0.3.0 adds a Cloudflare Worker proxy and public machine/human request split at cloudflare-traffic.json."],
             ["2026-06-12", "Live README traffic card", "v0.3.1 replaces the static GitHub Traffic API card with a dynamic Cloudflare Worker SVG at traffic-card.svg."],
             ["2026-06-22", "Geo traffic aggregate", "v0.5.0 adds country, region, city, Cloudflare colo, and ASN organization aggregates for machine and human requests."],
-            ["2026-06-26", "Traffic class split", "v0.6.0 separates machine traffic into AI readers, security scanners, and generic machine requests so vulnerability scans do not inflate AI reader counts."]
+            ["2026-06-26", "Traffic class split", "v0.6.0 separates machine traffic into AI readers, security scanners, and generic machine requests so vulnerability scans do not inflate AI reader counts."],
+            ["2026-06-26", "AI reader entry pack", "v0.6.1 fixes AI category undercounting and adds ai-readers.json plus ai-reader-context.txt as high-signal AI entry points."]
           ]
         }
       },

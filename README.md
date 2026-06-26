@@ -13,6 +13,8 @@ Transparent experiment: make a GitHub project unusually easy for crawlers, code 
 **Machine/human split:** [cloudflare-traffic.json](https://beacon.ybliterature.com/cloudflare-traffic.json)
 **Machine geo aggregate:** [geo-traffic.json](https://beacon.ybliterature.com/geo-traffic.json)
 **Traffic classes:** [traffic-classes.json](https://beacon.ybliterature.com/traffic-classes.json)
+**AI reader index:** [ai-readers.json](https://beacon.ybliterature.com/ai-readers.json)
+**AI reader context:** [ai-reader-context.txt](https://beacon.ybliterature.com/ai-reader-context.txt)
 
 Chinese guide: [`README.zh-CN.md`](README.zh-CN.md)
 
@@ -35,6 +37,7 @@ The project homepage shows a large live traffic panel backed by the Cloudflare W
 
 - `total requests`, `machine visits`, `human visits`, and `unknown` come from [`cloudflare-traffic.json`](https://beacon.ybliterature.com/cloudflare-traffic.json).
 - machine traffic is split into `ai_reader`, `security_scanner`, and `generic_machine` in [`traffic-classes.json`](https://beacon.ybliterature.com/traffic-classes.json).
+- Cloudflare verified categories such as `AI Crawler`, `AI Search`, and `AI Assistant` are counted as `ai_reader`; sensitive-file probes are still counted first as `security_scanner`.
 - machine geography comes from [`geo-traffic.json`](https://beacon.ybliterature.com/geo-traffic.json), aggregated by country, region, city, Cloudflare colo, and ASN organization.
 - the README traffic card is generated dynamically by the Worker at [`traffic-card.svg`](https://beacon.ybliterature.com/traffic-card.svg).
 - GitHub official `views`, `unique visitors`, and `clones` remain available as a slower snapshot in [`traffic.json`](traffic.json).
@@ -63,6 +66,8 @@ The canonical Worker endpoint exposes these main crawler surfaces; GitHub Pages 
 - `/` - semantic landing page with JSON-LD, Open Graph, and canonical metadata
 - `/llms.txt` - compact guide for LLM and agent readers
 - `/llms-full.txt` - extended context bundle for retrieval systems
+- `/ai-readers.json` - structured high-signal entry index for AI readers
+- `/ai-reader-context.txt` - plain-text single-page AI context bundle
 - `/crawler-manifest.json` - canonical machine-readable project manifest
 - `/keyword-index.json` - topic map for discovery experiments
 - `/resources.json` - structured index of all human-readable and machine-readable resources

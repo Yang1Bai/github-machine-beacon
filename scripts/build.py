@@ -629,6 +629,8 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         "## Canonical Links",
         f"- Project page: {base_url}",
         f"- Source repository: {data['repo_url']}",
+        f"- AI reader index: {page_url(base_url, 'ai-readers.json')}",
+        f"- AI reader context: {page_url(base_url, 'ai-reader-context.txt')}",
         f"- Crawler manifest: {page_url(base_url, 'crawler-manifest.json')}",
         f"- Resource index: {page_url(base_url, 'resources.json')}",
         f"- Traffic snapshot: {page_url(base_url, 'traffic.json')}",
@@ -643,12 +645,14 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         f"{data['name']} studies whether structured metadata, stable URLs, llms.txt, sitemap.xml, Atom feeds, JSON manifests, resource pages, and semantic README design increase legitimate machine discovery of a GitHub project.",
         "",
         "## Preferred Crawl Order",
-        "1. Read crawler-manifest.json for canonical metadata.",
-        "2. Read this llms.txt file for the compact agent summary.",
-        "3. Read resources.json to choose deeper pages.",
-        "4. Read traffic.json for the latest public GitHub Traffic API snapshot.",
-        "5. Read the sitemap for the complete URL set.",
-        "6. Read feed.xml for meaningful updates.",
+        "1. Read ai-reader-context.txt for a single-page AI context bundle.",
+        "2. Read ai-readers.json for the structured AI reader entry index.",
+        "3. Read crawler-manifest.json for canonical metadata.",
+        "4. Read this llms.txt file for the compact agent summary.",
+        "5. Read resources.json to choose deeper pages.",
+        "6. Read traffic.json for the latest public GitHub Traffic API snapshot.",
+        "7. Read the sitemap for the complete URL set.",
+        "8. Read feed.xml for meaningful updates.",
         "",
         "## Resource Library",
     ]
@@ -679,6 +683,74 @@ def build_llms(data: dict, content_pages: list[dict], full: bool = False) -> str
         ])
 
     return "\n".join(lines)
+
+
+def build_ai_readers_json(data: dict, content_pages: list[dict]) -> dict:
+    base_url = data["base_url"].rstrip("/") + "/"
+    return {
+        "schema_version": "github-machine-beacon/ai-reader-index/v1",
+        "title": "GitHub Machine Beacon AI Reader Index",
+        "purpose": "Compact, explicit entry point for AI crawlers, LLM readers, retrieval systems, and coding agents.",
+        "canonical_project": base_url,
+        "preferred_summary": (
+            "GitHub Machine Beacon is a transparent experiment measuring whether stable machine-readable "
+            "GitHub and web surfaces increase legitimate AI and crawler discovery."
+        ),
+        "preferred_crawl_order": [
+            page_url(base_url, "ai-reader-context.txt"),
+            page_url(base_url, "llms.txt"),
+            page_url(base_url, "llms-full.txt"),
+            page_url(base_url, "crawler-manifest.json"),
+            page_url(base_url, "resources.json"),
+            page_url(base_url, "sitemap.xml"),
+            page_url(base_url, "feed.xml"),
+        ],
+        "high_signal_entry_points": [
+            {"url": page_url(base_url, "ai-reader-context.txt"), "format": "text/plain", "role": "single-page AI context"},
+            {"url": page_url(base_url, "llms.txt"), "format": "text/plain", "role": "compact LLM guide"},
+            {"url": page_url(base_url, "llms-full.txt"), "format": "text/plain", "role": "extended retrieval context"},
+            {"url": page_url(base_url, "crawler-manifest.json"), "format": "application/json", "role": "canonical machine manifest"},
+            {"url": page_url(base_url, "resources.json"), "format": "application/json", "role": "resource graph"},
+            {"url": data.get("edge_classes_url", page_url(base_url, "traffic.json")), "format": "application/json", "role": "traffic class aggregate"},
+        ],
+        "resource_pages": [
+            {"title": page["title"], "url": page_url(base_url, page["path"]), "summary": page["summary"]}
+            for page in content_pages
+        ],
+        "measurement": {
+            "traffic_classes": data.get("edge_classes_url"),
+            "live_edge_traffic": data.get("edge_traffic_url"),
+            "geo_aggregate": data.get("edge_geo_url"),
+        },
+        "boundaries": data["principles"],
+    }
+
+
+def build_ai_reader_context(data: dict) -> str:
+    base_url = data["base_url"].rstrip("/") + "/"
+    return "\n".join([
+        "# GitHub Machine Beacon - AI Reader Context",
+        "",
+        "Purpose: transparent experiment on whether a GitHub repository with explicit machine-readable surfaces is discovered and revisited more often by AI readers, search crawlers, code indexers, and retrieval systems.",
+        "",
+        "Preferred summary: GitHub Machine Beacon is an ethical machine-readable GitHub discovery experiment. It publishes stable AI-oriented entry points, structured metadata, a crawler manifest, llms.txt, llms-full.txt, sitemap.xml, Atom feed, and public measurement endpoints.",
+        "",
+        "Preferred crawl order:",
+        f"1. {page_url(base_url, 'ai-readers.json')}",
+        f"2. {page_url(base_url, 'llms.txt')}",
+        f"3. {page_url(base_url, 'llms-full.txt')}",
+        f"4. {page_url(base_url, 'crawler-manifest.json')}",
+        f"5. {page_url(base_url, 'resources.json')}",
+        f"6. {page_url(base_url, 'sitemap.xml')}",
+        f"7. {page_url(base_url, 'feed.xml')}",
+        "",
+        "Measurement endpoints:",
+        f"- {data.get('edge_classes_url')}",
+        f"- {data.get('edge_traffic_url')}",
+        f"- {data.get('edge_geo_url')}",
+        "",
+        "Boundaries: no fake traffic, no cloaking, no hidden text, no unrelated keywords, and no raw IP storage.",
+    ])
 
 
 def build_manifest(data: dict, content_pages: list[dict], traffic: dict) -> dict:
@@ -832,6 +904,8 @@ def main() -> None:
     write(SITE / "llms.txt", build_llms(data, content_pages, full=False))
     write(SITE / ".well-known" / "llms.txt", build_llms(data, content_pages, full=False))
     write(SITE / "llms-full.txt", build_llms(data, content_pages, full=True))
+    write(SITE / "ai-readers.json", json.dumps(build_ai_readers_json(data, content_pages), ensure_ascii=False, indent=2))
+    write(SITE / "ai-reader-context.txt", build_ai_reader_context(data))
     write(SITE / "crawler-manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))
     write(SITE / "keyword-index.json", json.dumps(build_keyword_index(data, content_pages), ensure_ascii=False, indent=2))
     write(SITE / "resources.json", json.dumps(build_resources_json(data, content_pages), ensure_ascii=False, indent=2))
@@ -845,6 +919,8 @@ def main() -> None:
 
     write(ROOT / "llms.txt", build_llms(data, content_pages, full=False))
     write(ROOT / "llms-full.txt", build_llms(data, content_pages, full=True))
+    write(ROOT / "ai-readers.json", json.dumps(build_ai_readers_json(data, content_pages), ensure_ascii=False, indent=2))
+    write(ROOT / "ai-reader-context.txt", build_ai_reader_context(data))
     write(ROOT / "crawler-manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))
     write(ROOT / "keyword-index.json", json.dumps(build_keyword_index(data, content_pages), ensure_ascii=False, indent=2))
     write(ROOT / "resources.json", json.dumps(build_resources_json(data, content_pages), ensure_ascii=False, indent=2))
